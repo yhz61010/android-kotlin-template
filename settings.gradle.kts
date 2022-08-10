@@ -1,11 +1,4 @@
-enableFeaturePreview("VERSION_CATALOGS")
-
-// Set single lock file (gradle.lockfile)
-// This preview feature should be enabled by default in Gradle 7
-// More: https://docs.gradle.org/current/userguide/dependency_locking.html#single_lock_file_per_project
-enableFeaturePreview("ONE_LOCKFILE_PER_PROJECT")
-
-rootProject.name = "android template"
+rootProject.name = "android_template"
 
 include(
     ":app",
@@ -67,7 +60,6 @@ pluginManagement {
     }
 }
 
-@Suppress("detekt.StringLiteralDuplication")
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
@@ -75,90 +67,93 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 
+    // https://docs.gradle.org/current/userguide/platforms.html
     versionCatalogs {
         create("libs") {
 
             val kotlinVersion: String by settings
             version("kotlin", kotlinVersion)
             // Required by Android dynamic feature modules and SafeArgs
-            alias("kotlin-reflect").to("org.jetbrains.kotlin", "kotlin-reflect").versionRef("kotlin")
+            library("kotlin-reflect", "org.jetbrains.kotlin", "kotlin-reflect").versionRef("kotlin")
             version("coroutines", "1.+")
-            alias("coroutines").to("org.jetbrains.kotlinx", "kotlinx-coroutines-android").versionRef("coroutines")
+            library("coroutines", "org.jetbrains.kotlinx", "kotlinx-coroutines-android").versionRef("coroutines")
             bundle("kotlin", listOf("kotlin-reflect", "coroutines"))
 
             version("retrofit", "2.+")
-            alias("retrofit-core").to("com.squareup.retrofit2", "retrofit").versionRef("retrofit")
-            alias("converter-moshi").to("com.squareup.retrofit2", "converter-moshi").versionRef("retrofit")
+            library("retrofit-core", "com.squareup.retrofit2", "retrofit").versionRef("retrofit")
+            library("converter-moshi", "com.squareup.retrofit2", "converter-moshi").versionRef("retrofit")
             bundle("retrofit", listOf("retrofit-core", "converter-moshi"))
 
             // Retrofit will use okhttp 4 (it has binary capability with okhttp 3)
             // See: https://square.github.io/okhttp/upgrading_to_okhttp_4/
             version("okhttp", "4.+")
-            alias("okhttp-okhttp").to("com.squareup.okhttp3", "okhttp").versionRef("okhttp")
-            alias("okhttp-interceptor").to("com.squareup.okhttp3", "logging-interceptor").versionRef("okhttp")
-            // bundle is basically an alias for several dependencies
+            library("okhttp-okhttp", "com.squareup.okhttp3", "okhttp").versionRef("okhttp")
+            library("okhttp-interceptor", "com.squareup.okhttp3", "logging-interceptor").versionRef("okhttp")
+            // bundle is basically an library for several dependencies
             bundle("okhttp", listOf("okhttp-okhttp", "okhttp-interceptor"))
 
             version("stetho", "1.5.0") // 1.5.1 has critical bug and newer version is unlikely to be release
-            alias("stetho-core").to("com.facebook.stetho", "stetho").versionRef("stetho")
-            alias("stetho-okhttp3").to("com.facebook.stetho", "stetho-okhttp3").versionRef("stetho")
+            library("stetho-core", "com.facebook.stetho", "stetho").versionRef("stetho")
+            library("stetho-okhttp3", "com.facebook.stetho", "stetho-okhttp3").versionRef("stetho")
             bundle("stetho", listOf("stetho-core", "stetho-okhttp3"))
 
             version("kodein", "6.+")
             // Required by Android dynamic feature modules and SafeArgs
-            alias("kodein-core").to("org.kodein.di", "kodein-di-generic-jvm").versionRef("kodein")
-            alias("kodein-android-x").to("org.kodein.di", "kodein-di-framework-android-x").versionRef("kodein")
+            library("kodein-core", "org.kodein.di", "kodein-di-generic-jvm").versionRef("kodein")
+            library("kodein-android-x", "org.kodein.di", "kodein-di-framework-android-x").versionRef("kodein")
             bundle("kodein", listOf("kodein-core", "kodein-android-x"))
 
-            alias("timber").to("com.jakewharton.timber:timber:4.+")
-            alias("constraintLayout").to("androidx.constraintlayout:constraintlayout:2.+")
-            alias("coordinatorLayout").to("androidx.coordinatorlayout:coordinatorlayout:1.+")
-            alias("appcompat").to("androidx.appcompat:appcompat:1.+")
-            alias("recyclerview").to("androidx.recyclerview:recyclerview:1.+")
-            alias("material").to("com.google.android.material:material:1.+")
-            alias("lottie").to("com.airbnb.android:lottie:2.+")
-            alias("coil").to("io.coil-kt:coil:1.+")
-            alias("play-core").to("com.google.android.play:core:1.+")
+            library("timber", "com.jakewharton.timber:timber:4.+")
+            library("constraintLayout", "androidx.constraintlayout:constraintlayout:2.+")
+            library("coordinatorLayout", "androidx.coordinatorlayout:coordinatorlayout:1.+")
+            library("appcompat", "androidx.appcompat:appcompat:1.+")
+            library("recyclerview", "androidx.recyclerview:recyclerview:1.+")
+            library("material", "com.google.android.material:material:1.+")
+            library("lottie", "com.airbnb.android:lottie:2.+")
+            library("coil", "io.coil-kt:coil:1.+")
+            library("play-core", "com.google.android.play:core:1.+")
 
-            alias("core-ktx").to("androidx.core:core-ktx:1.+")
-            alias("fragment-ktx").to("androidx.fragment:fragment-ktx:1.+")
+            library("core-ktx", "androidx.core:core-ktx:1.+")
+            library("fragment-ktx", "androidx.fragment:fragment-ktx:1.+")
             bundle("ktx", listOf("core-ktx", "fragment-ktx"))
 
             version("lifecycle", "2.+")
-            alias("viewmodel-ktx").to("androidx.lifecycle", "lifecycle-viewmodel-ktx").versionRef("lifecycle")
-            alias("livedata-ktx").to("androidx.lifecycle", "lifecycle-livedata-ktx").versionRef("lifecycle")
-            alias("lifecycle-common").to("androidx.lifecycle", "lifecycle-common-java8").versionRef("lifecycle")
+            library("viewmodel-ktx", "androidx.lifecycle", "lifecycle-viewmodel-ktx").versionRef("lifecycle")
+            library("livedata-ktx", "androidx.lifecycle", "lifecycle-livedata-ktx").versionRef("lifecycle")
+            library("lifecycle-common", "androidx.lifecycle", "lifecycle-common-java8").versionRef("lifecycle")
             bundle("lifecycle", listOf("viewmodel-ktx", "livedata-ktx", "lifecycle-common"))
 
             val navigationVersion: String by settings
             version("navigation", navigationVersion)
-            alias("navigation-fragment").to("androidx.navigation", "navigation-fragment-ktx").versionRef("navigation")
-            alias("navigation-dynamic")
-                .to("androidx.navigation", "navigation-dynamic-features-fragment")
-                .versionRef("navigation")
-            alias("navigation-ui-ktx").to("androidx.navigation", "navigation-ui-ktx").versionRef("navigation")
+            library("navigation-fragment", "androidx.navigation", "navigation-fragment-ktx").versionRef("navigation")
+            library(
+                "navigation-dynamic",
+                "androidx.navigation",
+                "navigation-dynamic-features-fragment"
+            ).versionRef("navigation")
+            library("navigation-ui-ktx", "androidx.navigation", "navigation-ui-ktx").versionRef("navigation")
             bundle("navigation", listOf("navigation-fragment", "navigation-dynamic", "navigation-ui-ktx"))
 
             version("room", "2.+")
-            alias("room-ktx").to("androidx.room", "room-ktx").versionRef("room")
-            alias("room-runtime").to("androidx.room", "room-runtime").versionRef("room")
+            library("room-ktx", "androidx.room", "room-ktx").versionRef("room")
+            library("room-runtime", "androidx.room", "room-runtime").versionRef("room")
             bundle("room", listOf("room-ktx", "room-runtime"))
 
-            alias("room.compiler").to("androidx.room", "room-compiler").versionRef("room")
+            library("room.compiler", "androidx.room", "room-compiler").versionRef("room")
 
             // Test dependencies
-            alias("test-coroutines").to("org.jetbrains.kotlinx", "kotlinx-coroutines-test").versionRef("coroutines")
+            library("test-coroutines", "org.jetbrains.kotlinx", "kotlinx-coroutines-test").versionRef("coroutines")
 
             version("kluent", "1.+")
-            alias("kluent-android").to("org.amshove.kluent", "kluent-android").versionRef("kluent")
+            library("kluent-android", "org.amshove.kluent", "kluent-android").versionRef("kluent")
 
-            alias("test-runner").to("androidx.test:runner:1.+")
-            alias("espresso").to("androidx.test.espresso:espresso-core:3.+")
-            alias("mockk").to("io.mockk:mockk:1.+")
-            alias("arch").to("androidx.arch.core:core-testing:2.+")
+            library("test-runner", "androidx.test:runner:1.+")
+            library("espresso", "androidx.test.espresso:espresso-core:3.+")
+            library("mockk", "io.mockk:mockk:1.+")
+            library("arch", "androidx.arch.core:core-testing:2.+")
 
             version("junit", "5.+")
-            alias("junit-jupiter-api").to("org.junit.jupiter", "junit-jupiter-api").versionRef("junit")
+            library("junit-jupiter-api", "org.junit.jupiter", "junit-jupiter-api").versionRef("junit")
 
             bundle(
                 "test",
@@ -173,7 +168,7 @@ dependencyResolutionManagement {
                 )
             )
 
-            alias("junit-jupiter-engine").to("org.junit.jupiter", "junit-jupiter-engine").versionRef("junit")
+            library("junit-jupiter-engine", "org.junit.jupiter", "junit-jupiter-engine").versionRef("junit")
         }
     }
 }

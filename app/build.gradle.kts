@@ -40,10 +40,7 @@ android {
     lint {
         warningsAsErrors = true
         abortOnError = true
-    }
-    lintOptions {
-        // By default lint does not check test sources, but setting this option means that lint will not even parse them
-        isIgnoreTestSources = true
+        ignoreTestSources = true
     }
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_1_8.toString()
