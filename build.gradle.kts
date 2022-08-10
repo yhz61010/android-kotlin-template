@@ -123,9 +123,19 @@ fun Project.configureAndroid() {
     }
 }
 
+tasks.withType<Detekt>().configureEach {
+    reports {
+        html.required.set(true) // observe findings in your browser with structure and code snippets
+        xml.required.set(true) // checkstyle like format mainly for integrations like Jenkins
+        txt.required.set(true) // similar to the console output, contains issue signature to manually edit baseline files
+        sarif.required.set(true) // standardized SARIF format (https://sarifweb.azurewebsites.net/) to support integrations with Github Code Scanning
+        md.required.set(true) // simple Markdown format
+    }
+}
+
 // Target version of the generated JVM bytecode. It is used for type resolution.
-tasks.withType<Detekt> {
-    this.jvmTarget = "1.8"
+tasks.withType<Detekt>().configureEach {
+    jvmTarget = "1.8"
 }
 
 /*
