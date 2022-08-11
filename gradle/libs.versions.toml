@@ -5,11 +5,13 @@
 compile-sdk-version = "33"
 min-sdk-version = "21"
 target-sdk-version = "33"
+
 #===================
 #===== Compile =====
 #===================
 agp = "7.2.2"
 kotlin = "1.7.10"
+
 #=================================
 #===== Android dependencies ======
 #=================================
@@ -27,6 +29,7 @@ navigation = "2.5.1"
 annotation = "1.4.0"
 cardview = "1.0.0"
 lifecycle = "2.5.1"
+viewpager2 = "1.0.0"
 room = "2.5.0-alpha02" # 2.4.2 has compilation error with Kotlin 1.7.0
 #===========================
 #===== Android Compose =====
@@ -34,6 +37,7 @@ room = "2.5.0-alpha02" # 2.4.2 has compilation error with Kotlin 1.7.0
 compose = "1.2.0"
 androidx-activity-compose = "1.5.1"
 compose-compilerextension = "1.2.0"
+
 #=======================
 #===== Third party =====
 #=======================
@@ -52,9 +56,9 @@ eventbus = "3.3.1"
 mars-xlog = "1.2.5"
 karn-notify = "1.4.0"
 mmkv = "1.2.13"
+fasterxml = "2.13.3"
 xx-permission = "13.5"
 bson = "2.13.1" # As of 2.13.0, you need to add fasterxml jackson manually.
-fasterxml = "2.13.3"
 free-reflection = "3.1.0"
 
 #================
@@ -78,6 +82,7 @@ agp = { module = "com.android.tools.build:gradle", version.ref = "agp" }
 kgp = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
 kotlin-reflect = { module = "org.jetbrains.kotlin:kotlin-reflect", version.ref = "kotlin" }
 kotlin-coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "coroutines" }
+
 #===================
 #===== Android =====
 #===================
@@ -92,6 +97,7 @@ androidx-coordinatorlayout = { module = "androidx.coordinatorlayout:coordinatorl
 androidx-recyclerview = { module = "androidx.recyclerview:recyclerview", version.ref = "recyclerview" }
 androidx-cardview = { module = "androidx.cardview:cardview", version.ref = "cardview" }
 androidx-fragment = { module = "androidx.fragment:fragment-ktx", version.ref = "fragment" }
+androidx-viewpager2 = { module = "androidx.viewpager2:viewpager2", version.ref = "viewpager2" }
 #=============================
 #===== Android Lifecycle =====
 #=============================
@@ -104,6 +110,15 @@ lifecycle-runtime = { module = "androidx.lifecycle:lifecycle-runtime-ktx", versi
 # Saved state module for ViewModel
 lifecycle-viewmodel-savedstate = { module = "androidx.lifecycle:lifecycle-viewmodel-savedstate", version.ref = "lifecycle" }
 #===========================
+#===== Android Room ========
+#===========================
+room-runtime = { module = "androidx.room:room-runtime", version.ref = "room" }
+room-compiler = { module = "androidx.room:room-compiler", version.ref = "room" }
+# optional - Kotlin Extensions and Coroutines support for Room
+room-ktx = { module = "androidx.room:room-ktx", version.ref = "room" }
+# optional - RxJava support for Room
+room-rxjava2 = { module = "androidx.room:room-rxjava2", version.ref = "room" }
+#===========================
 #===== Android Compose =====
 #===========================
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "androidx-activity-compose" }
@@ -111,6 +126,7 @@ compose-material = { module = "androidx.compose.material:material", version.ref 
 compose-foundation = { module = "androidx.compose.foundation:foundation", version.ref = "compose" }
 compose-ui = { module = "androidx.compose.ui:ui", version.ref = "compose" }
 compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling", version.ref = "compose" }
+
 #=======================
 #===== Third party =====
 #=======================
@@ -118,6 +134,7 @@ detekt-formatting = { module = "io.gitlab.arturbosch.detekt:detekt-formatting", 
 # https://github.com/Kotlin/dokka
 dokka-gradle-plugin = { module = "org.jetbrains.dokka:dokka-gradle-plugin", version.ref = "dokka" }
 dokka-core = { module = "org.jetbrains.dokka:dokka-core", version.ref = "dokka" }
+
 #================
 #===== Test =====
 #================
