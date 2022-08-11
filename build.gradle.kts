@@ -3,18 +3,19 @@ import io.gitlab.arturbosch.detekt.Detekt
 
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 plugins {
-    id(GradlePluginId.DETEKT)
-    id(GradlePluginId.KTLINT_GRADLE)
-    id(GradlePluginId.ANDROID_JUNIT_5) apply false
-
-    id(GradlePluginId.KOTLIN_ANDROID) apply false
-    id(GradlePluginId.ANDROID_APPLICATION) apply false
-    id(GradlePluginId.ANDROID_LIBRARY) apply false
-    id(GradlePluginId.SAFE_ARGS) apply false
+//    id(GradlePluginId.ANDROID_APPLICATION) apply false
+//    id(GradlePluginId.ANDROID_LIBRARY) apply false
+//    id(GradlePluginId.KOTLIN_ANDROID) apply false
+//    id(GradlePluginId.SAFE_ARGS) apply false
 
 //    id 'com.android.application' version '7.2.2' apply false
 //    id 'com.android.library' version '7.2.2' apply false
 //    id 'org.jetbrains.kotlin.android' version '1.7.10' apply false
+
+//    id(GradlePluginId.ANDROID_JUNIT_5) apply false
+
+    alias(libs.plugins.detekt)
+    alias(libs.plugins.ktlint)
 }
 
 //tasks {
@@ -29,10 +30,7 @@ tasks.register<Delete>("clean") {
 
 // all projects = root project + sub projects
 allprojects {
-//    repositories {
-//        google()
-//        mavenCentral()
-//    }
+    group = PUBLISHING_GROUP
 
     // We want to apply ktlint at all project level because it also checks Gradle config files (*.kts)
     apply(plugin = GradlePluginId.KTLINT_GRADLE)
@@ -53,12 +51,6 @@ allprojects {
             exclude { element -> element.file.path.contains("generated/") }
         }
     }
-
-    // Gradle dependency locking - lock all configurations of the app
-    // More: https://docs.gradle.org/current/userguide/dependency_locking.html
-    dependencyLocking {
-        lockAllConfigurations()
-    }
 }
 
 subprojects {
@@ -67,6 +59,10 @@ subprojects {
     }
 
     apply(plugin = GradlePluginId.DETEKT)
+    // or
+    // apply {
+    //     plugin(GradlePluginId.DETEKT)
+    // }
 
     detekt {
         config = files("$rootDir/detekt.yml")
@@ -86,33 +82,6 @@ subprojects {
     afterEvaluate {
         configureAndroid()
     }
-
-    // While writing versions locks pre-release version of dependencies will be ignored
-    configurations.all {
-        resolutionStrategy.componentSelection {
-            // Accept the highest version matching the requested version that isn't...
-            all {
-                // detekt is using pre-release dependencies
-                val detektExceptions = listOf(
-                    "io.gitlab.arturbosch.detekt",
-                    "com.fasterxml.jackson",
-                    "com.fasterxml.jackson.core",
-                    "com.fasterxml.jackson"
-                )
-
-                if (detektExceptions.any { it == candidate.group }) {
-                    return@all
-                }
-
-                // android lint is using pre-release dependencies
-                val androidLintExceptions = listOf("com.android.tools.build")
-
-                if (androidLintExceptions.any { it == candidate.group }) {
-                    return@all
-                }
-            }
-        }
-    }
 }
 
 fun Project.configureAndroid() {
@@ -123,7 +92,10 @@ fun Project.configureAndroid() {
     }
 }
 
+// Target version of the generated JVM bytecode. It is used for type resolution.
 tasks.withType<Detekt>().configureEach {
+    jvmTarget = JavaVersion.VERSION_11.toString()
+
     reports {
         html.required.set(true) // observe findings in your browser with structure and code snippets
         xml.required.set(true) // checkstyle like format mainly for integrations like Jenkins
@@ -131,11 +103,6 @@ tasks.withType<Detekt>().configureEach {
         sarif.required.set(true) // standardized SARIF format (https://sarifweb.azurewebsites.net/) to support integrations with Github Code Scanning
         md.required.set(true) // simple Markdown format
     }
-}
-
-// Target version of the generated JVM bytecode. It is used for type resolution.
-tasks.withType<Detekt>().configureEach {
-    jvmTarget = "1.8"
 }
 
 /*

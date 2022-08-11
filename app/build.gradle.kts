@@ -2,13 +2,14 @@ import com.android.build.gradle.internal.dsl.BaseFlavor
 import com.android.build.gradle.internal.dsl.DefaultConfig
 
 plugins {
-    id(GradlePluginId.ANDROID_APPLICATION)
-    id(GradlePluginId.KOTLIN_ANDROID) // or kotlin("android") or id 'kotlin-android'
-    id(GradlePluginId.KOTLIN_KAPT) // or kotlin("kapt")
+    id("com.android.application")
+    kotlin("android")
+    kotlin("kapt") // id("org.jetbrains.kotlin.kapt") // or kotlin("kapt")
 //    apply plugin: 'kotlin-parcelize'
-    id(GradlePluginId.KTLINT_GRADLE)
-    id(GradlePluginId.SAFE_ARGS)
-    id(GradlePluginId.ANDROID_JUNIT_5)
+
+    alias(libs.plugins.navigation)
+    alias(libs.plugins.detekt)
+    alias(libs.plugins.ktlint)
 }
 
 android {
@@ -30,42 +31,67 @@ android {
     buildTypes {
         getByName(BuildType.RELEASE) {
             isMinifyEnabled = BuildTypeRelease.isMinifyEnabled
-            proguardFiles("proguard-android-optimize.txt", "proguard-rules.pro")
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
         }
 
         getByName(BuildType.DEBUG) {
             isMinifyEnabled = BuildTypeDebug.isMinifyEnabled
         }
     }
+
+    // https://developer.android.com/reference/tools/gradle-api/7.1/com/android/build/api/dsl/Lint
     lint {
-        warningsAsErrors = true
-        abortOnError = true
-        ignoreTestSources = true
+        // if true, stop the gradle build if errors are found
+//        abortOnError = true
+        // Like checkTestSources, but always skips analyzing tests -- meaning that it
+        // also ignores checks that have explicitly asked to look at test sources, such
+        // as the unused resource check.
+//        ignoreTestSources = true
+
+        // turn off checking the given issue id's
+        disable.apply {
+//            add("MissingTranslation")
+            add("RtlHardcoded")
+            add("RtlCompat")
+            add("RtlEnabled")
+        }
     }
+
     kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_1_8.toString()
+        jvmTarget = JavaVersion.VERSION_11.toString()
     }
+
     buildFeatures {
         viewBinding = true
     }
+
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
     }
 }
 
 dependencies {
-    implementation (libs.bundles.kotlin)
-    implementation(libs.appcompat)
-    implementation(libs.material)
-    implementation(libs.coroutines)
-    implementation(libs.recyclerview)
-    implementation(libs.constraintLayout)
+    implementation(libs.android.material)
+    implementation(libs.bundles.kotlin)
+    implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.appcompat)
+    implementation(libs.androidx.constraintlayout)
+    implementation(libs.androidx.recyclerview)
     implementation(libs.bundles.navigation)
-    implementation(libs.bundles.lifecycle)
 
-    testImplementation(libs.bundles.test)
-    testRuntimeOnly(libs.junit.jupiter.engine)
+//    implementation(libs.bundles.navigation)
+//    implementation(libs.bundles.lifecycle)
+
+    testImplementation(libs.junit)
+
+    androidTestImplementation(libs.androidx.test.ext.junit)
+    androidTestImplementation(libs.androidx.test.ext.junit.ktx)
+    androidTestImplementation(libs.androidx.test.rules)
+    androidTestImplementation(libs.espresso.core)
 }
 
 /*

@@ -1,7 +1,11 @@
 plugins {
-    id(GradlePluginId.ANDROID_LIBRARY)
-    id(GradlePluginId.KOTLIN_ANDROID) // or kotlin("android") or id 'kotlin-android'
-    id(GradlePluginId.ANDROID_JUNIT_5)
+    id("com.android.library")
+    kotlin("android")
+    kotlin("kapt") // id("org.jetbrains.kotlin.kapt") // or kotlin("kapt")
+//    apply plugin: 'kotlin-parcelize'
+
+    alias(libs.plugins.detekt)
+    alias(libs.plugins.ktlint)
 }
 
 
@@ -12,7 +16,6 @@ android {
         minSdk = AndroidConfig.MIN_SDK_VERSION
         targetSdk = AndroidConfig.TARGET_SDK_VERSION
 
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
         testInstrumentationRunner = AndroidConfig.TEST_INSTRUMENTATION_RUNNER
     }
@@ -20,34 +23,59 @@ android {
     buildTypes {
         getByName(BuildType.RELEASE) {
             isMinifyEnabled = BuildTypeRelease.isMinifyEnabled
-            proguardFiles("proguard-android-optimize.txt", "proguard-rules.pro")
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
         }
 
         getByName(BuildType.DEBUG) {
             isMinifyEnabled = BuildTypeDebug.isMinifyEnabled
         }
     }
-    testOptions {
-        unitTests.isReturnDefaultValues = TestOptions.IS_RETURN_DEFAULT_VALUES
+
+    // https://developer.android.com/reference/tools/gradle-api/7.1/com/android/build/api/dsl/Lint
+    lint {
+        // if true, stop the gradle build if errors are found
+        abortOnError = true
+        // Like checkTestSources, but always skips analyzing tests -- meaning that it
+        // also ignores checks that have explicitly asked to look at test sources, such
+        // as the unused resource check.
+        ignoreTestSources = true
+
+        // turn off checking the given issue id's
+        disable.apply {
+//            add("MissingTranslation")
+            add("RtlHardcoded")
+            add("RtlCompat")
+            add("RtlEnabled")
+        }
     }
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
-    }
+
     kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_1_8.toString()
+        jvmTarget = JavaVersion.VERSION_11.toString()
     }
+
+    buildFeatures {
+        viewBinding = true
+    }
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
+    }
+
     packagingOptions {
-        exclude("META-INF/AL2.0")
-        exclude("META-INF/licenses/**")
-        exclude("**/attach_hotspot_windows.dll")
-        exclude("META-INF/LGPL2.1")
+        resources.excludes.apply {
+            add("META-INF/AL2.0")
+            add("META-INF/licenses/**")
+            add("**/attach_hotspot_windows.dll")
+            add("META-INF/LGPL2.1")
+        }
     }
 }
 
 dependencies {
     implementation(libs.bundles.kotlin)
     implementation(libs.bundles.test)
-
-    runtimeOnly(libs.junit.jupiter.engine)
 }
