@@ -3,16 +3,10 @@ import io.gitlab.arturbosch.detekt.Detekt
 
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 plugins {
-//    id(GradlePluginId.ANDROID_APPLICATION) apply false
-//    id(GradlePluginId.ANDROID_LIBRARY) apply false
-//    id(GradlePluginId.KOTLIN_ANDROID) apply false
-//    id(GradlePluginId.SAFE_ARGS) apply false
-
-//    id 'com.android.application' version '7.2.2' apply false
-//    id 'com.android.library' version '7.2.2' apply false
-//    id 'org.jetbrains.kotlin.android' version '1.7.10' apply false
-
-//    id(GradlePluginId.ANDROID_JUNIT_5) apply false
+    // https://docs.gradle.org/current/userguide/plugins.html#sec:subprojects_plugins_dsl
+    alias(libs.plugins.android.application) apply false
+    alias(libs.plugins.android.library) apply false
+    alias(libs.plugins.kotlin.android) apply false
 
     alias(libs.plugins.detekt)
     alias(libs.plugins.ktlint)

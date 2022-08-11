@@ -9,7 +9,7 @@ target-sdk-version = "33"
 #===== Compile =====
 #===================
 agp = "7.2.2"
-kotlin = "1.7.0"
+kotlin = "1.7.10"
 #==================
 ###### Android dependencies #####
 #==================
@@ -101,6 +101,9 @@ test = [
 ]
 
 [plugins]
+android_application = { id = "com.android.application", version.ref = "agp" }
+android_library = { id = "com.android.library", version.ref = "agp" }
+kotlin_android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 navigation = { id = "androidx.navigation.safeargs.kotlin", version.ref = "navigation" }
 detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
 ktlint = { id = "org.jlleitschuh.gradle.ktlint", version.ref = "ktlint.gradle" }
