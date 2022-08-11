@@ -1,8 +1,8 @@
 plugins {
-    id("com.android.library")
-    kotlin("android")
-    kotlin("kapt") // id("org.jetbrains.kotlin.kapt") // or kotlin("kapt")
-//    apply plugin: 'kotlin-parcelize'
+    alias(libs.plugins.android.library)
+    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.kotlin.kapt) // id("org.jetbrains.kotlin.kapt") // or kotlin("kapt")
+    alias(libs.plugins.kotlin.parcelize) //  id("kotlin-parcelize")
 
     alias(libs.plugins.detekt)
     alias(libs.plugins.ktlint)

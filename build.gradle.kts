@@ -7,6 +7,8 @@ plugins {
     alias(libs.plugins.android.application) apply false
     alias(libs.plugins.android.library) apply false
     alias(libs.plugins.kotlin.android) apply false
+    alias(libs.plugins.kotlin.kapt) apply false // id("org.jetbrains.kotlin.kapt") // or kotlin("kapt")
+    alias(libs.plugins.kotlin.parcelize) apply false //  id("kotlin-parcelize")
 
     alias(libs.plugins.detekt)
     alias(libs.plugins.ktlint)
