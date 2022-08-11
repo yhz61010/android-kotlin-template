@@ -15,14 +15,15 @@ plugins {
 }
 
 android {
-    compileSdk = AndroidConfig.COMPILE_SDK_VERSION
+    compileSdk = libs.versions.compile.sdk.get().toInt()
 
     defaultConfig {
-        applicationId = AndroidConfig.ID
-        minSdk = AndroidConfig.MIN_SDK_VERSION
-        targetSdk = AndroidConfig.TARGET_SDK_VERSION
-        versionCode = AndroidConfig.VERSION_CODE
-        versionName = AndroidConfig.VERSION_NAME
+        applicationId = namespace
+        minSdk = libs.versions.min.sdk.get().toInt()
+        targetSdk = libs.versions.target.sdk.get().toInt()
+
+        versionCode = libs.versions.versionCode.get().toInt()
+        versionName = libs.versions.versionName.get()
 
         testInstrumentationRunner = AndroidConfig.TEST_INSTRUMENTATION_RUNNER
 
@@ -54,13 +55,13 @@ android {
 //        ignoreTestSources = true
 
         // turn off checking the given issue id's
-        disable.run {
-//            add("MissingTranslation")
-//            add("GoogleAppIndexingWarning")
-            add("RtlHardcoded")
-            add("RtlCompat")
-            add("RtlEnabled")
-        }
+        disable += setOf(
+            // "MissingTranslation",
+            // "GoogleAppIndexingWarning",
+            "RtlHardcoded",
+            "RtlCompat",
+            "RtlEnabled"
+        )
     }
 
     kotlinOptions {
