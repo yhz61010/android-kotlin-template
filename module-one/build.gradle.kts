@@ -1,3 +1,4 @@
+// https://docs.gradle.org/current/userguide/plugins.html#sec:subprojects_plugins_dsl
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)

@@ -9,6 +9,7 @@ plugins {
     alias(libs.plugins.kotlin.parcelize) //  id("kotlin-parcelize")
 
     alias(libs.plugins.navigation)
+
     alias(libs.plugins.detekt)
     alias(libs.plugins.ktlint)
 }
