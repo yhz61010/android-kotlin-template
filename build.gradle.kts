@@ -27,7 +27,7 @@ allprojects {
     group = PUBLISHING_GROUP
 
     // We want to apply ktlint at all project level because it also checks Gradle config files (*.kts)
-    apply(plugin = GradlePluginId.KTLINT_GRADLE)
+    apply(plugin = rootProject.libs.plugins.ktlint.get().pluginId)
 
     // Ktlint configuration for sub-projects
     ktlint {
@@ -52,10 +52,10 @@ subprojects {
         maxParallelForks = (Runtime.getRuntime().availableProcessors() / 2).takeIf { it > 0 } ?: 1
     }
 
-    apply(plugin = GradlePluginId.DETEKT)
+    apply(plugin = rootProject.libs.plugins.detekt.get().pluginId)
     // or
     // apply {
-    //     plugin(GradlePluginId.DETEKT)
+    //     plugin(rootProject.libs.plugins.detekt.get().pluginId)
     // }
 
     detekt {
