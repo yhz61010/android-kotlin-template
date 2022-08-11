@@ -29,6 +29,17 @@ allprojects {
     // We want to apply ktlint at all project level because it also checks Gradle config files (*.kts)
     apply(plugin = rootProject.libs.plugins.ktlint.get().pluginId)
 
+    tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach {
+        kotlinOptions {
+            jvmTarget = JavaVersion.VERSION_11.toString()
+        }
+    }
+
+    tasks.withType<Test> {
+        maxParallelForks = (Runtime.getRuntime().availableProcessors() / 2).takeIf { it > 0 } ?: 1
+        useJUnitPlatform()
+    }
+
     // Ktlint configuration for sub-projects
     ktlint {
         verbose.set(true)
@@ -48,10 +59,6 @@ allprojects {
 }
 
 subprojects {
-    tasks.withType<Test> {
-        maxParallelForks = (Runtime.getRuntime().availableProcessors() / 2).takeIf { it > 0 } ?: 1
-    }
-
     apply(plugin = rootProject.libs.plugins.detekt.get().pluginId)
     // or
     // apply {
