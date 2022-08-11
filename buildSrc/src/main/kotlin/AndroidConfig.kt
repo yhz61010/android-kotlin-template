@@ -1,3 +1,5 @@
+const val PUBLISHING_GROUP = "com.leovp"
+
 object AndroidConfig {
     const val COMPILE_SDK_VERSION = 33
     const val MIN_SDK_VERSION = 21
@@ -27,8 +29,4 @@ object BuildTypeDebug : BuildType {
 
 object BuildTypeRelease : BuildType {
     override val isMinifyEnabled = false
-}
-
-object TestOptions {
-    const val IS_RETURN_DEFAULT_VALUES = true
 }
