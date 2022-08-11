@@ -31,7 +31,6 @@ compose-compilerextension = "1.2.0"
 #==================
 detekt = "1.21.0"
 dokka = "1.7.10"
-ktlint = "0.45.2"
 ktlint-gradle = "10.3.0"
 benmanesversion = "0.42.0"
 #==================

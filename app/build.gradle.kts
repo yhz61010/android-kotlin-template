@@ -54,8 +54,9 @@ android {
 //        ignoreTestSources = true
 
         // turn off checking the given issue id's
-        disable.apply {
+        disable.run {
 //            add("MissingTranslation")
+//            add("GoogleAppIndexingWarning")
             add("RtlHardcoded")
             add("RtlCompat")
             add("RtlEnabled")
