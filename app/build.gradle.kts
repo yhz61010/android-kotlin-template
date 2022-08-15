@@ -3,28 +3,21 @@ import java.io.ByteArrayOutputStream
 // https://docs.gradle.org/current/userguide/plugins.html#sec:subprojects_plugins_dsl
 plugins {
     alias(libs.plugins.android.application)
-    alias(libs.plugins.kotlin.android)
+//    alias(libs.plugins.kotlin.android)
     // id("org.jetbrains.kotlin.kapt") // or kotlin("kapt")
     // If you use kotlin(), you can change dash(-) with dot(.)
     // or you can still use dash like id("kotlin-parcelize")
-    alias(libs.plugins.kotlin.kapt)
-    alias(libs.plugins.kotlin.parcelize) // id("kotlin-parcelize")
+//    alias(libs.plugins.kotlin.kapt)
+//    alias(libs.plugins.kotlin.parcelize) // id("kotlin-parcelize")
 
     alias(libs.plugins.navigation)
-
-    alias(libs.plugins.detekt)
-    alias(libs.plugins.ktlint)
 }
 
 android {
-    compileSdk = libs.versions.compile.sdk.get().toInt()
-
     val appName = "LeoTemplate"
 
     defaultConfig {
         applicationId = namespace
-        minSdk = libs.versions.min.sdk.get().toInt()
-        targetSdk = libs.versions.target.sdk.get().toInt()
 
         versionCode = libs.versions.versionCode.get().toInt()
         versionName = libs.versions.versionName.get()
@@ -34,8 +27,6 @@ android {
 //        ndk {
 //            abiFilters += setOf("armeabi-v7a", "arm64-v8a", "x86", "x86_64")
 //        }
-
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
         // buildConfigFieldFromGradleProperty("apiBaseUrl")
         // buildConfigField("FEATURE_MODULE_NAMES", getFeatureNames())
@@ -74,47 +65,9 @@ android {
         )
     }
 
-    kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_11.toString()
-    }
-
-    buildFeatures {
-        viewBinding = true
-    }
-
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
-    }
-
-    packagingOptions {
-        resources.excludes += setOf(
-            "META-INF/{AL2.0,LGPL2.1}",
-        )
-        resources.pickFirsts += setOf(
-            "META-INF/licenses/**",
-            "META-INF/atomicfu.kotlin_module",
-            "META-INF/NOTICE*",
-            "META-INF/NOTICE*.*",
-            "META-INF/DEPENDENCIES*",
-            "META-INF/DEPENDENCIES*.*",
-            "META-INF/LICENSE*",
-            "META-INF/LICENSE*.*",
-            "META-INF/INDEX.LIST",
-            "META-INF/io.netty.versions.properties",
-            "**/*.proto",
-            "**/*.bin",
-            "**/*.java",
-            "**/*.properties",
-            "**/*.version",
-            "**/*.*_module",
-            "*.txt",
-            "kotlin/**",
-            "kotlinx/**",
-            "okhttp3/**",
-            "META-INF/services/**",
-        )
-    }
+//    buildFeatures {
+//        viewBinding = true
+//    }
 
     applicationVariants.all {
         val variant = this

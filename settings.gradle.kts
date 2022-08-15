@@ -7,8 +7,9 @@ pluginManagement {
         mavenCentral()
     }
 
-//    resolutionStrategy {
-//        eachPlugin {
+    resolutionStrategy {
+        eachPlugin {
+//            println("id=${requested.id.id} version=${requested.version} namespace=${requested.id.namespace}")
 //            when (requested.id.id) {
 //                "com.android.application",
 //                "com.android.library",
@@ -25,8 +26,8 @@ pluginManagement {
 //                    useModule(androidJnit5Coordinates) // navigationVersion
 //                }
 //            }
-//        }
-//    }
+        }
+    }
 }
 
 dependencyResolutionManagement {
