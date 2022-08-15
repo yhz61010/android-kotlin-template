@@ -587,8 +587,8 @@ style:
     active: false
     maxChainedCalls: 5
   MaxLineLength:
-    active: false
-    maxLineLength: 120
+    active: true
+    maxLineLength: 180
     excludePackageStatements: true
     excludeImportStatements: true
     excludeCommentStatements: false

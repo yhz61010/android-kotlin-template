@@ -106,19 +106,19 @@ android {
     }
 
     applicationVariants.all {
-        outputs.all {
-            (this as? com.android.build.gradle.internal.api.ApkVariantOutputImpl)?.let { output ->
-                output.outputFileName =
-                    "${appName}${("-$flavorName").takeIf { it != "-" } ?: ""}-${buildType.name}" +
-                            "-v${versionName}(${versionCode})" +
-                            "-${gitVersionTag()}-${gitCommitCount()}" +
-                            ("-unaligned".takeIf { !zipAlign.enabled } ?: "") +
-                            ".apk"
+        val variant = this
+        variant.outputs
+            .mapNotNull { it as? com.android.build.gradle.internal.api.ApkVariantOutputImpl }
+            .forEach { output ->
+                variant.packageApplicationProvider.get().outputDirectory
+                output.outputFileName = "${appName}${("-$flavorName").takeIf { it != "-" } ?: ""}-${buildType.name}" +
+                        "-v$versionName($versionCode)" +
+                        "-${gitVersionTag()}-${gitCommitCount()}" +
+//                        ("-unaligned".takeIf { !output.zipAlign.enabled } ?: "") +
+                        ".apk"
             }
-        }
     }
 }
-
 
 // 获取当前分支的提交总次数
 fun gitCommitCount(): Int {

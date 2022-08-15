@@ -12,7 +12,6 @@ plugins {
     alias(libs.plugins.ktlint)
 }
 
-
 android {
     compileSdk = libs.versions.compile.sdk.get().toInt()
 
