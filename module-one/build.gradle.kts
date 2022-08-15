@@ -2,7 +2,10 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
-    alias(libs.plugins.kotlin.kapt) // id("org.jetbrains.kotlin.kapt") // or kotlin("kapt")
+    // id("org.jetbrains.kotlin.kapt") // or kotlin("kapt")
+    // If you use kotlin() use must change dash(-) with dot(.)
+    // or you can still use dash like id(“kotlin-android-extensions”)
+    alias(libs.plugins.kotlin.kapt)
     alias(libs.plugins.kotlin.parcelize) //  id("kotlin-parcelize")
 
     alias(libs.plugins.detekt)

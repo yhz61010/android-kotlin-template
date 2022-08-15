@@ -1,4 +1,6 @@
 import com.android.build.gradle.BaseExtension
+import com.android.build.gradle.internal.dsl.BaseFlavor
+import com.android.build.gradle.internal.dsl.DefaultConfig
 import io.gitlab.arturbosch.detekt.Detekt
 
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
@@ -134,4 +136,27 @@ task("staticCheck") {
         // By defining Gradle dependency all dependent tasks will run before this "empty" task
         dependsOn(taskDependencies)
     }
+}
+
+
+/*
+Takes value from Gradle project property and sets it as build config property
+ */
+fun BaseFlavor.buildConfigFieldFromGradleProperty(gradlePropertyName: String) {
+    val propertyValue = project.properties[gradlePropertyName] as? String
+    checkNotNull(propertyValue) { "Gradle property $gradlePropertyName is null" }
+
+    val androidResourceName = "GRADLE_${gradlePropertyName.toSnakeCase()}".toUpperCase()
+    buildConfigField("String", androidResourceName, propertyValue)
+}
+
+fun String.toSnakeCase() = this.split(Regex("(?=[A-Z])")).joinToString("_") { it.toLowerCase() }
+
+/*
+Adds a new field to the generated BuildConfig class
+ */
+fun DefaultConfig.buildConfigField(name: String, value: Array<String>) {
+    // Create String that holds Java String Array code
+    val strValue = value.joinToString(prefix = "{", separator = ",", postfix = "}", transform = { "\"$it\"" })
+    buildConfigField("String[]", name, strValue)
 }

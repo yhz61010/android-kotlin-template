@@ -1,11 +1,13 @@
-import com.android.build.gradle.internal.dsl.BaseFlavor
-import com.android.build.gradle.internal.dsl.DefaultConfig
+import java.io.ByteArrayOutputStream
 
 // https://docs.gradle.org/current/userguide/plugins.html#sec:subprojects_plugins_dsl
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
-    alias(libs.plugins.kotlin.kapt) // id("org.jetbrains.kotlin.kapt") // or kotlin("kapt")
+    // id("org.jetbrains.kotlin.kapt") // or kotlin("kapt")
+    // If you use kotlin() use must change dash(-) with dot(.)
+    // or you can still use dash like id(“kotlin-android-extensions”)
+    alias(libs.plugins.kotlin.kapt)
     alias(libs.plugins.kotlin.parcelize) //  id("kotlin-parcelize")
 
     alias(libs.plugins.navigation)
@@ -17,6 +19,8 @@ plugins {
 android {
     compileSdk = libs.versions.compile.sdk.get().toInt()
 
+    val appName = "LeoTemplate"
+
     defaultConfig {
         applicationId = namespace
         minSdk = libs.versions.min.sdk.get().toInt()
@@ -24,6 +28,12 @@ android {
 
         versionCode = libs.versions.versionCode.get().toInt()
         versionName = libs.versions.versionName.get()
+
+        multiDexEnabled = true
+
+//        ndk {
+//            abiFilters += setOf("armeabi-v7a", "arm64-v8a", "x86", "x86_64")
+//        }
 
         testInstrumentationRunner = AndroidConfig.TEST_INSTRUMENTATION_RUNNER
 
@@ -76,6 +86,76 @@ android {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
     }
+
+    applicationVariants.all {
+        outputs.all {
+            (this as? com.android.build.gradle.internal.api.ApkVariantOutputImpl)?.let { output ->
+                output.outputFileName =
+                    "${appName}${("-$flavorName").takeIf { it != "-" } ?: ""}-${buildType.name}" +
+                            "-v${versionName}(${versionCode})" +
+                            "-${gitVersionTag()}-${gitCommitCount()}" +
+                            ("-unaligned".takeIf { !zipAlign.enabled } ?: "") +
+                            ".apk"
+            }
+        }
+    }
+}
+
+
+// 获取当前分支的提交总次数
+fun gitCommitCount(): Int {
+//    val cmd = 'git rev-list HEAD --first-parent --count'
+    val cmd = "git rev-list HEAD --count"
+
+    val stdout = ByteArrayOutputStream()
+    runCatching {
+        exec {
+            commandLine = cmd.trim().split(' ')
+            standardOutput = stdout
+        }
+    }.getOrDefault(0)
+    // You must trim() the result. Because the result of command has a suffix '\n'.
+    return stdout.toString().trim().toInt()
+}
+
+// 使用commit的哈希值作为版本号也是可以的，获取最新的一次提交的哈希值的前七个字符
+// $ git rev-list HEAD --abbrev-commit --max-count=1
+// a935b078
+
+/*
+ * 获取最新的一个tag信息
+ * $ git describe --tags
+ * 4.0.4-9-ga935b078
+ * 说明：
+ * 4.0.4        : tag名
+ * 9            : 打tag之后又有四次提交
+ * ga935b078    ：开头 g 为 git 的缩写，在多种管理工具并存的环境中很有用处
+ * a935b078     ：当前分支最新的 commitID 前几位
+ */
+
+fun gitVersionTag(): String {
+    val cmd = "git describe --tags"
+
+    val stdout = ByteArrayOutputStream()
+    runCatching {
+        exec {
+            commandLine = cmd.trim().split(' ')
+            standardOutput = stdout
+        }
+    }.getOrDefault(null) ?: return "NA"
+    var versionTag = stdout.toString()
+
+    val regex = "-(\\d+)-g".toRegex()
+    val matcher: MatchResult? = regex.matchEntire(versionTag)
+
+    val matcherGroup0: MatchGroup? = matcher?.groups?.get(0)
+    versionTag = if (matcher?.value?.isNotBlank() == true && matcherGroup0?.value?.isNotBlank() == true) {
+        versionTag.substring(0, matcherGroup0.range.first) + "." + matcherGroup0.value
+    } else {
+        "$versionTag.0"
+    }
+
+    return versionTag
 }
 
 dependencies {
@@ -96,26 +176,4 @@ dependencies {
     androidTestImplementation(libs.androidx.test.ext.junit.ktx)
     androidTestImplementation(libs.androidx.test.rules)
     androidTestImplementation(libs.espresso.core)
-}
-
-/*
-Takes value from Gradle project property and sets it as build config property
- */
-fun BaseFlavor.buildConfigFieldFromGradleProperty(gradlePropertyName: String) {
-    val propertyValue = project.properties[gradlePropertyName] as? String
-    checkNotNull(propertyValue) { "Gradle property $gradlePropertyName is null" }
-
-    val androidResourceName = "GRADLE_${gradlePropertyName.toSnakeCase()}".toUpperCase()
-    buildConfigField("String", androidResourceName, propertyValue)
-}
-
-fun String.toSnakeCase() = this.split(Regex("(?=[A-Z])")).joinToString("_") { it.toLowerCase() }
-
-/*
-Adds a new field to the generated BuildConfig class
- */
-fun DefaultConfig.buildConfigField(name: String, value: Array<String>) {
-    // Create String that holds Java String Array code
-    val strValue = value.joinToString(prefix = "{", separator = ",", postfix = "}", transform = { "\"$it\"" })
-    buildConfigField("String[]", name, strValue)
 }
