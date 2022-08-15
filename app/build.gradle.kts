@@ -181,10 +181,7 @@ fun gitVersionTag(): String {
 dependencies {
     implementation(libs.android.material)
     implementation(libs.bundles.kotlin)
-    implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.appcompat)
-    implementation(libs.androidx.constraintlayout)
-    implementation(libs.androidx.recyclerview)
+    implementation(libs.bundles.androidx.main)
     implementation(libs.bundles.navigation)
     implementation(libs.bundles.lifecycle)
 
