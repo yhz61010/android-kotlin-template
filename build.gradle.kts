@@ -122,10 +122,10 @@ subprojects {
 fun Project.configureBase(): BaseExtension {
     return extensions.getByName<BaseExtension>("android").apply {
         resourcePrefix = "${name}_"
-        compileSdkVersion(33)
+        compileSdkVersion(rootProject.libs.versions.compile.sdk.get().toInt())
         defaultConfig {
-            minSdk = 21
-            targetSdk = 33
+            minSdk = rootProject.libs.versions.min.sdk.get().toInt()
+            targetSdk = rootProject.libs.versions.target.sdk.get().toInt()
 
             testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         }
