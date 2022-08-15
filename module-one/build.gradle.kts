@@ -10,24 +10,6 @@ plugins {
 }
 
 android {
-    defaultConfig {
-        consumerProguardFiles("consumer-rules.pro")
-    }
-
-    buildTypes {
-        getByName("release") {
-            isMinifyEnabled = true
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
-            )
-        }
-
-        getByName("debug") {
-            isMinifyEnabled = false
-        }
-    }
-
     // https://developer.android.com/reference/tools/gradle-api/7.1/com/android/build/api/dsl/Lint
     lint {
         // if true, stop the gradle build if errors are found
@@ -36,20 +18,7 @@ android {
         // also ignores checks that have explicitly asked to look at test sources, such
         // as the unused resource check.
         ignoreTestSources = true
-
-        // turn off checking the given issue id's
-        disable += setOf(
-            // "MissingTranslation",
-            // "GoogleAppIndexingWarning",
-            "RtlHardcoded",
-            "RtlCompat",
-            "RtlEnabled"
-        )
     }
-
-//    buildFeatures {
-//        viewBinding = true
-//    }
 }
 
 dependencies {

@@ -1,4 +1,5 @@
 import java.io.ByteArrayOutputStream
+import java.util.*
 
 // https://docs.gradle.org/current/userguide/plugins.html#sec:subprojects_plugins_dsl
 plugins {
@@ -32,17 +33,24 @@ android {
         // buildConfigField("FEATURE_MODULE_NAMES", getFeatureNames())
     }
 
+    val releaseSigning = signingConfigs.create("release") {
+        keyAlias = getSignProperty("keyAlias")
+        keyPassword = getSignProperty("keyPassword")
+        storeFile = File(rootDir, getSignProperty("storeFile"))
+        storePassword = getSignProperty("storePassword")
+        enableV1Signing = true
+        enableV2Signing = true
+        enableV3Signing = true
+        enableV4Signing = true
+    }
+
     buildTypes {
-        getByName("release") {
-            isMinifyEnabled = true
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
-            )
+        getByName("debug") {
+            signingConfig = releaseSigning
         }
 
-        getByName("debug") {
-            isMinifyEnabled = false
+        getByName("release")  {
+            signingConfig = releaseSigning
         }
     }
 
@@ -54,20 +62,7 @@ android {
         // also ignores checks that have explicitly asked to look at test sources, such
         // as the unused resource check.
 //        ignoreTestSources = true
-
-        // turn off checking the given issue id's
-        disable += setOf(
-            // "MissingTranslation",
-            // "GoogleAppIndexingWarning",
-            "RtlHardcoded",
-            "RtlCompat",
-            "RtlEnabled"
-        )
     }
-
-//    buildFeatures {
-//        viewBinding = true
-//    }
 
     applicationVariants.all {
         val variant = this
@@ -140,6 +135,10 @@ fun gitVersionTag(): String {
     }
 
     return versionTag
+}
+
+fun Project.getSignProperty(key: String, path: String = "conf/keystore.properties"): String {
+    return Properties().apply { rootProject.file(path).inputStream().use(::load) }.getProperty(key)
 }
 
 dependencies {

@@ -31,7 +31,7 @@ allprojects {
     // }
 
     detekt {
-        config = files("$rootDir/detekt.yml")
+        config = files("$rootDir/conf/detekt.yml")
 
         parallel = true
 
@@ -88,10 +88,10 @@ subprojects {
 
     plugins.withId(rootProject.libs.plugins.android.application.get().pluginId) {
 //        println("displayName=$displayName, name=$name, group=$group")
-        configureBase("com.leovp.androidtemplate")
+        configureApplication("com.leovp.androidtemplate")
     }
 
-    plugins.withId(rootProject.libs.plugins.android.library.get().pluginId) { configureBase() }
+    plugins.withId(rootProject.libs.plugins.android.library.get().pluginId) { configureLibrary() }
 
 //    afterEvaluate {
 //        configureAndroid()
@@ -116,23 +116,42 @@ subprojects {
 //    }
 //}
 
-fun Project.configureBase(ns: String? = null): BaseExtension {
+fun Project.configureBase(): BaseExtension {
     return extensions.getByName<BaseExtension>("android").apply {
         resourcePrefix = "${name}_"
-        namespace = ns.takeIf { it?.isNotBlank() == true } ?: "com.leovp.${name.replace('-', '_')}"
         compileSdkVersion(33)
         defaultConfig {
             minSdk = 21
             targetSdk = 33
 
-            vectorDrawables.useSupportLibrary = true
             testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         }
         sourceSets.configureEach {
             java.srcDirs("src/$name/kotlin")
         }
         compileOptions.setDefaultJavaVersion(JavaVersion.VERSION_11)
+        buildTypes {
+            getByName("release") {
+                isMinifyEnabled = true
+                proguardFiles(
+                    getDefaultProguardFile("proguard-android-optimize.txt"),
+                    "proguard-rules.pro"
+                )
+            }
+
+            getByName("debug") {
+                isMinifyEnabled = false
+            }
+        }
         buildFeatures.viewBinding = true
+        // turn off checking the given issue id's
+        lintOptions.disable += setOf(
+            // "MissingTranslation",
+            // "GoogleAppIndexingWarning",
+            "RtlHardcoded",
+            "RtlCompat",
+            "RtlEnabled"
+        )
         packagingOptions.resources.excludes += setOf(
             "META-INF/licenses/**",
             "META-INF/atomicfu.kotlin_module",
@@ -157,6 +176,29 @@ fun Project.configureBase(ns: String? = null): BaseExtension {
             "okhttp3/**",
             "META-INF/services/**",
         )
+    }
+}
+
+fun Project.configureApplication(ns: String): BaseExtension = configureBase().apply {
+    namespace = ns.replace('-', '_')
+    defaultConfig {
+        vectorDrawables.useSupportLibrary = true
+    }
+    buildTypes {
+        getByName("release") {
+            isShrinkResources = true
+        }
+
+        getByName("debug") {
+            isShrinkResources = false
+        }
+    }
+}
+
+fun Project.configureLibrary(): BaseExtension = configureBase().apply {
+    namespace = "com.leovp.${name.replace('-', '_')}"
+    defaultConfig {
+        consumerProguardFiles("consumer-rules.pro")
     }
 }
 
