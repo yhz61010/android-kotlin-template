@@ -6,7 +6,7 @@ plugins {
     // If you use kotlin() use must change dash(-) with dot(.)
     // or you can still use dash like id(“kotlin-android-extensions”)
     alias(libs.plugins.kotlin.kapt)
-    alias(libs.plugins.kotlin.parcelize) //  id("kotlin-parcelize")
+    alias(libs.plugins.kotlin.parcelize) // id("kotlin-parcelize")
 
     alias(libs.plugins.detekt)
     alias(libs.plugins.ktlint)
