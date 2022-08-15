@@ -19,6 +19,7 @@ plugins {
 
 // all projects = root project + sub projects
 allprojects {
+    // The group name is also the prefix of application package name as well as the prefix of submodules package name.
     group = "com.leovp"
 
     // We want to apply ktlint at all project level because it also checks Gradle config files (*.kts)
@@ -87,8 +88,10 @@ subprojects {
 //    apply(plugin = rootProject.libs.plugins.kotlin.parcelize.get().pluginId)
 
     plugins.withId(rootProject.libs.plugins.android.application.get().pluginId) {
-//        println("displayName=$displayName, name=$name, group=$group")
-        configureApplication("com.leovp.androidtemplate")
+        println("displayName=$displayName, name=$name, group=$group")
+        // The `group` is the value setting in `allprojects`
+        // The `ns` parameter just means the application namespace aka app package name.
+        configureApplication("$group.androidtemplate")
     }
 
     plugins.withId(rootProject.libs.plugins.android.library.get().pluginId) { configureLibrary() }
@@ -179,6 +182,12 @@ fun Project.configureBase(): BaseExtension {
     }
 }
 
+/**
+ * The application level default configurations.
+ * You just need to add your custom properties as you wish.
+ *
+ * @param ns The application namespace aka app package name.
+ */
 fun Project.configureApplication(ns: String): BaseExtension = configureBase().apply {
     namespace = ns.replace('-', '_')
     defaultConfig {
@@ -195,8 +204,13 @@ fun Project.configureApplication(ns: String): BaseExtension = configureBase().ap
     }
 }
 
+/**
+ * All the submodules will have the hierarchy configurations.
+ * You just need to add your custom properties as you wish.
+ */
 fun Project.configureLibrary(): BaseExtension = configureBase().apply {
-    namespace = "com.leovp.${name.replace('-', '_')}"
+    // The `group` is the value setting in `allprojects`
+    namespace = "$group.${name.replace('-', '_')}"
     defaultConfig {
         consumerProguardFiles("consumer-rules.pro")
     }
