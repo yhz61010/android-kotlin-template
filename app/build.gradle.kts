@@ -152,7 +152,9 @@ fun gitCommitCount(): Int {
  */
 
 fun gitVersionTag(): String {
-    val cmd = "git describe --tags"
+    // https://stackoverflow.com/a/4916591/1685062
+//    val cmd = "git describe --tags"
+    val cmd = "git describe --always"
 
     val stdout = ByteArrayOutputStream()
     runCatching {
@@ -161,7 +163,7 @@ fun gitVersionTag(): String {
             standardOutput = stdout
         }
     }.getOrDefault(null) ?: return "NA"
-    var versionTag = stdout.toString()
+    var versionTag = stdout.toString().trim()
 
     val regex = "-(\\d+)-g".toRegex()
     val matcher: MatchResult? = regex.matchEntire(versionTag)
@@ -170,7 +172,7 @@ fun gitVersionTag(): String {
     versionTag = if (matcher?.value?.isNotBlank() == true && matcherGroup0?.value?.isNotBlank() == true) {
         versionTag.substring(0, matcherGroup0.range.first) + "." + matcherGroup0.value
     } else {
-        "$versionTag.0"
+        versionTag
     }
 
     return versionTag
