@@ -8,7 +8,7 @@ target-sdk = "33"
 ndk-sdk = "21.1.6352462" # 22.1.7171670
 
 versionCode = "1"
-versionName = "1.0"
+versionName = "1.0.0"
 
 #===================
 #===== Compile =====

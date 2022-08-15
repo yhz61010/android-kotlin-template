@@ -18,7 +18,7 @@ plugins {
 
 // all projects = root project + sub projects
 allprojects {
-    group = PUBLISHING_GROUP
+    group = "com.leovp"
 
     // We want to apply ktlint at all project level because it also checks Gradle config files (*.kts)
     apply(plugin = rootProject.libs.plugins.ktlint.get().pluginId)
@@ -90,7 +90,7 @@ subprojects {
 //}
 
 fun Project.configureAndroid() {
-    (project.extensions.findByName("android") as? BaseExtension)?.run {
+    (project.extensions.getByName<BaseExtension>("android")).apply {
         sourceSets {
             map { it.java.srcDir("src/${it.name}/kotlin") }
         }

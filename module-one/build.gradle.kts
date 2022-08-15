@@ -20,20 +20,20 @@ android {
         targetSdk = libs.versions.target.sdk.get().toInt()
 
         consumerProguardFiles("consumer-rules.pro")
-        testInstrumentationRunner = AndroidConfig.TEST_INSTRUMENTATION_RUNNER
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
-        getByName(BuildType.RELEASE) {
-            isMinifyEnabled = BuildTypeRelease.isMinifyEnabled
+        getByName("release") {
+            isMinifyEnabled = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
         }
 
-        getByName(BuildType.DEBUG) {
-            isMinifyEnabled = BuildTypeDebug.isMinifyEnabled
+        getByName("debug") {
+            isMinifyEnabled = false
         }
     }
 
@@ -76,12 +76,12 @@ android {
         resources.pickFirsts += setOf(
             "META-INF/licenses/**",
             "META-INF/atomicfu.kotlin_module",
-            "META-INF/NOTICE",
-            "META-INF/NOTICE.*",
-            "META-INF/DEPENDENCIES",
-            "META-INF/DEPENDENCIES.*",
-            "META-INF/LICENSE",
-            "META-INF/LICENSE.*",
+            "META-INF/NOTICE*",
+            "META-INF/NOTICE*.*",
+            "META-INF/DEPENDENCIES*",
+            "META-INF/DEPENDENCIES*.*",
+            "META-INF/LICENSE*",
+            "META-INF/LICENSE*.*",
             "META-INF/INDEX.LIST",
             "META-INF/io.netty.versions.properties",
             "**/*.proto",
