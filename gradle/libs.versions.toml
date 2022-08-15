@@ -35,6 +35,7 @@ cardview = "1.0.0"
 lifecycle = "2.5.1"
 viewpager2 = "1.0.0"
 room = "2.5.0-alpha02" # 2.4.2 has compilation error with Kotlin 1.7.0
+
 #===========================
 #===== Android Compose =====
 #===========================
@@ -68,6 +69,7 @@ xx-permission = "13.5"
 bson = "2.13.1" # As of 2.13.0, you need to add fasterxml jackson manually.
 free-reflection = "3.1.0"
 flyco-tablayout = "2.2.0"
+srl = "2.0.5"
 
 #================
 #===== Test =====
@@ -106,6 +108,7 @@ androidx-recyclerview = { module = "androidx.recyclerview:recyclerview", version
 androidx-cardview = { module = "androidx.cardview:cardview", version.ref = "cardview" }
 androidx-fragment = { module = "androidx.fragment:fragment-ktx", version.ref = "fragment" }
 androidx-viewpager2 = { module = "androidx.viewpager2:viewpager2", version.ref = "viewpager2" }
+
 #=============================
 #===== Android Lifecycle =====
 #=============================
@@ -119,6 +122,7 @@ lifecycle-service = { module = "androidx.lifecycle:lifecycle-service", version.r
 lifecycle-runtime = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "lifecycle" }
 # Saved state module for ViewModel
 lifecycle-viewmodel-savedstate = { module = "androidx.lifecycle:lifecycle-viewmodel-savedstate", version.ref = "lifecycle" }
+
 #===========================
 #===== Android Room ========
 #===========================
@@ -128,6 +132,7 @@ room-compiler = { module = "androidx.room:room-compiler", version.ref = "room" }
 room-ktx = { module = "androidx.room:room-ktx", version.ref = "room" }
 # optional - RxJava support for Room
 room-rxjava2 = { module = "androidx.room:room-rxjava2", version.ref = "room" }
+
 #===========================
 #===== Android Compose =====
 #===========================
@@ -162,6 +167,9 @@ glide-transformations = { module = "jp.wasabeef:glide-transformations", version.
 rxJava3-java = { module = "io.reactivex.rxjava3:rxjava", version.ref = "rxjava3" }
 rxJava3-android = { module = "io.reactivex.rxjava3:rxandroid", version.ref = "rxjava3-android" }
 flycoTabLayout = { module = "com.flyco.tablayout:FlycoTabLayout_Lib", version.ref = "flyco-tablayout" }
+srl-footer = { module = "com.scwang.smart:refresh-footer-classics", version.ref = "srl" }
+srl-header = { module = "com.scwang.smart:refresh-header-classics", version.ref = "srl" }
+srl-kernel = { module = "com.scwang.smart:refresh-layout-kernel", version.ref = "srl" }
 
 #================
 #===== Test =====
@@ -211,6 +219,7 @@ lifecycle = ["lifecycle-viewmodel", "lifecycle-livedata", "lifecycle-service", "
 room = ["room-runtime", "room-ktx"]
 coil = ["coil", "coil-gif", "coil-svg"]
 glide = ["glide", "glide-okhttp3", "glide-transformations"]
+srl = ["srl-kernel", "srl-header", "srl-footer"]
 test = [
     "kotlin-junit5",
     "test-coroutines",

@@ -88,11 +88,11 @@ android {
     }
 
     packagingOptions {
-//        resources.excludes += setOf(
+        resources.excludes += setOf(
+            "META-INF/{AL2.0,LGPL2.1}",
+        )
         resources.pickFirsts += setOf(
-            "META-INF/AL2.0",
             "META-INF/licenses/**",
-            "META-INF/LGPL2.1",
             "META-INF/atomicfu.kotlin_module",
             "META-INF/NOTICE",
             "META-INF/NOTICE.*",
