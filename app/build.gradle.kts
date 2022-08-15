@@ -87,6 +87,24 @@ android {
         targetCompatibility = JavaVersion.VERSION_11
     }
 
+    packagingOptions {
+//        resources.excludes += setOf(
+        resources.pickFirsts += setOf(
+            "META-INF/AL2.0",
+            "META-INF/licenses/**",
+            "META-INF/LGPL2.1",
+            "META-INF/atomicfu.kotlin_module",
+            "META-INF/NOTICE",
+            "META-INF/NOTICE.*",
+            "META-INF/DEPENDENCIES",
+            "META-INF/DEPENDENCIES.*",
+            "META-INF/LICENSE",
+            "META-INF/LICENSE.*",
+            "META-INF/INDEX.LIST",
+            "META-INF/io.netty.versions.properties",
+        )
+    }
+
     applicationVariants.all {
         outputs.all {
             (this as? com.android.build.gradle.internal.api.ApkVariantOutputImpl)?.let { output ->
