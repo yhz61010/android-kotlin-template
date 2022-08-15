@@ -84,6 +84,17 @@ android {
             "META-INF/LICENSE.*",
             "META-INF/INDEX.LIST",
             "META-INF/io.netty.versions.properties",
+            "**/*.proto",
+            "**/*.bin",
+            "**/*.java",
+            "**/*.properties",
+            "**/*.version",
+            "**/*.*_module",
+            "*.txt",
+            "kotlin/**",
+            "kotlinx/**",
+            "okhttp3/**",
+            "META-INF/services/**",
         )
     }
 }
