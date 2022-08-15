@@ -186,6 +186,7 @@ square-okHttp-mockJunit5 = { module = "com.squareup.okhttp3:mockwebserver3-junit
 [bundles]
 kotlin = ["kotlin-reflect", "kotlin-coroutines"]
 navigation = ["androidx-navigation-fragment", "androidx-navigation-ui"]
+lifecycle = ["lifecycle-viewmodel", "lifecycle-livedata", "lifecycle-service", "lifecycle-viewmodel-savedstate"]
 test = [
     "kotlin-junit5",
     "test-coroutines",

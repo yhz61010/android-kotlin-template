@@ -166,9 +166,7 @@ dependencies {
     implementation(libs.androidx.constraintlayout)
     implementation(libs.androidx.recyclerview)
     implementation(libs.bundles.navigation)
-
-//    implementation(libs.bundles.navigation)
-//    implementation(libs.bundles.lifecycle)
+    implementation(libs.bundles.lifecycle)
 
     testImplementation(libs.junit)
 
