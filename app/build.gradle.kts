@@ -196,6 +196,8 @@ dependencies {
     implementation(libs.bundles.navigation)
     implementation(libs.bundles.lifecycle)
 
+    implementation(project(":module-one"))
+
     testImplementation(libs.junit)
 
     androidTestImplementation(libs.androidx.test.ext.junit)

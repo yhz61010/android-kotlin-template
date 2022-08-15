@@ -40,6 +40,6 @@ dependencyResolutionManagement {
 }
 
 include(
-    ":app",
-    ":module-one"
+    "app",
+    "module-one"
 )
