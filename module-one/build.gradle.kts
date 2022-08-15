@@ -1,12 +1,7 @@
 // https://docs.gradle.org/current/userguide/plugins.html#sec:subprojects_plugins_dsl
 plugins {
     alias(libs.plugins.android.library)
-//    alias(libs.plugins.kotlin.android)
-//    // id("org.jetbrains.kotlin.kapt") // or kotlin("kapt")
-//    // If you use kotlin(), you can change dash(-) with dot(.)
-//    // or you can still use dash like id("kotlin-parcelize")
-//    alias(libs.plugins.kotlin.kapt)
-//    alias(libs.plugins.kotlin.parcelize) // id("kotlin-parcelize")
+    alias(libs.plugins.kotlin.parcelize) // id("kotlin-parcelize")
 }
 
 android {

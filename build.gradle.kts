@@ -85,7 +85,6 @@ allprojects {
 subprojects {
     apply(plugin = rootProject.libs.plugins.kotlin.android.get().pluginId)
     apply(plugin = rootProject.libs.plugins.kotlin.kapt.get().pluginId)
-    // apply(plugin = rootProject.libs.plugins.kotlin.parcelize.get().pluginId)
 
     plugins.withId(rootProject.libs.plugins.android.application.get().pluginId) {
         // println("displayName=$displayName, name=$name, group=$group")
