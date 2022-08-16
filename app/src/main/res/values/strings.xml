@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">android template</string>
+    <string name="app_app_name">android template</string>
     <string name="app_action_settings">Settings</string>
     <!-- Strings used for fragments for navigation -->
     <string name="app_first_fragment_label">First Fragment</string>
