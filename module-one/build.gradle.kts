@@ -8,7 +8,7 @@ android {
     // https://developer.android.com/reference/tools/gradle-api/7.1/com/android/build/api/dsl/Lint
     lint {
         // if true, stop the gradle build if errors are found
-        abortOnError = true
+        abortOnError = false
         // Like checkTestSources, but always skips analyzing tests -- meaning that it
         // also ignores checks that have explicitly asked to look at test sources, such
         // as the unused resource check.

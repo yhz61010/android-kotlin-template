@@ -39,6 +39,14 @@ val appPkg = "com.leovp.androidtemplate"
 
 /**
  * By default, the resource prefix is just the module name.
+ *
+ * resourcePrefix 的校验规则：
+ * 1. 针对可识别类型的文件夹中的非 `values` 文件夹目录，校验 `xml` 文件的文件前缀是否符合规则。
+ * 2. 针对 `values` 文件夹中的文件，不校验文件前缀，校验文件中name元素的值。
+ * 3. 针对二进制文件，校验文件前缀。
+ * 4. 图片资源通常来说也应该被检验文件前缀，但是我们通常会进行如下 lint 设置 abortOnError = false
+ * 因此错误提示被忽略了。
+ *
  * @see [resourcePrefix](https://blog.csdn.net/weixin_43910395/article/details/120166450)
  */
 val useResourcePrefix = true
@@ -105,15 +113,13 @@ allprojects {
         }
     }
 
-    tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach {
-        kotlinOptions {
-            jvmTarget = JavaVersion.VERSION_11.toString()
-        }
-    }
-
     tasks.withType<Test> {
         maxParallelForks = (Runtime.getRuntime().availableProcessors() / 2).takeIf { it > 0 } ?: 1
         useJUnitPlatform()
+    }
+
+    afterEvaluate {
+        configureCompileVersion()
     }
 
 //    configurations.all {
@@ -136,10 +142,6 @@ subprojects {
     }
 
     plugins.withId(rootProject.libs.plugins.android.library.get().pluginId) { configureLibrary() }
-
-//    afterEvaluate {
-//        configureAndroid()
-//    }
 }
 
 //tasks {
@@ -151,6 +153,19 @@ subprojects {
 //tasks.register<Delete>("clean") {
 //    delete(rootProject.buildDir)
 //}
+
+fun Project.configureCompileVersion() {
+    tasks.withType<JavaCompile>().configureEach {
+        sourceCompatibility = JavaVersion.VERSION_11.toString()
+        targetCompatibility = JavaVersion.VERSION_11.toString()
+    }
+
+    tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach {
+        kotlinOptions {
+            jvmTarget = JavaVersion.VERSION_11.toString()
+        }
+    }
+}
 
 fun Project.configureBase(): BaseExtension {
     return extensions.getByName<BaseExtension>("android").apply {
