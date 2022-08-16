@@ -6,11 +6,8 @@ import io.gitlab.arturbosch.detekt.Detekt
 // =====================================
 // ========== Global settings ==========
 // =====================================
-val customGroup = "com.leovp"
 
 /**
- * All the occurrences `-` dash in `appPkg` will be replaced with `_` underscore.
- *
  * **Attention:**
  * The rule for each package name of module is as following:
  * ```
@@ -20,9 +17,15 @@ val customGroup = "com.leovp"
  * ```
  * com.leovp.module_one
  * ```
+ * **Attention:** All the occurrences `-` dash in `moduleName` will be replaced with `_` underscore.
+ */
+val customGroup = "com.leovp"
+
+/**
+ * All the occurrences `-` dash in `appPkg` will be replaced with `_` underscore.
  *
  * **Attention:**
- * The `sourceSets` is similar.
+ * The rule for `sourceSets` is as following.
  * For example:
  * ```
  * sourceSets.configureEach {
@@ -37,27 +40,6 @@ val appPkg = "com.leovp.androidtemplate"
 /**
  * By default, the resource prefix is just the module name.
  * @see [resourcePrefix](https://blog.csdn.net/weixin_43910395/article/details/120166450)
- *
- * **Attention:**
- * The rule for each package name of module is as following:
- * ```
- * customGroup + "." + moduleName
- * ```
- * For example:
- * ```
- * com.leovp.module_one
- * ```
- *
- * **Attention:**
- * The `sourceSets` is similar.
- * For example:
- * ```
- * sourceSets.configureEach {
- *      java.srcDirs("src/$moduleName/kotlin")
- * }
- * ```
- *
- * **Attention:** All the occurrences `-` dash in `moduleName` will be replaced with `_` underscore.
  */
 val useResourcePrefix = true
 
