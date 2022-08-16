@@ -3,8 +3,65 @@ import com.android.build.gradle.internal.dsl.BaseFlavor
 import com.android.build.gradle.internal.dsl.DefaultConfig
 import io.gitlab.arturbosch.detekt.Detekt
 
+// =====================================
+// ========== Global settings ==========
+// =====================================
 val customGroup = "com.leovp"
-val customPkg = "com.leovp.androidtemplate"
+
+/**
+ * All the occurrences `-` dash in `appPkg` will be replaced with `_` underscore.
+ *
+ * **Attention:**
+ * The rule for each package name of module is as following:
+ * ```
+ * customGroup + "." + moduleName
+ * ```
+ * For example:
+ * ```
+ * com.leovp.module_one
+ * ```
+ *
+ * **Attention:**
+ * The `sourceSets` is similar.
+ * For example:
+ * ```
+ * sourceSets.configureEach {
+ *      java.srcDirs("src/$moduleName/kotlin")
+ * }
+ * ```
+ *
+ * **Attention:** All the occurrences `-` dash in `moduleName` will be replaced with `_` underscore.
+ */
+val appPkg = "com.leovp.androidtemplate"
+
+/**
+ * By default, the resource prefix is just the module name.
+ * @see [resourcePrefix](https://blog.csdn.net/weixin_43910395/article/details/120166450)
+ *
+ * **Attention:**
+ * The rule for each package name of module is as following:
+ * ```
+ * customGroup + "." + moduleName
+ * ```
+ * For example:
+ * ```
+ * com.leovp.module_one
+ * ```
+ *
+ * **Attention:**
+ * The `sourceSets` is similar.
+ * For example:
+ * ```
+ * sourceSets.configureEach {
+ *      java.srcDirs("src/$moduleName/kotlin")
+ * }
+ * ```
+ *
+ * **Attention:** All the occurrences `-` dash in `moduleName` will be replaced with `_` underscore.
+ */
+val useResourcePrefix = true
+
+// =====================================
 
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 plugins {
@@ -93,7 +150,7 @@ subprojects {
         // println("displayName=$displayName, name=$name, group=$group")
         // You can use `group` which is the value that is set in `allprojects`.
         // The `ns` parameter just means the application namespace aka app package name.
-        configureApplication(customPkg)
+        configureApplication(appPkg)
     }
 
     plugins.withId(rootProject.libs.plugins.android.library.get().pluginId) { configureLibrary() }
@@ -115,7 +172,10 @@ subprojects {
 
 fun Project.configureBase(): BaseExtension {
     return extensions.getByName<BaseExtension>("android").apply {
-        resourcePrefix = "${name}_"
+        val moduleName = name.replace('-', '_')
+        if (useResourcePrefix) {
+            resourcePrefix = "${moduleName}_"
+        }
         compileSdkVersion(rootProject.libs.versions.compile.sdk.get().toInt())
         defaultConfig {
             minSdk = rootProject.libs.versions.min.sdk.get().toInt()
@@ -124,10 +184,10 @@ fun Project.configureBase(): BaseExtension {
             testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         }
         sourceSets.configureEach {
-            java.srcDirs("src/$name/kotlin")
+            java.srcDirs("src/$moduleName/kotlin")
         }
 //        sourceSets {
-//            map { it.java.srcDir("src/${it.name}/kotlin") }
+//            map { it.java.srcDir("src/${it.moduleName}/kotlin") }
 //        }
         compileOptions.setDefaultJavaVersion(JavaVersion.VERSION_11)
         buildTypes {
@@ -183,10 +243,13 @@ fun Project.configureBase(): BaseExtension {
  * The application level default configurations.
  * You just need to add your custom properties as you wish.
  *
+ * **Attention**:
+ * All the occurrences `-` dash will be replaced with `_` underscore.
+ *
  * @param ns The application namespace aka app package name.
  */
 fun Project.configureApplication(ns: String): BaseExtension = configureBase().apply {
-    namespace = ns.replace("-", "")
+    namespace = ns.replace('-', '_')
     defaultConfig {
         vectorDrawables.useSupportLibrary = true
     }
@@ -204,10 +267,13 @@ fun Project.configureApplication(ns: String): BaseExtension = configureBase().ap
 /**
  * All the submodules will have the hierarchy configurations.
  * You just need to add your custom properties as you wish.
+ *
+ * **Attention**:
+ * All the occurrences `-` dash will be replaced with `_` underscore.
  */
 fun Project.configureLibrary(): BaseExtension = configureBase().apply {
     // The `group` is the value that is set in `allprojects`.
-    namespace = "$group.${name.replace("-", "")}"
+    namespace = "$group.${name.replace('-', '_')}"
     defaultConfig {
         consumerProguardFiles("consumer-rules.pro")
     }
