@@ -123,9 +123,11 @@ allprojects {
         useJUnitPlatform()
     }
 
-    afterEvaluate {
-        configureCompileVersion()
-    }
+    configureCompileVersion()
+
+//    afterEvaluate {
+//        configureCompileVersion()
+//    }
 
 //    configurations.all {
 //        resolutionStrategy.eachDependency {
