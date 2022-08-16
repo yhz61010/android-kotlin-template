@@ -3,6 +3,9 @@ import com.android.build.gradle.internal.dsl.BaseFlavor
 import com.android.build.gradle.internal.dsl.DefaultConfig
 import io.gitlab.arturbosch.detekt.Detekt
 
+val customGroup = "com.leovp"
+val customPkg = "com.leovp.androidtemplate"
+
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 plugins {
     // https://docs.gradle.org/current/userguide/plugins.html#sec:subprojects_plugins_dsl
@@ -20,7 +23,7 @@ plugins {
 // all projects = root project + sub projects
 allprojects {
     // The group name is also the prefix of application package name as well as the prefix of submodules package name.
-    group = "com.leovp"
+    group = customGroup
 
     // We want to apply ktlint at all project level because it also checks Gradle config files (*.kts)
     apply(plugin = rootProject.libs.plugins.ktlint.get().pluginId)
@@ -88,9 +91,9 @@ subprojects {
 
     plugins.withId(rootProject.libs.plugins.android.application.get().pluginId) {
         // println("displayName=$displayName, name=$name, group=$group")
-        // The `group` is the value setting in `allprojects`
+        // You can use `group` which is the value that is set in `allprojects`.
         // The `ns` parameter just means the application namespace aka app package name.
-        configureApplication("$group.androidtemplate")
+        configureApplication(customPkg)
     }
 
     plugins.withId(rootProject.libs.plugins.android.library.get().pluginId) { configureLibrary() }
@@ -110,14 +113,6 @@ subprojects {
 //    delete(rootProject.buildDir)
 //}
 
-//fun Project.configureAndroid() {
-//    (project.extensions.getByName<BaseExtension>("android")).apply {
-//        sourceSets {
-//            map { it.java.srcDir("src/${it.name}/kotlin") }
-//        }
-//    }
-//}
-
 fun Project.configureBase(): BaseExtension {
     return extensions.getByName<BaseExtension>("android").apply {
         resourcePrefix = "${name}_"
@@ -131,6 +126,9 @@ fun Project.configureBase(): BaseExtension {
         sourceSets.configureEach {
             java.srcDirs("src/$name/kotlin")
         }
+//        sourceSets {
+//            map { it.java.srcDir("src/${it.name}/kotlin") }
+//        }
         compileOptions.setDefaultJavaVersion(JavaVersion.VERSION_11)
         buildTypes {
             getByName("release") {
@@ -208,7 +206,7 @@ fun Project.configureApplication(ns: String): BaseExtension = configureBase().ap
  * You just need to add your custom properties as you wish.
  */
 fun Project.configureLibrary(): BaseExtension = configureBase().apply {
-    // The `group` is the value setting in `allprojects`
+    // The `group` is the value that is set in `allprojects`.
     namespace = "$group.${name.replace('-', '_')}"
     defaultConfig {
         consumerProguardFiles("consumer-rules.pro")
