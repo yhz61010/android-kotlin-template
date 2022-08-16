@@ -156,6 +156,13 @@ subprojects {
 //    delete(rootProject.buildDir)
 //}
 
+/**
+ * Configure to eliminate the following warnning:
+ * ```
+ * 'compileReleaseJavaWithJavac' task (current target is 1.8) and 'compileReleaseKotlin'
+ * task (current target is 11) jvm target compatibility should be set to the same Java version.
+ * ```
+ */
 fun Project.configureCompileVersion() {
     tasks.withType<JavaCompile>().configureEach {
         sourceCompatibility = jdkVersion
