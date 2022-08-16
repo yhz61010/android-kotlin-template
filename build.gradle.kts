@@ -186,7 +186,7 @@ fun Project.configureBase(): BaseExtension {
  * @param ns The application namespace aka app package name.
  */
 fun Project.configureApplication(ns: String): BaseExtension = configureBase().apply {
-    namespace = ns.replace('-', '_')
+    namespace = ns.replace("-", "")
     defaultConfig {
         vectorDrawables.useSupportLibrary = true
     }
@@ -207,7 +207,7 @@ fun Project.configureApplication(ns: String): BaseExtension = configureBase().ap
  */
 fun Project.configureLibrary(): BaseExtension = configureBase().apply {
     // The `group` is the value that is set in `allprojects`.
-    namespace = "$group.${name.replace('-', '_')}"
+    namespace = "$group.${name.replace("-", "")}"
     defaultConfig {
         consumerProguardFiles("consumer-rules.pro")
     }

@@ -8,8 +8,8 @@
     <fragment
         android:id="@+id/FirstFragment"
         android:name="com.leovp.androidtemplate.FirstFragment"
-        android:label="@string/first_fragment_label"
-        tools:layout="@layout/fragment_first">
+        android:label="@string/app_first_fragment_label"
+        tools:layout="@layout/app_fragment_first">
 
         <action
             android:id="@+id/action_FirstFragment_to_SecondFragment"
@@ -18,8 +18,8 @@
     <fragment
         android:id="@+id/SecondFragment"
         android:name="com.leovp.androidtemplate.SecondFragment"
-        android:label="@string/second_fragment_label"
-        tools:layout="@layout/fragment_second">
+        android:label="@string/app_second_fragment_label"
+        tools:layout="@layout/app_fragment_second">
 
         <action
             android:id="@+id/action_SecondFragment_to_FirstFragment"
