@@ -37,6 +37,8 @@ val customGroup = "com.leovp"
  */
 val appPkg = "com.leovp.androidtemplate"
 
+val jdkVersion = JavaVersion.VERSION_11.toString()
+
 /**
  * By default, the resource prefix is just the module name.
  *
@@ -156,13 +158,13 @@ subprojects {
 
 fun Project.configureCompileVersion() {
     tasks.withType<JavaCompile>().configureEach {
-        sourceCompatibility = JavaVersion.VERSION_11.toString()
-        targetCompatibility = JavaVersion.VERSION_11.toString()
+        sourceCompatibility = jdkVersion
+        targetCompatibility = jdkVersion
     }
 
     tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach {
         kotlinOptions {
-            jvmTarget = JavaVersion.VERSION_11.toString()
+            jvmTarget = jdkVersion
         }
     }
 }
@@ -186,7 +188,7 @@ fun Project.configureBase(): BaseExtension {
 //        sourceSets {
 //            map { it.java.srcDir("src/${it.moduleName}/kotlin") }
 //        }
-        compileOptions.setDefaultJavaVersion(JavaVersion.VERSION_11)
+        compileOptions.setDefaultJavaVersion(JavaVersion.toVersion(jdkVersion))
         buildTypes {
             getByName("release") {
                 isMinifyEnabled = true
@@ -278,7 +280,7 @@ fun Project.configureLibrary(): BaseExtension = configureBase().apply {
 
 // Target version of the generated JVM bytecode. It is used for type resolution.
 tasks.withType<Detekt>().configureEach {
-    jvmTarget = JavaVersion.VERSION_11.toString()
+    jvmTarget = jdkVersion
 
     reports {
         html.required.set(true) // observe findings in your browser with structure and code snippets
