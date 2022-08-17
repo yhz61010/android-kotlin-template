@@ -1,4 +1,4 @@
-package com.leovp.module_one
+package com.leovp.moduleone
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.runner.AndroidJUnit4
@@ -17,6 +17,7 @@ class ExampleInstrumentedTest {
     fun useAppContext() {
         // Context of the app under test.
         val appContext = InstrumentationRegistry.getInstrumentation().targetContext
-        assertEquals("com.leovp.module_one.test", appContext.packageName)
+        println("appContext.packageName=${appContext.packageName}")
+        assertEquals("com.leovp.moduleone.test", appContext.packageName)
     }
 }

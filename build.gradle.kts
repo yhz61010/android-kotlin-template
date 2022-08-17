@@ -3,6 +3,7 @@ import com.android.build.gradle.internal.dsl.BaseFlavor
 import com.android.build.gradle.internal.dsl.DefaultConfig
 import com.github.benmanes.gradle.versions.updates.DependencyUpdatesTask
 import io.gitlab.arturbosch.detekt.Detekt
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import org.jlleitschuh.gradle.ktlint.KtlintExtension
 
 // =====================================
@@ -19,12 +20,12 @@ import org.jlleitschuh.gradle.ktlint.KtlintExtension
  * ```
  * com.leovp.module_one
  * ```
- * **Attention:** All the occurrences `-` dash in `moduleName` will be replaced with `_` underscore.
+ * **Attention:** All the occurrences `-` dash in `moduleName` will be removed.
  */
 val customGroup = "com.leovp"
 
 /**
- * All the occurrences `-` dash in `appPkg` will be replaced with `_` underscore.
+ * All the occurrences `-` dash in `appPkg` will be removed.
  *
  * **Attention:**
  * The rule for `sourceSets` is as following.
@@ -35,11 +36,11 @@ val customGroup = "com.leovp"
  * }
  * ```
  *
- * **Attention:** All the occurrences `-` dash in `moduleName` will be replaced with `_` underscore.
+ * **Attention:** All the occurrences `-` dash in `moduleName` will be removed.
  */
 val appPkg = "com.leovp.androidtemplate"
 
-val jdkVersion = JavaVersion.VERSION_11.toString()
+val jdkVersion = JavaVersion.VERSION_11
 
 /**
  * By default, the resource prefix is just the module name.
@@ -76,7 +77,6 @@ plugins {
     alias(libs.plugins.benmanes.versions)
 }
 
-//val ktlintVersion = libs.versions.ktlint.asProvider().get()
 val detektFormatting = libs.detekt.formatting
 
 // all projects = root project + sub projects
@@ -133,11 +133,9 @@ allprojects {
         useJUnitPlatform()
     }
 
-    configureCompileVersion()
-
-//    afterEvaluate {
-//        configureCompileVersion()
-//    }
+    afterEvaluate {
+        configureCompileVersion()
+    }
 
 //    configurations.all {
 //        resolutionStrategy.eachDependency {
@@ -185,20 +183,20 @@ subprojects {
  */
 fun Project.configureCompileVersion() {
     tasks.withType<JavaCompile>().configureEach {
-        sourceCompatibility = jdkVersion
-        targetCompatibility = jdkVersion
+        sourceCompatibility = jdkVersion.toString()
+        targetCompatibility = jdkVersion.toString()
     }
 
-    tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach {
+    tasks.withType<KotlinCompile>().configureEach {
         kotlinOptions {
-            jvmTarget = jdkVersion
+            jvmTarget = jdkVersion.toString()
         }
     }
 }
 
 fun Project.configureBase(): BaseExtension {
     return extensions.getByName<BaseExtension>("android").apply {
-        val moduleName = name.replace('-', '_')
+        val moduleName = name.replace("-", "")
         if (useResourcePrefix) {
             resourcePrefix = "${moduleName}_"
         }
@@ -215,7 +213,11 @@ fun Project.configureBase(): BaseExtension {
 //        sourceSets {
 //            map { it.java.srcDir("src/${it.moduleName}/kotlin") }
 //        }
-        compileOptions.setDefaultJavaVersion(JavaVersion.toVersion(jdkVersion))
+        compileOptions {
+            setDefaultJavaVersion(jdkVersion)
+            sourceCompatibility = jdkVersion
+            targetCompatibility = jdkVersion
+        }
         buildTypes {
             getByName("release") {
                 isMinifyEnabled = true
@@ -270,12 +272,12 @@ fun Project.configureBase(): BaseExtension {
  * You just need to add your custom properties as you wish.
  *
  * **Attention**:
- * All the occurrences `-` dash will be replaced with `_` underscore.
+ * All the occurrences `-` dash will be removed.
  *
  * @param ns The application namespace aka app package name.
  */
 fun Project.configureApplication(ns: String): BaseExtension = configureBase().apply {
-    namespace = ns.replace('-', '_')
+    namespace = ns.replace("-", "")
     defaultConfig {
         vectorDrawables.useSupportLibrary = true
     }
@@ -295,11 +297,11 @@ fun Project.configureApplication(ns: String): BaseExtension = configureBase().ap
  * You just need to add your custom properties as you wish.
  *
  * **Attention**:
- * All the occurrences `-` dash will be replaced with `_` underscore.
+ * All the occurrences `-` dash will be removed.
  */
 fun Project.configureLibrary(): BaseExtension = configureBase().apply {
     // The `group` is the value that is set in `allprojects`.
-    namespace = "$group.${name.replace('-', '_')}"
+    namespace = "$group.${name.replace("-", "")}"
     defaultConfig {
         consumerProguardFiles("consumer-rules.pro")
     }
@@ -307,7 +309,7 @@ fun Project.configureLibrary(): BaseExtension = configureBase().apply {
 
 // Target version of the generated JVM bytecode. It is used for type resolution.
 tasks.withType<Detekt>().configureEach {
-    jvmTarget = jdkVersion
+    jvmTarget = jdkVersion.toString()
 
     reports {
         html.required.set(true) // observe findings in your browser with structure and code snippets

@@ -1,4 +1,4 @@
-package com.leovp.module_one
+package com.leovp.moduleone
 
 import android.content.Context
 
@@ -7,4 +7,4 @@ import android.content.Context
  * Date: 2022/8/15 14:02
  */
 
-fun Context.helloWorld(): String = "Hello World."
+fun Context.sayHelloTo(name: String): String = "Hello $name"
