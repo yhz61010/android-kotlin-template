@@ -16,27 +16,16 @@ import org.jlleitschuh.gradle.ktlint.KtlintExtension
  * ```
  * customGroup + "." + moduleName
  * ```
- * For example:
+ * For example, if the module name is `module-one`, the final package name is as following:
  * ```
- * com.leovp.module_one
+ * com.leovp.module.one
  * ```
- * **Attention:** All the occurrences `-` dash in `moduleName` will be removed.
+ * **Attention:** All the occurrences `-` dash in `moduleName` will be replaced with `.` dot.
  */
 val customGroup = "com.leovp"
 
 /**
- * All the occurrences `-` dash in `appPkg` will be removed.
- *
- * **Attention:**
- * The rule for `sourceSets` is as following.
- * For example:
- * ```
- * sourceSets.configureEach {
- *      java.srcDirs("src/$moduleName/kotlin")
- * }
- * ```
- *
- * **Attention:** All the occurrences `-` dash in `moduleName` will be removed.
+ * **Attention:** All the occurrences `-` dash in `appPkg` will be replaced with `.` dot.
  */
 val appPkg = "com.leovp.androidtemplate"
 
@@ -51,6 +40,9 @@ val jdkVersion = JavaVersion.VERSION_11
  * 3. 针对二进制文件，校验文件前缀。
  * 4. 图片资源通常来说也应该被检验文件前缀，但是我们通常会进行如下 lint 设置 abortOnError = false
  * 因此错误提示被忽略了。
+ *
+ * **Attention:**
+ * All the occurrences `-` dash in `Module Name` will be replaced with `_` underscore.
  *
  * @see [resourcePrefix](https://blog.csdn.net/weixin_43910395/article/details/120166450)
  */
@@ -196,8 +188,8 @@ fun Project.configureCompileVersion() {
 
 fun Project.configureBase(): BaseExtension {
     return extensions.getByName<BaseExtension>("android").apply {
-        val moduleName = name.replace("-", "")
         if (useResourcePrefix) {
+            val moduleName = name.replace("-", "_")
             resourcePrefix = "${moduleName}_"
         }
         compileSdkVersion(rootProject.libs.versions.compile.sdk.get().toInt())
@@ -208,10 +200,11 @@ fun Project.configureBase(): BaseExtension {
             testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         }
         sourceSets.configureEach {
-            java.srcDirs("src/$moduleName/kotlin")
+            // This `name` is just the name for each `source` in `sourceSets`.
+            java.srcDirs("src/$name/kotlin")
         }
 //        sourceSets {
-//            map { it.java.srcDir("src/${it.moduleName}/kotlin") }
+//            map { it.java.srcDir("src/${it.name}/kotlin") }
 //        }
         compileOptions {
             setDefaultJavaVersion(jdkVersion)
@@ -272,12 +265,12 @@ fun Project.configureBase(): BaseExtension {
  * You just need to add your custom properties as you wish.
  *
  * **Attention**:
- * All the occurrences `-` dash will be removed.
+ * All the occurrences `-` dash will be replaced with `.` dot.
  *
  * @param ns The application namespace aka app package name.
  */
 fun Project.configureApplication(ns: String): BaseExtension = configureBase().apply {
-    namespace = ns.replace("-", "")
+    namespace = ns.replace('-', '.')
     defaultConfig {
         vectorDrawables.useSupportLibrary = true
     }
@@ -297,11 +290,11 @@ fun Project.configureApplication(ns: String): BaseExtension = configureBase().ap
  * You just need to add your custom properties as you wish.
  *
  * **Attention**:
- * All the occurrences `-` dash will be removed.
+ * All the occurrences `-` dash will be replaced with `.` dot.
  */
 fun Project.configureLibrary(): BaseExtension = configureBase().apply {
     // The `group` is the value that is set in `allprojects`.
-    namespace = "$group.${name.replace("-", "")}"
+    namespace = "$group.${name.replace('-', '.')}"
     defaultConfig {
         consumerProguardFiles("consumer-rules.pro")
     }
