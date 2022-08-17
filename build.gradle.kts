@@ -1,7 +1,9 @@
 import com.android.build.gradle.BaseExtension
 import com.android.build.gradle.internal.dsl.BaseFlavor
 import com.android.build.gradle.internal.dsl.DefaultConfig
+import com.github.benmanes.gradle.versions.updates.DependencyUpdatesTask
 import io.gitlab.arturbosch.detekt.Detekt
+import org.jlleitschuh.gradle.ktlint.KtlintExtension
 
 // =====================================
 // ========== Global settings ==========
@@ -70,7 +72,12 @@ plugins {
 
     alias(libs.plugins.detekt)
     alias(libs.plugins.ktlint)
+
+    alias(libs.plugins.benmanes.versions)
 }
+
+//val ktlintVersion = libs.versions.ktlint.asProvider().get()
+val detektFormatting = libs.detekt.formatting
 
 // all projects = root project + sub projects
 allprojects {
@@ -79,6 +86,9 @@ allprojects {
 
     // We want to apply ktlint at all project level because it also checks Gradle config files (*.kts)
     apply(plugin = rootProject.libs.plugins.ktlint.get().pluginId)
+    configure<KtlintExtension> {
+        version.set(rootProject.libs.versions.ktlint.asProvider().get())
+    }
 
     apply(plugin = rootProject.libs.plugins.detekt.get().pluginId)
     // or
@@ -135,6 +145,11 @@ allprojects {
 //                    "requested.module=${requested.module} requested.version=${requested.version}")
 //        }
 //    }
+
+    dependencies {
+        // We must define `detektFormatting` in outside, or else the compile error will occur.
+        detektPlugins(detektFormatting)
+    }
 }
 
 subprojects {
@@ -331,6 +346,21 @@ task("staticCheck") {
     }
 }
 
+// https://github.com/ben-manes/gradle-versions-plugin
+tasks.withType<DependencyUpdatesTask> {
+    rejectVersionIf {
+        isNonStable(candidate.version) && !isNonStable(currentVersion)
+    }
+}
+
+fun isNonStable(version: String): Boolean {
+    val stableKeyword = listOf("RELEASE", "FINAL", "GA").any { version.toUpperCase().contains(it) }
+    val regex = "^[0-9,.v-]+(-r)?$".toRegex()
+    val isStable = stableKeyword || regex.matches(version)
+    return isStable.not()
+}
+
+// --------------------------------------
 
 /*
 Takes value from Gradle project property and sets it as build config property
