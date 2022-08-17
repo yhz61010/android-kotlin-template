@@ -1,4 +1,4 @@
-package com.leovp.moduleone
+package com.leovp.module_common
 
 import org.junit.Assert.assertEquals
 import org.junit.Test

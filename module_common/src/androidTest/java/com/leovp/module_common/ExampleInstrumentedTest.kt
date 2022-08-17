@@ -1,7 +1,7 @@
-package com.leovp.moduleone
+package com.leovp.module_common
 
+import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
-import androidx.test.runner.AndroidJUnit4
 import org.junit.Assert.assertEquals
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -17,7 +17,6 @@ class ExampleInstrumentedTest {
     fun useAppContext() {
         // Context of the app under test.
         val appContext = InstrumentationRegistry.getInstrumentation().targetContext
-        println("appContext.packageName=${appContext.packageName}")
-        assertEquals("com.leovp.moduleone.test", appContext.packageName)
+        assertEquals("com.leovp.module.common.test", appContext.packageName)
     }
 }

@@ -148,7 +148,7 @@ dependencies {
     implementation(libs.bundles.navigation)
     implementation(libs.bundles.lifecycle)
 
-    implementation(project(":module-one"))
+    implementation(project(":module_common"))
 
     testImplementation(libs.bundles.test)
     androidTestImplementation(libs.bundles.android.test)

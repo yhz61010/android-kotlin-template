@@ -42,5 +42,5 @@ dependencyResolutionManagement {
 
 include(
     "app",
-    "module-one"
+    "module_common"
 )
