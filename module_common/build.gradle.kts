@@ -20,5 +20,6 @@ dependencies {
     implementation(libs.bundles.kotlin)
 
     testImplementation(libs.bundles.test)
+    testRuntimeOnly(libs.bundles.test.runtime.only)
     androidTestImplementation(libs.bundles.android.test)
 }

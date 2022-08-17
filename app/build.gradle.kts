@@ -156,5 +156,6 @@ dependencies {
     implementation(project(":module_common"))
 
     testImplementation(libs.bundles.test)
+    testRuntimeOnly(libs.bundles.test.runtime.only)
     androidTestImplementation(libs.bundles.android.test)
 }

@@ -193,6 +193,8 @@ test-runner = { module = "androidx.test:runner", version.ref = "test-runner" }
 mockk = { module = "io.mockk:mockk", version.ref = "mockk" }
 arch = { module = "androidx.arch.core:core-testing", version.ref = "arch" }
 junit-jupiter-api = { module = "org.junit.jupiter:junit-jupiter-api", version.ref = "jupiter" }
+junit-jupiter-engine = { module = "org.junit.jupiter:junit-jupiter-engine", version.ref = "jupiter" }
+junit-vintage-engine = { module = "org.junit.vintage:junit-vintage-engine", version.ref = "jupiter" }
 compose-ui-test-junit4 = { module = "androidx.compose.ui:ui-test-junit4", version.ref = "compose" }
 compose-ui-test-manifest = { module = "androidx.compose.ui:ui-test-manifest", version.ref = "compose" }
 square-okHttp-mockJunit5 = { module = "com.squareup.okhttp3:mockwebserver3-junit5", version.ref = "square-okHttp" }
@@ -240,6 +242,7 @@ test = [
     "test-runner",
     "arch"
 ]
+test-runtime-only = ["junit-jupiter-engine", "junit-vintage-engine"]
 android-test = ["androidx-test-ext-junit-ktx", "espresso-core"]
 
 #===================#===================#===================#===================
