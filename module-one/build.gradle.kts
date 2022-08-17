@@ -18,5 +18,7 @@ android {
 
 dependencies {
     implementation(libs.bundles.kotlin)
-    implementation(libs.bundles.test)
+
+    testImplementation(libs.bundles.test)
+    androidTestImplementation(libs.bundles.android.test)
 }

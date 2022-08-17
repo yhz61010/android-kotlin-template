@@ -150,10 +150,6 @@ dependencies {
 
     implementation(project(":module-one"))
 
-    testImplementation(libs.junit)
-
-    androidTestImplementation(libs.androidx.test.ext.junit)
-    androidTestImplementation(libs.androidx.test.ext.junit.ktx)
-    androidTestImplementation(libs.androidx.test.rules)
-    androidTestImplementation(libs.espresso.core)
+    testImplementation(libs.bundles.test)
+    androidTestImplementation(libs.bundles.android.test)
 }

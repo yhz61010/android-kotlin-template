@@ -86,6 +86,10 @@ test-runner = "1.4.0"
 mockk = "1.12.5"
 arch = "2.1.0"
 
+#===================#===================#===================#===================
+#===================#===================#===================#===================
+#===================#===================#===================#===================
+
 [libraries]
 #===================
 #===== Compile =====
@@ -193,6 +197,10 @@ compose-ui-test-junit4 = { module = "androidx.compose.ui:ui-test-junit4", versio
 compose-ui-test-manifest = { module = "androidx.compose.ui:ui-test-manifest", version.ref = "compose" }
 square-okHttp-mockJunit5 = { module = "com.squareup.okhttp3:mockwebserver3-junit5", version.ref = "square-okHttp" }
 
+#===================#===================#===================#===================
+#===================#===================#===================#===================
+#===================#===================#===================#===================
+
 [bundles]
 androidx-full = [
     "androidx-core-ktx",
@@ -223,15 +231,20 @@ coil = ["coil", "coil-gif", "coil-svg"]
 glide = ["glide", "glide-okhttp3", "glide-transformations"]
 srl = ["srl-kernel", "srl-header", "srl-footer"]
 test = [
+    "junit",
     "kotlin-junit5",
+    "junit-jupiter-api",
+    "mockk",
     "test-coroutines",
     "kluent-android",
     "test-runner",
-    "espresso-core",
-    "mockk",
-    "arch",
-    "junit-jupiter-api"
+    "arch"
 ]
+android-test = ["androidx-test-ext-junit-ktx", "espresso-core"]
+
+#===================#===================#===================#===================
+#===================#===================#===================#===================
+#===================#===================#===================#===================
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
