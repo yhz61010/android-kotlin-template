@@ -1,4 +1,4 @@
-package com.leovp.module_common
+package com.leovp.module.common
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry

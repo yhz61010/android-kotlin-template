@@ -16,16 +16,16 @@ import org.jlleitschuh.gradle.ktlint.KtlintExtension
  * ```
  * customGroup + "." + moduleName
  * ```
- * For example, if the module name is `module-one`, the final package name is as following:
+ * For example, if the module name is `module-one_two`, the final package name is as following:
  * ```
- * com.leovp.module.one
+ * com.leovp.module.one.two
  * ```
- * **Attention:** All the occurrences `-` dash in `moduleName` will be replaced with `.` dot.
+ * **Attention:** All the occurrences `-` dash or `_` underline in `moduleName` will be replaced with `.` dot.
  */
 val customGroup = "com.leovp"
 
 /**
- * **Attention:** All the occurrences `-` dash in `appPkg` will be replaced with `.` dot.
+ * **Attention:** All the occurrences `-` dash or `_` underline in `appPkg` will be replaced with `.` dot.
  */
 val appPkg = "com.leovp.androidtemplate"
 
@@ -265,12 +265,12 @@ fun Project.configureBase(): BaseExtension {
  * You just need to add your custom properties as you wish.
  *
  * **Attention**:
- * All the occurrences `-` dash will be replaced with `.` dot.
+ * All the occurrences `-` dash or `_` underline will be replaced with `.` dot.
  *
  * @param ns The application namespace aka app package name.
  */
 fun Project.configureApplication(ns: String): BaseExtension = configureBase().apply {
-    namespace = ns.replace('-', '.')
+    namespace = ns.replace('-', '.').replace('_', '.')
     defaultConfig {
         vectorDrawables.useSupportLibrary = true
     }
@@ -290,11 +290,11 @@ fun Project.configureApplication(ns: String): BaseExtension = configureBase().ap
  * You just need to add your custom properties as you wish.
  *
  * **Attention**:
- * All the occurrences `-` dash will be replaced with `.` dot.
+ * All the occurrences `-` dash or `_` underline will be replaced with `.` dot.
  */
 fun Project.configureLibrary(): BaseExtension = configureBase().apply {
     // The `group` is the value that is set in `allprojects`.
-    namespace = "$group.${name.replace('-', '.')}"
+    namespace = "$group.${name.replace('-', '.').replace('_', '.')}"
     defaultConfig {
         consumerProguardFiles("consumer-rules.pro")
     }

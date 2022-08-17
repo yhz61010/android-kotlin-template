@@ -14,6 +14,11 @@ plugins {
     // alias(libs.plugins.kotlin.kapt)
 }
 
+kapt {
+    // We also need to add `org.gradle.caching=true` in `gradle.properties`.
+    useBuildCache = true
+}
+
 android {
     val appName = "LeoTemplate"
 
