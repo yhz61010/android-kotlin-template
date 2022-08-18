@@ -99,7 +99,7 @@ mars-xlog = "1.2.5"
 karn-notify = "1.4.0"
 mmkv = "1.2.13"
 fasterxml = "2.13.3"
-xx-permission = "13.5"
+xx-permissions = "13.5"
 bson = "2.13.1" # As of 2.13.0, you need to add fasterxml jackson manually.
 free-reflection = "3.1.0"
 flyco-tablayout = "2.2.0"
@@ -108,6 +108,7 @@ netty = "4.1.70.Final"
 koin = "3.2.0"
 bytedeco-ffmpeg = "5.0-1.5.7"
 bytedeco-javacpp = "1.5.7"
+material-dialogs = "3.3.0"
 
 #================
 #===== Test =====
@@ -257,6 +258,10 @@ bytedeco-ffmpeg = { module = "org.bytedeco:ffmpeg", version.ref = "bytedeco-ffmp
 #     }
 # }
 bytedeco-javacpp = { module = "org.bytedeco:javacpp", version.ref = "bytedeco-javacpp" }
+material-dialogs = { module = "com.afollestad.material-dialogs:input", version.ref = "material-dialogs" }
+karn-notify = { module = "io.karn:notify", version.ref = "karn-notify" }
+xx-permissions = { module = "com.github.getActivity:XXPermissions", version.ref = "xx-permissions" }
+mmkv = { module = "com.tencent:mmkv", version.ref = "mmkv" }
 
 #================
 #===== Test =====
