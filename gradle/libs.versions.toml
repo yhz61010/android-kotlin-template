@@ -186,6 +186,7 @@ flycoTabLayout = { module = "com.flyco.tablayout:FlycoTabLayout_Lib", version.re
 srl-footer = { module = "com.scwang.smart:refresh-footer-classics", version.ref = "srl" }
 srl-header = { module = "com.scwang.smart:refresh-header-classics", version.ref = "srl" }
 srl-kernel = { module = "com.scwang.smart:refresh-layout-kernel", version.ref = "srl" }
+jacoco = { module = "org.jacoco:org.jacoco.core", version.ref = "jacoco" }
 
 #================
 #===== Test =====

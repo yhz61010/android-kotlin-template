@@ -71,6 +71,17 @@ plugins {
     alias(libs.plugins.ktlint.gradle)
 
     alias(libs.plugins.benmanes.versions)
+
+    jacoco
+}
+
+// ********************
+// https://gist.github.com/huuphuoc1396/497c27c1fac205f5d9c6696016227e1c
+//
+// Fix the problem: "Unexpected SMAP line: *S KotlinDebug"
+// ********************
+jacoco {
+    toolVersion = rootProject.libs.versions.jacoco.get()
 }
 
 val detektFormatting = libs.detekt.formatting

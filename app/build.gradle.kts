@@ -1,12 +1,15 @@
 import java.io.ByteArrayOutputStream
 import java.util.*
 
+apply(from = "../jacoco.gradle.kts")
 // https://docs.gradle.org/current/userguide/plugins.html#sec:subprojects_plugins_dsl
 plugins {
     alias(libs.plugins.android.application)
 
     alias(libs.plugins.kotlin.parcelize) // id("kotlin-parcelize")
     alias(libs.plugins.navigation)
+
+    jacoco
 }
 
 kapt {
