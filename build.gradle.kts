@@ -68,7 +68,7 @@ plugins {
     alias(libs.plugins.navigation) apply false
 
     alias(libs.plugins.detekt)
-    alias(libs.plugins.ktlint)
+    alias(libs.plugins.ktlint.gradle)
 
     alias(libs.plugins.benmanes.versions)
 }
@@ -81,7 +81,7 @@ allprojects {
     group = customGroup
 
     // We want to apply ktlint at all project level because it also checks Gradle config files (*.kts)
-    apply(plugin = rootProject.libs.plugins.ktlint.get().pluginId)
+    apply(plugin = rootProject.libs.plugins.ktlint.gradle.get().pluginId)
     configure<KtlintExtension> {
         version.set(rootProject.libs.versions.ktlint.asProvider().get())
     }

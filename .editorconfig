@@ -4,8 +4,8 @@ root = true
 
 [*]
 charset = utf-8
-#indent_size = 4
-#indent_style = space
+indent_size = 4
+indent_style = space
 insert_final_newline = true
 trim_trailing_whitespace = true
 
@@ -27,3 +27,9 @@ indent_size = 2
 [*.java]
 ij_java_imports_layout = ascii
 ij_java_use_single_class_imports = true
+
+[*.proto]
+indent_size=2
+
+[*.json]
+indent_size=2
