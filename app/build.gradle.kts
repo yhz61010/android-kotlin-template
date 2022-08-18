@@ -148,6 +148,8 @@ dependencies {
     implementation(libs.bundles.navigation)
     implementation(libs.bundles.lifecycle)
 
+    // By using `projects`, you need to enable `enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")`
+    // in `settings.gradle.kts` where in your root folder.
     implementation(projects.moduleCommon)
 
     testImplementation(libs.bundles.test)
