@@ -148,7 +148,7 @@ dependencies {
     implementation(libs.bundles.navigation)
     implementation(libs.bundles.lifecycle)
 
-    implementation(project(":module_common"))
+    implementation(projects.moduleCommon)
 
     testImplementation(libs.bundles.test)
     testRuntimeOnly(libs.bundles.test.runtime.only)

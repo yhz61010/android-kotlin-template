@@ -40,6 +40,10 @@ dependencyResolutionManagement {
     }
 }
 
+// https://docs.gradle.org/7.0/release-notes.html
+// Type-safe project accessors
+enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
+
 include(
     "app",
     "module_common"
