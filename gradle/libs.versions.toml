@@ -1,3 +1,21 @@
+# "group:name:version:classifier@extension"
+# For the given regular declaration:
+# dependencies {
+#     implementation "com.mygroup:my-artifact:1.0.0:debug@aar"
+# }
+# In `TOML`
+# [libraries]
+# myDependency = { module = "com.mygroup:my-artifact", version = "1.0.0" }
+# In `build.gradle.kts`
+# dependencies {
+#     implementation(libs.myDependency) {
+#         artifact {
+#             classifier = 'debug'
+#             type = 'aar'
+#         }
+#     }
+# }
+
 [versions]
 #===================
 #===== Project =====
@@ -88,6 +106,8 @@ flyco-tablayout = "2.2.0"
 srl = "2.0.5"
 netty = "4.1.70.Final"
 koin = "3.2.0"
+bytedeco-ffmpeg = "5.0-1.5.7"
+bytedeco-javacpp = "1.5.7"
 
 #================
 #===== Test =====
@@ -215,6 +235,28 @@ netty-codec-http = { module = "io.netty:netty-codec-http", version.ref = "netty"
 netty-handler = { module = "io.netty:netty-handler", version.ref = "netty" }
 netty-all = { module = "io.netty:netty-all", version.ref = "netty" }
 coin = { module = "io.insert-koin:koin-android", version.ref = "koin" }
+# https://mvnrepository.com/artifact/org.bytedeco/ffmpeg
+# In `build.gradle.kts`
+# dependencies {
+#     implementation(libs.bytedeco.ffmpeg)
+#     implementation(libs.bytedeco.ffmpeg) {
+#         artifact {
+#             classifier = 'android-arm'
+#         }
+#     }
+# }
+bytedeco-ffmpeg = { module = "org.bytedeco:ffmpeg", version.ref = "bytedeco-ffmpeg" }
+# https://mvnrepository.com/artifact/org.bytedeco/javacpp
+# In `build.gradle.kts`
+# dependencies {
+#     implementation(libs.bytedeco.javacpp)
+#     implementation(libs.bytedeco.javacpp) {
+#         artifact {
+#             classifier = 'android-arm'
+#         }
+#     }
+# }
+bytedeco-javacpp = { module = "org.bytedeco:javacpp", version.ref = "bytedeco-javacpp" }
 
 #================
 #===== Test =====
@@ -240,6 +282,7 @@ powermock-junit4 = { module = "org.powermock:powermock-module-junit4", version.r
 powermock-core = { module = "org.powermock:powermock-core", version.ref = "powermock-version" }
 powermock-api = { module = "org.powermock:powermock-api-mockito2", version.ref = "powermock-version" }
 robolectric = { module = "org.robolectric:robolectric", version.ref = "robolectric-version" }
+mars-xlog = { module = "com.tencent.mars:mars-xlog", version.ref = "mars-xlog" }
 
 #===================#===================#===================#===================
 #===================#===================#===================#===================
