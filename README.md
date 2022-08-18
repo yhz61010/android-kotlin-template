@@ -48,3 +48,4 @@ plugins {
     // Your other plugins.
     alias(libs.plugins.sonarqube)
 }
+```
