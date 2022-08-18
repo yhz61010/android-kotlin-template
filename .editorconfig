@@ -1,5 +1,7 @@
 root = true
 
+# https://pinterest.github.io/ktlint/rules/configuration-ktlint/
+
 [*]
 charset = utf-8
 #indent_size = 4
@@ -9,9 +11,11 @@ trim_trailing_whitespace = true
 
 [*.{kt,kts}]
 indent_size = 4
-#ij_kotlin_imports_layout = *
+ij_kotlin_imports_layout = *
+disabled_rules = import-ordering # ,indent
 #ij_kotlin_name_count_to_use_star_import = 999
 #ij_kotlin_name_count_to_use_star_import_for_members = 999
+# Use "off" (or -1) to ignore max line length or a positive number to set max line length
 max_line_length = 120
 
 [*.md]

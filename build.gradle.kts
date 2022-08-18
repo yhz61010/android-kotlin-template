@@ -57,7 +57,11 @@ plugins {
     alias(libs.plugins.android.library) apply false
     alias(libs.plugins.kotlin.android) apply false
 
-    alias(libs.plugins.kotlin.kapt) apply false // id("org.jetbrains.kotlin.kapt") or kotlin("kapt")
+    // id("org.jetbrains.kotlin.kapt") // or kotlin("kapt")
+    // If you use kotlin(), you can change dash(-) with dot(.)
+    // or you can still use dash like id("kotlin-parcelize")
+    // alias(libs.plugins.kotlin.kapt)
+    alias(libs.plugins.kotlin.kapt) apply false
     alias(libs.plugins.kotlin.parcelize) apply false // id("kotlin-parcelize")
 
     // https://stackoverflow.com/a/72508037/1685062
@@ -156,15 +160,15 @@ subprojects {
     plugins.withId(rootProject.libs.plugins.android.library.get().pluginId) { configureLibrary() }
 }
 
-//tasks {
+// tasks {
 //    register("clean", Delete::class) {
 //        delete(rootProject.buildDir)
 //    }
-//}
+// }
 
-//tasks.register<Delete>("clean") {
+// tasks.register<Delete>("clean") {
 //    delete(rootProject.buildDir)
-//}
+// }
 
 /**
  * Configure to eliminate the following warnning:
@@ -305,11 +309,17 @@ tasks.withType<Detekt>().configureEach {
     jvmTarget = jdkVersion.toString()
 
     reports {
-        html.required.set(true) // observe findings in your browser with structure and code snippets
-        xml.required.set(true) // checkstyle like format mainly for integrations like Jenkins
-        txt.required.set(true) // similar to the console output, contains issue signature to manually edit baseline files
-        sarif.required.set(true) // standardized SARIF format (https://sarifweb.azurewebsites.net/) to support integrations with Github Code Scanning
-        md.required.set(true) // simple Markdown format
+        // observe findings in your browser with structure and code snippets
+        html.required.set(true)
+        // checkstyle like format mainly for integrations like Jenkins
+        xml.required.set(true)
+        // similar to the console output, contains issue signature to manually edit baseline files
+        txt.required.set(true)
+        // standardized SARIF format (https://sarifweb.azurewebsites.net/)
+        // to support integrations with Github Code Scanning
+        sarif.required.set(true)
+        // simple Markdown format
+        md.required.set(true)
     }
 }
 
