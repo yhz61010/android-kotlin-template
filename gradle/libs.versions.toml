@@ -373,6 +373,7 @@ room = ["room-runtime", "room-ktx"]
 coil = ["coil", "coil-gif", "coil-svg", "coil-video"]
 glide = ["glide", "glide-okhttp3", "glide-transformations"]
 srl = ["srl-kernel", "srl-header", "srl-footer"]
+java-mail = ["java-mail", "java-activation"]
 fasterxml = [
     "fasterxml-jackson-core",
     "fasterxml-jackson-databind",
