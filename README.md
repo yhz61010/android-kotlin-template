@@ -25,3 +25,18 @@ This is an Android kotlin template project.
 ```kotlin
 ./gradlew staticCheck
 ```
+
+## How to enable and run jacoco
+1. Add following line before `plugins` in your module-level `build.gradle.kts`:
+```kotlin
+apply(from = "../jacoco.gradle.kts")
+```
+2. Add `jacoco` in your module-level `build.gradle.kts` as following:
+```kotlin
+plugins {
+    // Your other plugins.
+    jacoco
+}
+```
+3. After `Sync` project, you'll get two tasks `jacocoTestReport` and `jacocoCoverageVerification`.
+Run them as you wish.
