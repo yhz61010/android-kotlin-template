@@ -236,8 +236,8 @@ glide-compiler = { module = "com.github.bumptech.glide:compiler", version.ref = 
 glide-okhttp3 = { module = "com.github.bumptech.glide:okhttp3-integration", version.ref = "glide" }
 # https://github.com/wasabeef/glide-transformations
 glide-transformations = { module = "jp.wasabeef:glide-transformations", version.ref = "glide-transformations" }
-rxJava3-java = { module = "io.reactivex.rxjava3:rxjava", version.ref = "rxjava3" }
-rxJava3-android = { module = "io.reactivex.rxjava3:rxandroid", version.ref = "rxjava3-android" }
+rxjava3-java = { module = "io.reactivex.rxjava3:rxjava", version.ref = "rxjava3" }
+rxjava3-android = { module = "io.reactivex.rxjava3:rxandroid", version.ref = "rxjava3-android" }
 flycoTabLayout = { module = "com.flyco.tablayout:FlycoTabLayout_Lib", version.ref = "flyco-tablayout" }
 srl-footer = { module = "com.scwang.smart:refresh-footer-classics", version.ref = "srl" }
 srl-header = { module = "com.scwang.smart:refresh-header-classics", version.ref = "srl" }
