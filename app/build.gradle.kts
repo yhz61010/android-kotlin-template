@@ -7,11 +7,6 @@ plugins {
     alias(libs.plugins.kotlin.parcelize) // id("kotlin-parcelize")
 
     alias(libs.plugins.navigation)
-
-    // id("org.jetbrains.kotlin.kapt") // or kotlin("kapt")
-    // If you use kotlin(), you can change dash(-) with dot(.)
-    // or you can still use dash like id("kotlin-parcelize")
-    // alias(libs.plugins.kotlin.kapt)
 }
 
 kapt {
@@ -76,10 +71,10 @@ android {
             .forEach { output ->
                 variant.packageApplicationProvider.get().outputDirectory
                 output.outputFileName = "${appName}${("-$flavorName").takeIf { it != "-" } ?: ""}-${buildType.name}" +
-                        "-v$versionName($versionCode)" +
-                        "-${gitVersionTag()}-${gitCommitCount()}" +
+                    "-v$versionName($versionCode)" +
+                    "-${gitVersionTag()}-${gitCommitCount()}" +
 //                        ("-unaligned".takeIf { !output.zipAlign.enabled } ?: "") +
-                        ".apk"
+                    ".apk"
             }
     }
 }
