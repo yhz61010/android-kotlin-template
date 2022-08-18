@@ -31,7 +31,7 @@ This is an Android kotlin template project.
 ```kotlin
 apply(from = "../jacoco.gradle.kts")
 ```
-2. Add `jacoco` in your module-level `build.gradle.kts` as following:
+2. Add `jacoco` plugin to the module which you want to check. Modify your module-level `build.gradle.kts` as following:
 ```kotlin
 plugins {
     // Your other plugins.
@@ -40,3 +40,11 @@ plugins {
 ```
 3. After `Sync` project, you'll get two tasks `jacocoTestReport` and `jacocoCoverageVerification`.
 Run them as you wish.
+
+## Enable sonarqube
+Add `sonarqube` plugin to the module which you want to check. Modify your module-level `build.gradle.kts` as following:
+```kotlin
+plugins {
+    // Your other plugins.
+    alias(libs.plugins.sonarqube)
+}
