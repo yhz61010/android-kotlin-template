@@ -254,7 +254,7 @@ coin = { module = "io.insert-koin:koin-android", version.ref = "koin" }
 #     implementation(libs.bytedeco.ffmpeg)
 #     implementation(libs.bytedeco.ffmpeg) {
 #         artifact {
-#             classifier = 'android-arm'
+#             classifier = "android-arm"
 #         }
 #     }
 # }
@@ -265,7 +265,7 @@ bytedeco-ffmpeg = { module = "org.bytedeco:ffmpeg", version.ref = "bytedeco-ffmp
 #     implementation(libs.bytedeco.javacpp)
 #     implementation(libs.bytedeco.javacpp) {
 #         artifact {
-#             classifier = 'android-arm'
+#             classifier = "android-arm"
 #         }
 #     }
 # }
