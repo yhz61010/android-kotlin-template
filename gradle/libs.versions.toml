@@ -37,6 +37,7 @@ cardview = "1.0.0"
 viewpager2 = "1.0.0"
 swiperefreshlayout = "1.1.0"
 room = "2.5.0-alpha02" # 2.4.2 has compilation error with Kotlin 1.7.0
+camera = "1.2.0-alpha04"
 
 #===========================
 #===== Android Compose =====
@@ -131,6 +132,17 @@ androidx-coordinatorlayout = { module = "androidx.coordinatorlayout:coordinatorl
 androidx-recyclerview = { module = "androidx.recyclerview:recyclerview", version.ref = "recyclerview" }
 androidx-cardview = { module = "androidx.cardview:cardview", version.ref = "cardview" }
 androidx-viewpager2 = { module = "androidx.viewpager2:viewpager2", version.ref = "viewpager2" }
+# CameraX core library
+androidx-camera-core = { module = "androidx.camera:camera-core", version.ref = "camera" }
+# CameraX Camera2 extensions
+androidx-camera-camera2 = { module = "androidx.camera:camera-camera2", version.ref = "camera" }
+androidx-camera-video = { module = "androidx.camera:camera-video", version.ref = "camera" }
+# CameraX Lifecycle library
+androidx-camera-lifecycle = { module = "androidx.camera:camera-lifecycle", version.ref = "camera" }
+# CameraX View class
+androidx-camera-view = { module = "androidx.camera:camera-view", version.ref = "camera" }
+# CameraX Extensions library
+androidx-camera-ext = { module = "androidx.camera:camera-extensions", version.ref = "camera" }
 
 #=============================
 #===== Android Lifecycle =====
