@@ -97,7 +97,8 @@ allprojects {
 
         parallel = true
 
-        // By default detekt does not check test source set and gradle specific files, so hey have to be added manually
+        // By default detekt does not check test source set and gradle specific files,
+        // so hey have to be added manually.
         source = files(
             "$rootDir/buildSrc",
             "$rootDir/build.gradle.kts",

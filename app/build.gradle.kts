@@ -4,8 +4,8 @@ import java.util.*
 // https://docs.gradle.org/current/userguide/plugins.html#sec:subprojects_plugins_dsl
 plugins {
     alias(libs.plugins.android.application)
-    alias(libs.plugins.kotlin.parcelize) // id("kotlin-parcelize")
 
+    alias(libs.plugins.kotlin.parcelize) // id("kotlin-parcelize")
     alias(libs.plugins.navigation)
 }
 
