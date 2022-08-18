@@ -136,8 +136,7 @@ allprojects {
 
 //    configurations.all {
 //        resolutionStrategy.eachDependency {
-//            println("requested.group=${requested.group} requested.name=${requested.name} " +
-//                    "requested.module=${requested.module} requested.version=${requested.version}")
+//            println("module=${requested.module}:${requested.version} group=${requested.group} name=${requested.name}")
 //        }
 //    }
 
