@@ -403,3 +403,4 @@ navigation = { id = "androidx.navigation.safeargs.kotlin", version.ref = "naviga
 detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
 ktlint-gradle = { id = "org.jlleitschuh.gradle.ktlint", version.ref = "ktlint-gradle" }
 benmanes-versions = { id = "com.github.ben-manes.versions", version.ref = "benmanes" }
+sonarqube = { id = "org.sonarqube", version.ref = "sonarqube" }

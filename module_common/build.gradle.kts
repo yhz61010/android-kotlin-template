@@ -6,6 +6,7 @@ plugins {
 
     alias(libs.plugins.kotlin.parcelize) // id("kotlin-parcelize")
 
+    alias(libs.plugins.sonarqube)
     jacoco
 }
 
