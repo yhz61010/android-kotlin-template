@@ -216,7 +216,7 @@ fun Project.configureBase(): BaseExtension {
         }
         sourceSets.configureEach {
             // This `name` is just the name for each `source` in `sourceSets`.
-            java.srcDirs("src/$name/kotlin")
+            java.srcDirs("src/$name/kotlin", "src/$name/java")
         }
 //        sourceSets {
 //            map { it.java.srcDir("src/${it.name}/kotlin") }
