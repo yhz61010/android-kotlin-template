@@ -284,7 +284,7 @@ mmkv = { module = "com.tencent:mmkv", version.ref = "mmkv" }
 # dependencies {
 #     implementation(libs.android.animations) {
 #         artifact {
-#             type = 'aar'
+#             type = "aar"
 #         }
 #     }
 # }
