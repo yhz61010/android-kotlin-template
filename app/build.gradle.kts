@@ -37,7 +37,7 @@ android {
         // buildConfigField("FEATURE_MODULE_NAMES", getFeatureNames())
     }
 
-    val releaseSigning = signingConfigs.create("release") {
+    val releaseSigning = signingConfigs.create("releaseSigning") {
         keyAlias = getSignProperty("keyAlias")
         keyPassword = getSignProperty("keyPassword")
         storeFile = File(rootDir, getSignProperty("storeFile"))
