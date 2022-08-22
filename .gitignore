@@ -87,7 +87,6 @@ lint/tmp/
 /.idea/copyright/profiles_settings.xml
 /.idea/modules/
 
-/debug.keystore
 /.idea/other.xml
 /**/detekt-baseline.xml
 /.idea/shelf/
