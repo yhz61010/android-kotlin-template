@@ -83,3 +83,11 @@ lint/generated/
 lint/outputs/
 lint/tmp/
 # lint/reports/
+
+/.idea/copyright/profiles_settings.xml
+/.idea/modules/
+
+/debug.keystore
+/.idea/other.xml
+/**/detekt-baseline.xml
+/.idea/shelf/
