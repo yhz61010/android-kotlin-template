@@ -4,7 +4,9 @@ pluginManagement {
     repositories {
         gradlePluginPortal()
         google()
-        mavenCentral()
+        mavenCentral {
+            isAllowInsecureProtocol = true
+        }
     }
 
     resolutionStrategy {
