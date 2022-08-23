@@ -4,9 +4,7 @@ pluginManagement {
     repositories {
         gradlePluginPortal()
         google()
-        mavenCentral {
-            isAllowInsecureProtocol = true
-        }
+        mavenCentral()
     }
 
     resolutionStrategy {
@@ -36,7 +34,9 @@ dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
         google()
-        mavenCentral()
+        mavenCentral{
+            isAllowInsecureProtocol = true
+        }
         maven("https://maven.aliyun.com/repository/public")
         maven("https://jitpack.io")
     }
