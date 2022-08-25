@@ -30,6 +30,7 @@ dependencies {
     api(libs.leo.androidbase)
     api(libs.leo.pref)
     api(libs.leo.log)
+    api(libs.leo.floatview)
     api(libs.leo.lib.json)
 
     testImplementation(libs.bundles.test)
