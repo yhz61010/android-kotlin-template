@@ -225,29 +225,34 @@ fun Project.configureBase(): BaseExtension {
             "RtlCompat",
             "RtlEnabled"
         )
+        packagingOptions.resources.pickFirsts += setOf(
+             "META-INF/atomicfu.kotlin_module",
+        )
         packagingOptions.resources.excludes += setOf(
             "META-INF/licenses/**",
-            "META-INF/atomicfu.kotlin_module",
             "META-INF/NOTICE*",
-            "META-INF/NOTICE*.*",
-            "META-INF/DEPENDENCIES*",
-            "META-INF/DEPENDENCIES*.*",
             "META-INF/LICENSE*",
-            "META-INF/LICENSE*.*",
+            "META-INF/DEPENDENCIES*",
             "META-INF/INDEX.LIST",
             "META-INF/io.netty.versions.properties",
             "META-INF/{AL2.0,LGPL2.1}",
-            "**/*.proto",
-            "**/*.bin",
-            "**/*.java",
-            "**/*.properties",
-            "**/*.version",
-            "**/*.*_module",
-            "*.txt",
-            "kotlin/**",
-            "kotlinx/**",
-            "okhttp3/**",
-            "META-INF/services/**",
+            // "**/*.proto",
+            // "**/*.bin",
+            // "**/*.java",
+            // "**/*.properties",
+            // "**/*.version",
+            // ==============================
+            // ==============================
+            // Don't exclude [kotlin_module] file.
+            // Or else, you can't import kotlin extension methods in kotlin file.
+            // "**/*.*_module", // **/*.kotlin_module
+            // ==============================
+            // ==============================
+            // "*.txt",
+            // "kotlin/**",
+            // "kotlinx/**",
+            // "okhttp3/**",
+            // "META-INF/services/**",
         )
     }
 }

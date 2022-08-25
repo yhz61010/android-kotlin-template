@@ -28,6 +28,8 @@ ndk-sdk = "21.1.6352462" # 22.1.7171670
 versionCode = "1"
 versionName = "1.0.0"
 
+leo-version = "5.10.4"
+
 #===================
 #===== Compile =====
 #===================
@@ -147,6 +149,29 @@ kgp = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kot
 kotlin-reflect = { module = "org.jetbrains.kotlin:kotlin-reflect", version.ref = "kotlin" }
 kotlin-coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "coroutines" }
 
+#=========================
+#===== Leo Libraries =====
+#=========================
+leo-androidbase = { module = "com.leovp.android:androidbase-sdk", version.ref = "leo-version" }
+leo-pref = { module = "com.leovp.android:pref-sdk", version.ref = "leo-version" }
+leo-basenetty = { module = "com.leovp.android:basenetty-sdk", version.ref = "leo-version" }
+leo-floatview = { module = "com.leovp.android:basenetty-sdk", version.ref = "leo-version" }
+leo-audio = { module = "com.leovp.android:audio-sdk", version.ref = "leo-version" }
+leo-adpcm-ima-qt-codec-h264-hevc-decoder = { module = "com.leovp.android:adpcm-ima-qt-codec-h264-hevc-decoder-sdk", version.ref = "leo-version" }
+leo-opengl = { module = "com.leovp.android:opengl-sdk", version.ref = "leo-version" }
+leo-draw-on-screen = { module = "com.leovp.android:drawOnScreen-sdk", version.ref = "leo-version" }
+leo-circle-progressbar = { module = "com.leovp.android:circle-progressbar-sdk", version.ref = "leo-version" }
+leo-log = { module = "com.leovp.android:log-sdk", version.ref = "leo-version" }
+leo-lib-network = { module = "com.leovp.android:lib-network", version.ref = "leo-version" }
+leo-lib-compress = { module = "com.leovp.android:lib-compress", version.ref = "leo-version" }
+leo-lib-reflection = { module = "com.leovp.android:lib_reflection", version.ref = "leo-version" }
+
+leo-lib-json = { module = "com.leovp.android:lib-json", version.ref = "leo-version" }
+leo-lib-bytes = { module = "com.leovp.android:lib-bytes", version.ref = "leo-version" }
+leo-lib-image = { module = "com.leovp.android:lib-image", version.ref = "leo-version" }
+leo-lib-common-android = { module = "com.leovp.android:lib-common-android", version.ref = "leo-version" }
+leo-lib-common-kotlin = { module = "com.leovp.android:lib-common-kotlin", version.ref = "leo-version" }
+
 #===================
 #===== Android =====
 #===================
@@ -198,6 +223,7 @@ lifecycle-viewmodel-savedstate = { module = "androidx.lifecycle:lifecycle-viewmo
 #===== Android Room ========
 #===========================
 room-runtime = { module = "androidx.room:room-runtime", version.ref = "room" }
+# kapt
 room-compiler = { module = "androidx.room:room-compiler", version.ref = "room" }
 # optional - Kotlin Extensions and Coroutines support for Room
 room-ktx = { module = "androidx.room:room-ktx", version.ref = "room" }
