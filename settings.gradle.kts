@@ -1,4 +1,4 @@
-rootProject.name = "android_template"
+rootProject.name = "android_kotlin_template"
 
 pluginManagement {
     repositories {
@@ -34,7 +34,7 @@ dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
         google()
-        mavenCentral{
+        mavenCentral {
             isAllowInsecureProtocol = true
         }
         maven("https://maven.aliyun.com/repository/public")

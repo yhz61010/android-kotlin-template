@@ -21,6 +21,8 @@ kapt {
 android {
     val appName = "LeoTemplate"
 
+    namespace = "com.leovp.androidtemplate"
+
     defaultConfig {
         applicationId = namespace
 

@@ -11,6 +11,8 @@ plugins {
 }
 
 android {
+    namespace = "com.leovp.module.common"
+
     // https://developer.android.com/reference/tools/gradle-api/7.1/com/android/build/api/dsl/Lint
     lint {
         // if true, stop the gradle build if errors are found

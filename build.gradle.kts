@@ -10,25 +10,7 @@ import org.jlleitschuh.gradle.ktlint.KtlintExtension
 // ========== Global settings ==========
 // =====================================
 
-/**
- * **Attention:**
- * The rule for each package name of module is as following:
- * ```
- * customGroup + "." + moduleName
- * ```
- * For example, if the module name is `module-one_two`, the final package name is as following:
- * ```
- * com.leovp.module.one.two
- * ```
- * **Attention:** All the occurrences `-` dash or `_` underline in `moduleName` will be replaced with `.` dot.
- */
 val customGroup = "com.leovp"
-
-/**
- * **Attention:** All the occurrences `-` dash or `_` underline in `appPkg` will be replaced with `.` dot.
- */
-val appPkg = "com.leovp.androidtemplate"
-
 val jdkVersion = JavaVersion.VERSION_11
 
 /**
@@ -57,22 +39,19 @@ plugins {
     alias(libs.plugins.android.library) apply false
     alias(libs.plugins.kotlin.android) apply false
 
+    alias(libs.plugins.detekt)
+    alias(libs.plugins.ktlint.gradle)
+    alias(libs.plugins.benmanes.versions)
+    jacoco
+
     // id("org.jetbrains.kotlin.kapt") // or kotlin("kapt")
     // If you use kotlin(), you can change dash(-) with dot(.)
     // or you can still use dash like id("kotlin-parcelize")
     // alias(libs.plugins.kotlin.kapt)
     alias(libs.plugins.kotlin.kapt) apply false
     alias(libs.plugins.kotlin.parcelize) apply false // id("kotlin-parcelize")
-
     // https://stackoverflow.com/a/72508037/1685062
     alias(libs.plugins.navigation) apply false
-
-    alias(libs.plugins.detekt)
-    alias(libs.plugins.ktlint.gradle)
-
-    alias(libs.plugins.benmanes.versions)
-
-    jacoco
 }
 
 // ********************
@@ -88,7 +67,6 @@ val detektFormatting = libs.detekt.formatting
 
 // all projects = root project + sub projects
 allprojects {
-    // The group name is also the prefix of application package name as well as the prefix of submodules package name.
     group = customGroup
 
     // We want to apply ktlint at all project level because it also checks Gradle config files (*.kts)
@@ -145,11 +123,11 @@ allprojects {
         configureCompileVersion()
     }
 
-//    configurations.all {
-//        resolutionStrategy.eachDependency {
-//            println("module=${requested.module}:${requested.version} group=${requested.group} name=${requested.name}")
-//        }
-//    }
+    // configurations.all {
+    //     resolutionStrategy.eachDependency {
+    //         println("module=${requested.module}:${requested.version} group=${requested.group} name=${requested.name}")
+    //     }
+    // }
 
     dependencies {
         // We must define `detektFormatting` in outside, or else the compile error will occur.
@@ -163,9 +141,7 @@ subprojects {
 
     plugins.withId(rootProject.libs.plugins.android.application.get().pluginId) {
         // println("displayName=$displayName, name=$name, group=$group")
-        // You can use `group` which is the value that is set in `allprojects`.
-        // The `ns` parameter just means the application namespace aka app package name.
-        configureApplication(appPkg)
+        configureApplication()
     }
 
     plugins.withId(rootProject.libs.plugins.android.library.get().pluginId) { configureLibrary() }
@@ -218,9 +194,15 @@ fun Project.configureBase(): BaseExtension {
             // This `name` is just the name for each `source` in `sourceSets`.
             java.srcDirs("src/$name/kotlin", "src/$name/java")
         }
-//        sourceSets {
-//            map { it.java.srcDir("src/${it.name}/kotlin") }
-//        }
+        // sourceSets {
+        //     map { it.java.srcDir("src/${it.name}/kotlin") }
+        // }
+        testOptions {
+            unitTests {
+                isReturnDefaultValues = true
+                isIncludeAndroidResources = true
+            }
+        }
         compileOptions {
             setDefaultJavaVersion(jdkVersion)
             sourceCompatibility = jdkVersion
@@ -228,15 +210,10 @@ fun Project.configureBase(): BaseExtension {
         }
         buildTypes {
             getByName("release") {
-                isMinifyEnabled = true
                 proguardFiles(
                     getDefaultProguardFile("proguard-android-optimize.txt"),
                     "proguard-rules.pro"
                 )
-            }
-
-            getByName("debug") {
-                isMinifyEnabled = false
             }
         }
         buildFeatures.viewBinding = true
@@ -280,22 +257,22 @@ fun Project.configureBase(): BaseExtension {
  * You just need to add your custom properties as you wish.
  *
  * **Attention**:
- * All the occurrences `-` dash or `_` underline will be replaced with `.` dot.
- *
- * @param ns The application namespace aka app package name.
+ * The default value of `applicationId` is `namespace`.
  */
-fun Project.configureApplication(ns: String): BaseExtension = configureBase().apply {
-    namespace = ns.replace('-', '.').replace('_', '.')
+fun Project.configureApplication(): BaseExtension = configureBase().apply {
     defaultConfig {
+        applicationId = namespace
         vectorDrawables.useSupportLibrary = true
     }
     buildTypes {
         getByName("release") {
             isShrinkResources = true
+            isMinifyEnabled = true
         }
 
         getByName("debug") {
             isShrinkResources = false
+            isMinifyEnabled = false
         }
     }
 }
@@ -303,15 +280,19 @@ fun Project.configureApplication(ns: String): BaseExtension = configureBase().ap
 /**
  * All the submodules will have the hierarchy configurations.
  * You just need to add your custom properties as you wish.
- *
- * **Attention**:
- * All the occurrences `-` dash or `_` underline will be replaced with `.` dot.
  */
 fun Project.configureLibrary(): BaseExtension = configureBase().apply {
-    // The `group` is the value that is set in `allprojects`.
-    namespace = "$group.$name".replace('-', '.').replace('_', '.')
     defaultConfig {
         consumerProguardFiles("consumer-rules.pro")
+    }
+    buildTypes {
+        getByName("release") {
+            isMinifyEnabled = false
+        }
+
+        getByName("debug") {
+            isMinifyEnabled = false
+        }
     }
 }
 
@@ -393,7 +374,7 @@ fun String.toSnakeCase() = this.split(Regex("(?=[A-Z])")).joinToString("_") { it
 
 /* Adds a new field to the generated BuildConfig class */
 fun DefaultConfig.buildConfigField(name: String, value: Array<String>) {
-// Create String that holds Java String Array code
+    // Create String that holds Java String Array code
     val strValue = value.joinToString(prefix = "{", separator = ",", postfix = "}", transform = { "\"$it\"" })
     buildConfigField("String[]", name, strValue)
 }
