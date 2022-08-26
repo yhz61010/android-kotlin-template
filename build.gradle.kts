@@ -11,7 +11,13 @@ import org.jlleitschuh.gradle.ktlint.KtlintExtension
 // =====================================
 
 val customGroup = "com.leovp"
-val jdkVersion = JavaVersion.VERSION_11
+/**
+ * You can use it in subproject like this:
+ * ```kotlin
+ * val jdkVersion: JavaVersion by rootProject.extra
+ * ```
+ */
+val jdkVersion: JavaVersion by extra { JavaVersion.VERSION_11 }
 
 /**
  * By default, the resource prefix is just the module name.
