@@ -26,6 +26,9 @@ This is an Android kotlin template project.
 ./gradlew staticCheck
 ```
 
+### Gradle plugin for updating a project version catalog 
+[version-catalog-update-plugin](https://github.com/littlerobots/version-catalog-update-plugin)
+
 ## How to enable and run jacoco
 1. Add following line before `plugins` in your module-level `build.gradle.kts`:
 ```kotlin
