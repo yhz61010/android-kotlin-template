@@ -20,12 +20,18 @@
 #===================
 #===== Project =====
 #===================
+# @keep
 compile-sdk = "33"
+# @keep
 min-sdk = "21"
+# @keep
 target-sdk = "33"
+# @keep
 ndk-sdk = "21.1.6352462" # 22.1.7171670
 
+# @keep
 versionCode = "1"
+# @keep
 versionName = "1.0.0"
 
 leo-version = "5.11.0"
