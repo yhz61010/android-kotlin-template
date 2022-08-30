@@ -48,5 +48,5 @@ enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
 include(
     "app",
-    "module_common"
+    "module-common"
 )

@@ -88,6 +88,7 @@ ktlint-gradle = "10.3.0"
 benmanes = "0.42.0"
 jacoco = "0.8.8"
 sonarqube = "3.4.0.2513"
+vcu = "0.6.1"
 
 coil = "2.2.0"
 glide = "4.13.2"
@@ -486,4 +487,5 @@ navigation = { id = "androidx.navigation.safeargs.kotlin", version.ref = "naviga
 detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
 ktlint-gradle = { id = "org.jlleitschuh.gradle.ktlint", version.ref = "ktlint-gradle" }
 benmanes-versions = { id = "com.github.ben-manes.versions", version.ref = "benmanes" }
+vcu = { id = "nl.littlerobots.version-catalog-update", version.ref = "vcu"}
 sonarqube = { id = "org.sonarqube", version.ref = "sonarqube" }
