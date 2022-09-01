@@ -114,7 +114,6 @@ fun gitCommitCount(): Int {
  * ga935b078    ：开头 g 为 git 的缩写，在多种管理工具并存的环境中很有用处
  * a935b078     ：当前分支最新的 commitID 前几位
  */
-
 fun gitVersionTag(): String {
     // https://stackoverflow.com/a/4916591/1685062
 //    val cmd = "git describe --tags"
