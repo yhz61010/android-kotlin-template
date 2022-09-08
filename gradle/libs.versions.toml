@@ -287,6 +287,7 @@ jacoco = { module = "org.jacoco:org.jacoco.core", version.ref = "jacoco" }
 eventbus = { module = "org.greenrobot:eventbus", version.ref = "eventbus" }
 netty-codec-http = { module = "io.netty:netty-codec-http", version.ref = "netty" }
 netty-handler = { module = "io.netty:netty-handler", version.ref = "netty" }
+netty-proxy = { module = "io.netty:netty-handler-proxy", version.ref = "netty" }
 netty-all = { module = "io.netty:netty-all", version.ref = "netty" }
 koin = { module = "io.insert-koin:koin-android", version.ref = "koin" }
 # https://mvnrepository.com/artifact/org.bytedeco/ffmpeg
