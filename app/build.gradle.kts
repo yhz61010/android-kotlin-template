@@ -1,6 +1,8 @@
 import java.io.ByteArrayOutputStream
 import java.util.*
 
+// https://developer.android.com/studio/build?hl=zh-cn#module-level
+
 apply(from = "../jacoco.gradle.kts")
 // https://docs.gradle.org/current/userguide/plugins.html#sec:subprojects_plugins_dsl
 plugins {
@@ -21,6 +23,7 @@ kapt {
 android {
     val appName = "LeoTemplate"
 
+    /** The app's namespace. Used primarily to access app resources. */
     namespace = "com.leovp.androidtemplate"
 
     defaultConfig {
@@ -50,9 +53,22 @@ android {
         enableV4Signing = true
     }
 
-    // Specifies one flavor dimension.
+    /** Specifies one flavor dimension. */
     flavorDimensions += "version"
 
+    /**
+     * The productFlavors block is where you can configure multiple product flavors.
+     * This allows you to create different versions of your app that can
+     * override the defaultConfig block with their own settings. Product flavors
+     * are optional, and the build system does not create them by default.
+     *
+     * This example creates a free and paid product flavor. Each product flavor
+     * then specifies its own application ID, so that they can exist on the Google
+     * Play Store, or an Android device, simultaneously.
+     *
+     * If you declare product flavors, you must also declare flavor dimensions
+     * and assign each flavor to a flavor dimension.
+     */
     productFlavors {
         create("demo") {
             // Assigns this product flavor to the "version" flavor dimension.
@@ -73,6 +89,12 @@ android {
             signingConfig = releaseSigning
         }
 
+        /**
+         * By default, Android Studio configures the release build type to enable code
+         * shrinking, using minifyEnabled, and specifies the default Proguard rules file.
+         *
+         * See the global configurations in top-level `build.gradle.kts`.
+         */
         getByName("release") {
             signingConfig = releaseSigning
         }
