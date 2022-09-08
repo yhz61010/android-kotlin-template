@@ -50,6 +50,24 @@ android {
         enableV4Signing = true
     }
 
+    // Specifies one flavor dimension.
+    flavorDimensions += "version"
+
+    productFlavors {
+        create("demo") {
+            // Assigns this product flavor to the "version" flavor dimension.
+            // If you are using only one dimension, this property is optional,
+            // and the plugin automatically assigns all the module's flavors to
+            // that dimension.
+            dimension = "version"
+            applicationIdSuffix = ".demo"
+            versionNameSuffix = "-demo"
+        }
+        create("full") {
+            dimension = "version"
+        }
+    }
+
     buildTypes {
         getByName("debug") {
             signingConfig = releaseSigning
@@ -58,6 +76,20 @@ android {
         getByName("release") {
             signingConfig = releaseSigning
         }
+
+        /**
+         * The `initWith` property allows you to copy configurations from other build types,
+         * then configure only the settings you want to change. This one copies the debug build
+         * type, and then changes the manifest placeholder and application ID.
+         */
+        // Uncommented the following block will cause build exception
+        // if using ./gradlew build command
+        // create("staging") {
+        //     initWith(getByName("debug"))
+        //     // https://developer.android.com/studio/build/manifest-build-variables
+        //     // manifestPlaceholders["hostName"] = "internal.example.com"
+        //     // applicationIdSuffix = ".staging"
+        // }
     }
 
     // https://developer.android.com/reference/tools/gradle-api/7.1/com/android/build/api/dsl/Lint

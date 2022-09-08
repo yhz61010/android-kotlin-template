@@ -11,6 +11,7 @@ import org.jlleitschuh.gradle.ktlint.KtlintExtension
 // =====================================
 
 val customGroup = "com.leovp"
+
 /**
  * You can use it in subproject like this:
  * ```kotlin
@@ -233,6 +234,7 @@ fun Project.configureBase(): BaseExtension {
             "RtlEnabled"
         )
         packagingOptions.resources.pickFirsts += setOf(
+            // kotlinx-coroutines-android
             "META-INF/atomicfu.kotlin_module",
         )
         packagingOptions.resources.excludes += setOf(
@@ -243,9 +245,9 @@ fun Project.configureBase(): BaseExtension {
             "META-INF/INDEX.LIST",
             "META-INF/io.netty.versions.properties",
             "META-INF/{AL2.0,LGPL2.1}",
-            // "**/*.proto",
-            // "**/*.bin",
-            // "**/*.java",
+            "**/*.proto",
+            "**/*.bin",
+            "**/*.java",
             // "**/*.properties",
             // "**/*.version",
             // ==============================
