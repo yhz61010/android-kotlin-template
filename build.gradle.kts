@@ -41,6 +41,14 @@ val useResourcePrefix = true
 
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 plugins {
+    /**
+     * You should use `apply false` in the top-level build.gradle file
+     * to add a Gradle plugin as a build dependency, but not apply it to the
+     * current (root) project. You should not use `apply false` in sub-projects.
+     * For more information, see
+     * Applying external plugins with same version to subprojects.
+     */
+
     // https://docs.gradle.org/current/userguide/plugins.html#sec:subprojects_plugins_dsl
     alias(libs.plugins.android.application) apply false
     alias(libs.plugins.android.library) apply false
@@ -155,15 +163,13 @@ subprojects {
     plugins.withId(rootProject.libs.plugins.android.library.get().pluginId) { configureLibrary() }
 }
 
-// tasks {
-//    register("clean", Delete::class) {
-//        delete(rootProject.buildDir)
-//    }
-// }
-
-// tasks.register<Delete>("clean") {
+//tasks.register("clean", Delete::class) {
 //    delete(rootProject.buildDir)
-// }
+//}
+
+tasks.register<Delete>("clean") {
+    delete(rootProject.buildDir)
+}
 
 /**
  * Configure to eliminate the following warnning:
