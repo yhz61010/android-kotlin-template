@@ -143,7 +143,9 @@ allprojects {
 
     // configurations.all {
     //     resolutionStrategy.eachDependency {
-    //         println("module=${requested.module}:${requested.version} group=${requested.group} name=${requested.name}")
+    //         println(
+    //             "module=${requested.module}:${requested.version} group=${requested.group} name=${requested.name}"
+    //         )
     //     }
     // }
 
