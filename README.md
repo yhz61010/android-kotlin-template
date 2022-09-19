@@ -1,5 +1,26 @@
-# android-template
-This is an Android kotlin template project.
+[![Kotlin Version](https://img.shields.io/badge/Kotlin-1.7.10-blue)](https://kotlinlang.org)
+[![AGP](https://img.shields.io/badge/AGP-7.3.0-orange)](https://developer.android.com/studio/releases/gradle-plugin)
+[![Gradle](https://img.shields.io/badge/Gradle-7.5.1-green)](https://gradle.org)
+
+A pure Android kotlin template project that let you create Android Kotlin project.
+Using `Android + Kotlin + ktlint + Detekt + Gradle Kotlin DSL + Version Catalog(TOML)`
+
+## Features
+- 100% Kotlin-only template.
+- 100% Gradle Kotlin DSL setup.
+- Dependency versions managed via `Gradle Version Catalog`.
+- Sample Espresso, Instrumentation & JUnit tests.
+- Kotlin Static Analysis via detekt and ktlint.
+
+## Gradle Setup
+This template is using [**Gradle Kotlin DSL**](https://docs.gradle.org/current/userguide/kotlin_dsl.html) as well as the [Plugin DSL](https://docs.gradle.org/current/userguide/plugins.html#sec:plugins_block) to setup the build.
+
+Dependencies are centralized inside the `Gradle Version Catalog` in the [libs.versions.toml](gradle/libs.versions.toml) file in the `gradle` folder.
+
+## Static Analysis
+This template is using [**detekt**](https://github.com/detekt/detekt) to analyze the source code, 
+with the configuration that is stored in the [detekt.yml](conf/detekt.yml) file (the file has been generated with the `detektGenerateConfig` task). 
+It also uses the **detekt-formatting** plugin which includes the ktlint rules (see https://detekt.dev/docs/rules/formatting/).
 
 ###  Runs the ktlint formatter on all kotlin sources in this project.
 ```kotlin
