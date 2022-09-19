@@ -79,9 +79,9 @@ android {
             applicationIdSuffix = ".demo"
             versionNameSuffix = "-demo"
         }
-        create("full") {
-            dimension = "version"
-        }
+//        create("full") {
+//            dimension = "version"
+//        }
     }
 
     buildTypes {
@@ -195,7 +195,7 @@ fun gitVersionTag(): String {
     return versionTag
 }
 
-fun Project.getSignProperty(key: String, path: String = "conf/keystore.properties"): String {
+fun Project.getSignProperty(key: String, path: String = "config/sign/keystore.properties"): String {
     return Properties().apply { rootProject.file(path).inputStream().use(::load) }.getProperty(key)
 }
 

@@ -3,6 +3,7 @@
 [![Gradle](https://img.shields.io/badge/Gradle-7.5.1-green)](https://gradle.org)
 
 A pure Android kotlin template project that let you create Android Kotlin project.
+
 Using `Android + Kotlin + ktlint + Detekt + Gradle Kotlin DSL + Version Catalog(TOML)`
 
 ## Features
@@ -19,7 +20,7 @@ Dependencies are centralized inside the `Gradle Version Catalog` in the [libs.ve
 
 ## Static Analysis
 This template is using [**detekt**](https://github.com/detekt/detekt) to analyze the source code, 
-with the configuration that is stored in the [detekt.yml](conf/detekt.yml) file (the file has been generated with the `detektGenerateConfig` task). 
+with the configuration that is stored in the [detekt.yml](config/detekt/detekt.yml) file (the file has been generated with the `detektGenerateConfig` task). 
 It also uses the **detekt-formatting** plugin which includes the ktlint rules (see https://detekt.dev/docs/rules/formatting/).
 
 ###  Runs the ktlint formatter on all kotlin sources in this project.

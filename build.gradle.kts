@@ -100,7 +100,7 @@ allprojects {
     // }
 
     detekt {
-        config = files("$rootDir/conf/detekt.yml")
+        config = files("$rootDir/config/detekt/detekt.yml")
 
         parallel = true
 
