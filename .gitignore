@@ -50,6 +50,7 @@ captures/
 .idea/deploymentTargetDropDown.xml
 .idea/misc.xml
 .idea/kotlinScripting.xml
+/.idea/androidTestResultsUserPreferences.xml
 /.idea/copyright/profiles_settings.xml
 /.idea/modules/
 /.idea/other.xml
@@ -92,4 +93,3 @@ lint/tmp/
 /**/detekt-baseline.xml
 
 **/.DS_Store
-/.idea/androidTestResultsUserPreferences.xml
