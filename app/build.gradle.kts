@@ -11,6 +11,7 @@ plugins {
     alias(libs.plugins.kotlin.parcelize) // id("kotlin-parcelize")
     alias(libs.plugins.navigation)
 
+    // https://github.com/mannodermaus/android-junit5
     alias(libs.plugins.android.junit5)
 
     alias(libs.plugins.sonarqube)
@@ -43,6 +44,7 @@ android {
         // buildConfigFieldFromGradleProperty("apiBaseUrl")
         // buildConfigField("FEATURE_MODULE_NAMES", getFeatureNames())
 
+        // https://github.com/mannodermaus/android-junit5
         // Connect JUnit 5 to the runner
         testInstrumentationRunnerArguments["runnerBuilder"] = "de.mannodermaus.junit5.AndroidJUnit5Builder"
     }
@@ -221,6 +223,8 @@ dependencies {
     androidTestImplementation(libs.bundles.android.test)
     // ==============================
     // The instrumentation test companion libraries
+    // https://github.com/mannodermaus/android-junit5
+    // ==============================
     androidTestImplementation(libs.mannodermaus.junit5.core)
     androidTestRuntimeOnly(libs.mannodermaus.junit5.runner)
     // ==============================
