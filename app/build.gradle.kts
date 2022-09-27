@@ -11,6 +11,8 @@ plugins {
     alias(libs.plugins.kotlin.parcelize) // id("kotlin-parcelize")
     alias(libs.plugins.navigation)
 
+    alias(libs.plugins.android.junit5)
+
     alias(libs.plugins.sonarqube)
     jacoco
 }
@@ -40,6 +42,9 @@ android {
 
         // buildConfigFieldFromGradleProperty("apiBaseUrl")
         // buildConfigField("FEATURE_MODULE_NAMES", getFeatureNames())
+
+        // Connect JUnit 5 to the runner
+        testInstrumentationRunnerArguments["runnerBuilder"] = "de.mannodermaus.junit5.AndroidJUnit5Builder"
     }
 
     val releaseSigning = signingConfigs.create("releaseSigning") {
@@ -79,9 +84,9 @@ android {
             applicationIdSuffix = ".demo"
             versionNameSuffix = "-demo"
         }
-//        create("full") {
-//            dimension = "version"
-//        }
+        create("full") {
+            dimension = "version"
+        }
     }
 
     buildTypes {
@@ -212,5 +217,11 @@ dependencies {
 
     testImplementation(libs.bundles.test)
     testRuntimeOnly(libs.bundles.test.runtime.only)
+    androidTestImplementation(libs.bundles.test)
     androidTestImplementation(libs.bundles.android.test)
+    // ==============================
+    // The instrumentation test companion libraries
+    androidTestImplementation(libs.mannodermaus.junit5.core)
+    androidTestRuntimeOnly(libs.mannodermaus.junit5.runner)
+    // ==============================
 }
