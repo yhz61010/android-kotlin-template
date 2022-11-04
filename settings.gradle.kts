@@ -1,4 +1,4 @@
-rootProject.name = "android_kotlin_template"
+rootProject.name = "android-kotlin-template"
 
 // https://developer.android.com/studio/build?hl=zh-cn#settings-file
 pluginManagement {

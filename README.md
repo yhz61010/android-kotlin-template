@@ -1,5 +1,5 @@
-[![Kotlin Version](https://img.shields.io/badge/Kotlin-1.7.10-blue)](https://kotlinlang.org)
-[![AGP](https://img.shields.io/badge/AGP-7.3.0-orange)](https://developer.android.com/studio/releases/gradle-plugin)
+[![Kotlin Version](https://img.shields.io/badge/Kotlin-1.7.20-blue)](https://kotlinlang.org)
+[![AGP](https://img.shields.io/badge/AGP-7.3.1-orange)](https://developer.android.com/studio/releases/gradle-plugin)
 [![Gradle](https://img.shields.io/badge/Gradle-7.5.1-green)](https://gradle.org)
 
 A pure Android kotlin template project that let you create Android Kotlin project.
