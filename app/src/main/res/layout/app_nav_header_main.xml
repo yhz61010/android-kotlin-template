@@ -7,18 +7,18 @@
     android:gravity="bottom"
     android:orientation="vertical"
     android:paddingLeft="@dimen/app_activity_horizontal_margin"
-    android:paddingTop="@dimen/app_activity_vertical_margin"
+    android:paddingTop="@dimen/app_activity_vertical_margin_large"
     android:paddingRight="@dimen/app_activity_horizontal_margin"
     android:paddingBottom="@dimen/app_activity_vertical_margin"
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
-    <ImageView
+    <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/imageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        app:shapeAppearanceOverlay="@style/app_roundedImageViewRounded"
         android:contentDescription="@string/app_nav_header_desc"
-        android:paddingTop="@dimen/app_nav_header_vertical_spacing"
-        app:srcCompat="@mipmap/app_ic_launcher_round" />
+        app:srcCompat="@drawable/app_user_avatar" />
 
     <TextView
         android:layout_width="match_parent"
@@ -31,5 +31,6 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/app_nav_header_subtitle" />
+        android:text="@string/app_nav_header_subtitle"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small" />
 </LinearLayout>
