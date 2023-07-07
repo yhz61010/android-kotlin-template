@@ -5,38 +5,28 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.activityViewModels
+import com.leovp.androidbase.framework.BaseFragment
 import com.leovp.androidtemplate.databinding.AppFragmentSlideshowBinding
 
-class SlideshowFragment : Fragment() {
+class SlideshowFragment : BaseFragment<AppFragmentSlideshowBinding>() {
 
-    private var _binding: AppFragmentSlideshowBinding? = null
+    override fun getTagName(): String = "SSF"
+    private val slideshowViewModel by activityViewModels<SlideshowViewModel>()
 
-    // This property is only valid between onCreateView and
-    // onDestroyView.
-    private val binding get() = _binding!!
-
-    override fun onCreateView(
+    override fun getViewBinding(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
-        val slideshowViewModel =
-            ViewModelProvider(this).get(SlideshowViewModel::class.java)
+    ): AppFragmentSlideshowBinding {
+        return AppFragmentSlideshowBinding.inflate(inflater, container, false)
+    }
 
-        _binding = AppFragmentSlideshowBinding.inflate(inflater, container, false)
-        val root: View = binding.root
-
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         val textView: TextView = binding.textSlideshow
         slideshowViewModel.text.observe(viewLifecycleOwner) {
             textView.text = it
         }
-        return root
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 }

@@ -22,9 +22,7 @@ object InitManager {
     fun init(app: Application) {
         CrashHandler.initCrashHandler(app)
 
-        LeoToast.getInstance(app).init(
-            LeoToast.ToastConfig(GlobalConstants.DEBUG, R.mipmap.app_ic_launcher_round)
-        )
+        LeoToast.getInstance(app).init(LeoToast.ToastConfig(GlobalConstants.DEBUG, R.mipmap.app_ic_launcher_round))
 
         // Log must be initialized first.
         LogContext.setLogImpl(MarsXLog("AOS").apply { init(app) })

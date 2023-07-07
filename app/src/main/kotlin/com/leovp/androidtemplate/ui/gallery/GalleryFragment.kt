@@ -5,38 +5,28 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.activityViewModels
+import com.leovp.androidbase.framework.BaseFragment
 import com.leovp.androidtemplate.databinding.AppFragmentGalleryBinding
 
-class GalleryFragment : Fragment() {
+class GalleryFragment : BaseFragment<AppFragmentGalleryBinding>() {
 
-    private var _binding: AppFragmentGalleryBinding? = null
+    override fun getTagName(): String = "GF"
+    private val galleryViewModel by activityViewModels<GalleryViewModel>()
 
-    // This property is only valid between onCreateView and
-    // onDestroyView.
-    private val binding get() = _binding!!
-
-    override fun onCreateView(
+    override fun getViewBinding(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
-        val galleryViewModel =
-            ViewModelProvider(this).get(GalleryViewModel::class.java)
+    ): AppFragmentGalleryBinding {
+        return AppFragmentGalleryBinding.inflate(inflater, container, false)
+    }
 
-        _binding = AppFragmentGalleryBinding.inflate(inflater, container, false)
-        val root: View = binding.root
-
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         val textView: TextView = binding.textGallery
         galleryViewModel.text.observe(viewLifecycleOwner) {
             textView.text = it
         }
-        return root
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 }

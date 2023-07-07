@@ -35,7 +35,7 @@ android {
         // viewBinding is enabled by default. Check [build.gradle.kts] in the root folder of project.
         // viewBinding = true
         // aidl = true
-    // Generate BuildConfig.java file
+        // Generate BuildConfig.java file
         buildConfig = true
     }
 
@@ -47,9 +47,11 @@ android {
 
         multiDexEnabled = true
 
-//        ndk {
-//            abiFilters += setOf("armeabi-v7a", "arm64-v8a", "x86", "x86_64")
-//        }
+        ndk {
+            // abiFilters "arm64-v8a", "armeabi-v7a", "x86", "x86_64"
+            @android.annotation.SuppressLint("ChromeOsAbiSupport")
+            abiFilters += setOf("arm64-v8a")
+        }
 
         // buildConfigFieldFromGradleProperty("apiBaseUrl")
         // buildConfigField("FEATURE_MODULE_NAMES", getFeatureNames())
