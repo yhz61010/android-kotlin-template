@@ -249,7 +249,7 @@ fun Project.configureBase(): BaseExtension {
         )
         packagingOptions.resources.pickFirsts += setOf(
             // kotlinx-coroutines-android
-            "META-INF/atomicfu.kotlin_module",
+            "META-INF/atomicfu.kotlin_module"
         )
         packagingOptions.resources.excludes += setOf(
             "META-INF/licenses/**",
@@ -262,7 +262,7 @@ fun Project.configureBase(): BaseExtension {
             "META-INF/{AL2.0,LGPL2.1}",
             "**/*.proto",
             "**/*.bin",
-            "**/*.java",
+            "**/*.java"
             // "**/*.properties",
             // "**/*.version",
             // ==============================

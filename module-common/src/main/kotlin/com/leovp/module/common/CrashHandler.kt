@@ -5,9 +5,9 @@ import com.leovp.android.exts.toast
 import com.leovp.log.LogContext
 
 /**
-  * Author: Michael Leo
-  * Date: 2023/7/6 16:06
-  */
+ * Author: Michael Leo
+ * Date: 2023/7/6 16:06
+ */
 object CrashHandler : Thread.UncaughtExceptionHandler {
     private const val TAG = "crash"
 
@@ -28,7 +28,6 @@ object CrashHandler : Thread.UncaughtExceptionHandler {
         } else {
             // Handler exception by yourself
             LogContext.log.e(TAG, "Exception handled by handleException", ex)
-            System.gc()
         }
     }
 
@@ -40,7 +39,14 @@ object CrashHandler : Thread.UncaughtExceptionHandler {
      */
     private fun handleException(ex: Throwable): Boolean {
         LogContext.log.e(TAG, "=====> Crash <=====", ex)
-        if (CrashHandler::appContext.isInitialized) appContext.toast(ex.message, error = true, debug = true, longDuration = true)
+        if (CrashHandler::appContext.isInitialized) {
+            appContext.toast(
+                ex.message,
+                error = true,
+                debug = true,
+                longDuration = true
+            )
+        }
         return true
     }
 }

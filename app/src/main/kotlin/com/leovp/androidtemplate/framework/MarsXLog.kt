@@ -15,6 +15,10 @@ import java.io.File
  */
 class MarsXLog(private val prefix: String) : ILog {
 
+    companion object {
+        private const val CACHE_DAYS = 5
+    }
+
     override var enableLog = true
 
     override fun getTagName(tag: String) = "$prefix-$tag"
@@ -29,7 +33,7 @@ class MarsXLog(private val prefix: String) : ILog {
         System.loadLibrary("marsxlog")
         Log.setLogImp(Xlog())
         Log.setConsoleLogOpen(GlobalConstants.DEBUG)
-        Log.appenderOpen(defaultLevel, Xlog.AppednerModeAsync, cacheDir, logDir, "main", 5)
+        Log.appenderOpen(defaultLevel, Xlog.AppednerModeAsync, cacheDir, logDir, "main", CACHE_DAYS)
     }
 
     private fun getLogDir(ctx: Context, baseFolderName: String): File {
