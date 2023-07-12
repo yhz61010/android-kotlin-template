@@ -7,9 +7,10 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.activityViewModels
 import com.leovp.androidbase.framework.BaseFragment
+import com.leovp.androidtemplate.R
 import com.leovp.androidtemplate.databinding.AppFragmentSlideshowBinding
 
-class SlideshowFragment : BaseFragment<AppFragmentSlideshowBinding>() {
+class SlideshowFragment : BaseFragment<AppFragmentSlideshowBinding>(R.layout.app_fragment_slideshow) {
 
     override fun getTagName(): String = "SSF"
     private val slideshowViewModel by activityViewModels<SlideshowViewModel>()

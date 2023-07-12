@@ -7,9 +7,10 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.activityViewModels
 import com.leovp.androidbase.framework.BaseFragment
+import com.leovp.androidtemplate.R
 import com.leovp.androidtemplate.databinding.AppFragmentGalleryBinding
 
-class GalleryFragment : BaseFragment<AppFragmentGalleryBinding>() {
+class GalleryFragment : BaseFragment<AppFragmentGalleryBinding>(R.layout.app_fragment_gallery) {
 
     override fun getTagName(): String = "GF"
     private val galleryViewModel by activityViewModels<GalleryViewModel>()

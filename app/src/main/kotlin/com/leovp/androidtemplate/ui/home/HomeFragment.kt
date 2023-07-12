@@ -7,9 +7,10 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.activityViewModels
 import com.leovp.androidbase.framework.BaseFragment
+import com.leovp.androidtemplate.R
 import com.leovp.androidtemplate.databinding.AppFragmentHomeBinding
 
-class HomeFragment : BaseFragment<AppFragmentHomeBinding>() {
+class HomeFragment : BaseFragment<AppFragmentHomeBinding>(R.layout.app_fragment_home) {
 
     override fun getTagName(): String = "HF"
     private val homeViewModel by activityViewModels<HomeViewModel>()
