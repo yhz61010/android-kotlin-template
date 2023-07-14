@@ -29,6 +29,9 @@ android {
     /** The app's namespace. Used primarily to access app resources. */
     namespace = "com.leovp.androidtemplate"
 
+    @Suppress ("UnstableApiUsage")
+    resourcePrefix = "app_"
+
     defaultConfig {
         applicationId = namespace
 

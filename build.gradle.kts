@@ -35,7 +35,7 @@ val jdkVersion: JavaVersion by extra { JavaVersion.VERSION_17 }
  *
  * @see <a href="https://blog.csdn.net/weixin_43910395/article/details/120166450">resourcePrefix</a>
  */
-val useResourcePrefix = true
+// private val useResourcePrefix = true
 
 // =====================================
 
@@ -199,10 +199,13 @@ fun Project.configureCompileVersion() {
 
 fun Project.configureBase(): BaseExtension {
     return extensions.getByName<BaseExtension>("android").apply {
-        if (useResourcePrefix) {
-            val moduleName = name.replace("-", "_")
-            resourcePrefix = "${moduleName}_"
-        }
+        // You need to _resourcePrefix_ on your each module.
+        // if (useResourcePrefix) {
+        //     if (resourcePrefix == null) {
+        //         val moduleName = name.replace("-", "_")
+        //         resourcePrefix = "${moduleName}_"
+        //     }
+        // }
         compileSdkVersion(rootProject.libs.versions.compile.sdk.get().toInt())
         defaultConfig {
             minSdk = rootProject.libs.versions.min.sdk.get().toInt()
