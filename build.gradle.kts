@@ -259,7 +259,11 @@ fun Project.configureBase(): BaseExtension {
             "META-INF/INDEX.LIST",
             "META-INF/io.netty.versions.properties",
             "META-INF/services/reactor.blockhound.integration.BlockHoundIntegration",
+
+            // Multiple dependency bring these files in. Exclude them to enable
+            // our test APK to build (has no effect on our AARs)
             "META-INF/{AL2.0,LGPL2.1}",
+
             "**/*.proto",
             "**/*.bin",
             "**/*.java"
