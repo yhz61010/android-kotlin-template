@@ -178,7 +178,7 @@ tasks.register<Delete>("clean") {
 }
 
 /**
- * Configure to eliminate the following warnning:
+ * Configure to eliminate the following warning:
  * ```
  * 'compileReleaseJavaWithJavac' task (current target is 1.8) and 'compileReleaseKotlin'
  * task (current target is 11) jvm target compatibility should be set to the same Java version.

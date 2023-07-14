@@ -52,6 +52,7 @@ android {
     }
 
     // https://medium.com/androiddevelopers/5-ways-to-prepare-your-app-build-for-android-studio-flamingo-release-da34616bb946
+    @Suppress ("UnstableApiUsage")
     buildFeatures {
         // dataBinding = true
         // viewBinding is enabled by default. Check [build.gradle.kts] in the root folder of project.
@@ -86,6 +87,7 @@ android {
     }
 
     /** Specifies one flavor dimension. */
+    @Suppress ("UnstableApiUsage")
     flavorDimensions += "version"
 
     /**
@@ -240,7 +242,7 @@ dependencies {
 
     // By using `projects`, you need to enable `enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")`
     // in `settings.gradle.kts` where in your root folder.
-    implementation(projects.moduleCommon)
+    implementation(projects.featureCommon)
 
     testImplementation(libs.bundles.test)
     testRuntimeOnly(libs.bundles.test.runtime.only)

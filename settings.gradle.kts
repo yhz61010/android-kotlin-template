@@ -53,7 +53,11 @@ dependencyResolutionManagement {
      * but it does not configure any dependencies (unless you select a
      * template that requires some).
      */
+
+    @Suppress ("UnstableApiUsage")
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+
+    @Suppress ("UnstableApiUsage")
     repositories {
         google()
         mavenCentral {
@@ -70,5 +74,5 @@ enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
 include(
     "app",
-    "module-common"
+    "feature_common"
 )
