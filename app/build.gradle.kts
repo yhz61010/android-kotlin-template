@@ -29,16 +29,6 @@ android {
     /** The app's namespace. Used primarily to access app resources. */
     namespace = "com.leovp.androidtemplate"
 
-    // https://medium.com/androiddevelopers/5-ways-to-prepare-your-app-build-for-android-studio-flamingo-release-da34616bb946
-    buildFeatures {
-        // dataBinding = true
-        // viewBinding is enabled by default. Check [build.gradle.kts] in the root folder of project.
-        // viewBinding = true
-        // aidl = true
-        // Generate BuildConfig.java file
-        buildConfig = true
-    }
-
     defaultConfig {
         applicationId = namespace
 
@@ -61,15 +51,38 @@ android {
         testInstrumentationRunnerArguments["runnerBuilder"] = "de.mannodermaus.junit5.AndroidJUnit5Builder"
     }
 
-    val releaseSigning = signingConfigs.create("releaseSigning") {
-        keyAlias = getSignProperty("keyAlias")
-        keyPassword = getSignProperty("keyPassword")
-        storeFile = File(rootDir, getSignProperty("storeFile"))
-        storePassword = getSignProperty("storePassword")
-        enableV1Signing = true
-        enableV2Signing = true
-        enableV3Signing = true
-        enableV4Signing = true
+    // https://medium.com/androiddevelopers/5-ways-to-prepare-your-app-build-for-android-studio-flamingo-release-da34616bb946
+    buildFeatures {
+        // dataBinding = true
+        // viewBinding is enabled by default. Check [build.gradle.kts] in the root folder of project.
+        // viewBinding = true
+        // aidl = true
+        // Generate BuildConfig.java file
+        buildConfig = true
+    }
+
+    signingConfigs {
+        named("debug") {
+            keyAlias = getSignProperty("keyAlias")
+            keyPassword = getSignProperty("keyPassword")
+            storeFile = File(rootDir, getSignProperty("storeFile"))
+            storePassword = getSignProperty("storePassword")
+            enableV1Signing = true
+            enableV2Signing = true
+            enableV3Signing = true
+            enableV4Signing = true
+        }
+
+        create("release") {
+            keyAlias = getSignProperty("keyAlias")
+            keyPassword = getSignProperty("keyPassword")
+            storeFile = File(rootDir, getSignProperty("storeFile"))
+            storePassword = getSignProperty("storePassword")
+            enableV1Signing = true
+            enableV2Signing = true
+            enableV3Signing = true
+            enableV4Signing = true
+        }
     }
 
     /** Specifies one flavor dimension. */
@@ -105,7 +118,7 @@ android {
 
     buildTypes {
         getByName("debug") {
-            signingConfig = releaseSigning
+            signingConfig = signingConfigs.getByName("debug")
         }
 
         /**
@@ -115,7 +128,7 @@ android {
          * See the global configurations in top-level `build.gradle.kts`.
          */
         getByName("release") {
-            signingConfig = releaseSigning
+            signingConfig = signingConfigs.getByName("release")
         }
 
         /**
