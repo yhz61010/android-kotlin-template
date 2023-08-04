@@ -224,7 +224,7 @@ lifecycle-viewmodel-savedstate = { module = "androidx.lifecycle:lifecycle-viewmo
 #===== Android Room ========
 #===========================
 room-runtime = { module = "androidx.room:room-runtime", version.ref = "room" }
-# kapt
+# ksp
 room-compiler = { module = "androidx.room:room-compiler", version.ref = "room" }
 # optional - Kotlin Extensions and Coroutines support for Room
 room-ktx = { module = "androidx.room:room-ktx", version.ref = "room" }
@@ -266,7 +266,7 @@ coil-gif = { module = "io.coil-kt:coil-gif", version.ref = "coil" }
 coil-svg = { module = "io.coil-kt:coil-svg", version.ref = "coil" }
 coil-video = { module = "io.coil-kt:coil-video", version.ref = "coil" }
 glide = { module = "com.github.bumptech.glide:glide", version.ref = "glide" }
-# kapt(libs.glide.compiler)
+# ksp(libs.glide.compiler)
 glide-compiler = { module = "com.github.bumptech.glide:compiler", version.ref = "glide" }
 glide-okhttp3 = { module = "com.github.bumptech.glide:okhttp3-integration", version.ref = "glide" }
 # https://github.com/wasabeef/glide-transformations
@@ -488,7 +488,6 @@ powermock = [
 android-application = { id = "com.android.application", version.ref = "agp" }
 android-library = { id = "com.android.library", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
-kotlin-kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin" }
 kotlin-parcelize = { id = "org.jetbrains.kotlin.plugin.parcelize", version.ref = "kotlin" }
 
 navigation = { id = "androidx.navigation.safeargs.kotlin", version.ref = "navigation" }

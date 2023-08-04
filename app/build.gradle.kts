@@ -10,16 +10,14 @@ plugins {
 
     alias(libs.plugins.kotlin.parcelize) // id("kotlin-parcelize")
 
+    // Add ksp only if you use ksp() in dependencies {}
+    // alias(libs.plugins.ksp)
+
     // https://github.com/mannodermaus/android-junit5
     alias(libs.plugins.android.junit5)
 
     alias(libs.plugins.sonarqube)
     jacoco
-}
-
-kapt {
-    // We also need to add `org.gradle.caching=true` in `gradle.properties`.
-    useBuildCache = true
 }
 
 android {

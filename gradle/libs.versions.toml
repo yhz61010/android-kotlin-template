@@ -41,6 +41,7 @@ leo-version = "5.12.10"
 #===================
 agp = "8.1.0"
 kotlin = "1.9.0"
+ksp = "1.9.0-1.0.13"
 # Compose Compiler & Kotlin versions
 # https://androidx.dev/storage/compose-compiler/repository
 # https://developer.android.com/jetpack/androidx/releases/compose-kotlin?hl=zh-cn
@@ -273,7 +274,7 @@ powermock = [
 android-application = { id = "com.android.application", version.ref = "agp" }
 android-library = { id = "com.android.library", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
-kotlin-kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin" }
+ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 kotlin-parcelize = { id = "org.jetbrains.kotlin.plugin.parcelize", version.ref = "kotlin" }
 
 detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
