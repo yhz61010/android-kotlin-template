@@ -1,25 +1,26 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
-    <style name="app_Theme.AndroidTemplate" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
-        <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/app_purple_500</item>
-        <item name="colorPrimaryVariant">@color/app_purple_700</item>
-        <item name="colorOnPrimary">@color/app_white</item>
-        <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/app_teal_200</item>
-        <item name="colorSecondaryVariant">@color/app_teal_700</item>
-        <item name="colorOnSecondary">@color/app_black</item>
-        <!-- Status bar color. -->
-        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
-        <!-- Customize your theme here. -->
-    </style>
-
-    <style name="app_Theme.AndroidTemplate.NoActionBar">
+<resources>
+    <!-- Allows us to override platform level specific attributes in their respective values-vXX folder. -->
+    <style name="app_Platform.Theme.AndroidTemplate" parent="Theme.Material3.DynamicColors.DayNight">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+
+<!--        <item name="colorPrimary">@color/app_windowBackground</item>-->
+<!--        <item name="colorPrimaryDark">@color/app_windowBackground</item>-->
+
+        <!-- Prevent the issue of briefly displaying the default system bar color when launching the application. -->
+        <!-- There color will be override when the custom theme is activated. -->
+        <item name="android:statusBarColor">@color/app_windowBackground</item>
+        <item name="android:navigationBarColor">@color/app_windowBackground</item>
+        <!-- Prevent the issue of briefly displaying a white status bar text when launching the application. -->
+        <item name="android:windowLightStatusBar">true</item>
+
+        <!-- Prevent the issue of briefly displaying a white background color when launching the application. -->
+        <item name="android:colorBackground">@color/app_windowBackground</item>
+        <item name="android:windowBackground">@color/app_windowBackground</item>
     </style>
 
-    <style name="app_Theme.AndroidTemplate.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <!-- The actual theme we use. This varies for light theme (here), and values-night for dark theme. -->
+    <style name="app_Theme.AndroidTemplate" parent="app_Platform.Theme.AndroidTemplate" />
 
-    <style name="app_Theme.AndroidTemplate.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+    <!-- Customize your theme styles here. -->
 </resources>

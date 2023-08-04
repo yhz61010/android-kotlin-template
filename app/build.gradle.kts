@@ -9,7 +9,6 @@ plugins {
     alias(libs.plugins.android.application)
 
     alias(libs.plugins.kotlin.parcelize) // id("kotlin-parcelize")
-    alias(libs.plugins.navigation)
 
     // https://github.com/mannodermaus/android-junit5
     alias(libs.plugins.android.junit5)
@@ -59,11 +58,21 @@ android {
     // https://medium.com/androiddevelopers/5-ways-to-prepare-your-app-build-for-android-studio-flamingo-release-da34616bb946
     buildFeatures {
         // dataBinding = true
+        // aidl = true
+
         // viewBinding is enabled by default. Check [build.gradle.kts] in the root folder of project.
         // viewBinding = true
-        // aidl = true
+
+        // Enable compose feature
+        compose = true
+
         // Generate BuildConfig.java file
         buildConfig = true
+    }
+
+    // Compose options setting
+    composeOptions {
+        kotlinCompilerExtensionVersion = libs.versions.compose.compiler.get()
     }
 
     signingConfigs {
@@ -234,16 +243,13 @@ fun Project.getSignProperty(key: String, path: String = "config/sign/keystore.pr
 }
 
 dependencies {
-    implementation(libs.android.material)
-    implementation(libs.bundles.kotlin)
-    implementation(libs.bundles.androidx.main)
-    implementation(libs.bundles.navigation)
-    implementation(libs.bundles.lifecycle.full)
-
     // By using `projects`, you need to enable `enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")`
     // in `settings.gradle.kts` where in your root folder.
     implementation(projects.featureCommon)
 
+    implementation(libs.coil.kt.compose)
+
+    // ==============================
     testImplementation(libs.bundles.test)
     testRuntimeOnly(libs.bundles.test.runtime.only)
     androidTestImplementation(libs.bundles.test)

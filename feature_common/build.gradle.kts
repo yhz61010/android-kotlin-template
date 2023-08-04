@@ -63,6 +63,27 @@ dependencies {
     api(libs.mars.xlog)
     api(libs.karn.notify)
 
+    // ----------
+
+    val composeBom = platform(libs.androidx.compose.bom)
+    api(composeBom)
+    androidTestImplementation(composeBom)
+
+    // Material Design 3
+    api(libs.androidx.material3)
+
+    // Android Studio Preview support
+    api(libs.androidx.compose.ui.tooling.preview)
+    debugImplementation(libs.androidx.compose.ui.tooling)
+    // debugImplementation(libs.androidx.compose.ui.graphics)
+    debugImplementation(libs.androidx.compose.ui.test.manifest)
+
+    api(libs.bundles.androidx.compose)
+
+    api(libs.androidx.navigation.compose)
+    api(libs.androidx.compose.material.iconsExtended)
+    api(libs.androidx.lifecycle.runtime.compose)
+
     // ==============================
     testImplementation(libs.bundles.test)
     testRuntimeOnly(libs.bundles.test.runtime.only)

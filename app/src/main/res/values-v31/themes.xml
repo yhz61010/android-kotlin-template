@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Allows us to override platform level specific attributes in their respective values-vXX folder. -->
+    <style name="app_Platform.Theme.AndroidTemplate" parent="Theme.Material3.DynamicColors.DayNight">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+
+        <!-- Prevent the issue of briefly displaying a white background color when launching the application. -->
+        <item name="android:colorBackground">@color/app_windowBackground</item>
+        <item name="android:windowBackground">@color/app_windowBackground</item>
+
+        <item name="android:windowSplashScreenAnimatedIcon">@drawable/app_transparent_image</item>
+    </style>
+</resources>

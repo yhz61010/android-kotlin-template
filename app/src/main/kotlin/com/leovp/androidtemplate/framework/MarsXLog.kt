@@ -4,7 +4,7 @@ package com.leovp.androidtemplate.framework
 
 import android.content.Context
 import com.leovp.log.base.ILog
-import com.leovp.module.common.GlobalConstants
+import com.leovp.module.common.GlobalConst
 import com.tencent.mars.xlog.Log
 import com.tencent.mars.xlog.Xlog
 import java.io.File
@@ -23,7 +23,7 @@ class MarsXLog(private val prefix: String) : ILog {
 
     override fun getTagName(tag: String) = "$prefix-$tag"
 
-    private val defaultLevel = if (GlobalConstants.DEBUG) Xlog.LEVEL_DEBUG else Xlog.LEVEL_INFO
+    private val defaultLevel = if (GlobalConst.DEBUG) Xlog.LEVEL_DEBUG else Xlog.LEVEL_INFO
 
     fun init(context: Context) {
         val logDir = getLogDir(context, "xlog").absolutePath
@@ -32,7 +32,7 @@ class MarsXLog(private val prefix: String) : ILog {
         System.loadLibrary("c++_shared")
         System.loadLibrary("marsxlog")
         Log.setLogImp(Xlog())
-        Log.setConsoleLogOpen(GlobalConstants.DEBUG)
+        Log.setConsoleLogOpen(GlobalConst.DEBUG)
         Log.appenderOpen(defaultLevel, Xlog.AppednerModeAsync, cacheDir, logDir, "main", CACHE_DAYS)
     }
 

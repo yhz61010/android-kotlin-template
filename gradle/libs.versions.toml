@@ -34,29 +34,32 @@ versionCode = "1"
 # @keep
 versionName = "1.0.0"
 
-leo-version = "5.12.9"
+leo-version = "5.12.10"
 
 #===================
 #===== Compile =====
 #===================
 agp = "8.1.0"
 kotlin = "1.9.0"
+# Compose Compiler & Kotlin versions
+# https://androidx.dev/storage/compose-compiler/repository
+# https://developer.android.com/jetpack/androidx/releases/compose-kotlin?hl=zh-cn
+compose-compiler = "1.5.0"
 
 #=================================
 #===== Android dependencies ======
 #=================================
-material = "1.9.0"
-activity-ktx = "1.7.2"
-fragment-ktx = "1.6.1"
+compose-bom = "2023.06.01"
+compose-activity = "1.7.2"
+compose-navigation = "2.6.0"
+accompanist = "0.30.1"
+lottie-compose = "6.1.0"
+lifecycle-compose = "2.6.1"
+androidx-lifecycle-runtime-compose = "2.6.1"
+androidx-constraintlayout = "1.0.1"
+
 coroutines = "1.7.3"
-core-ktx = "1.10.1"
-appcompat = "1.6.1"
 annotation = "1.6.0"
-constraintlayout = "2.1.4"
-recyclerview = "1.3.1"
-cardview = "1.0.0"
-navigation = "2.6.0"
-lifecycle = "2.6.1"
 multidex = "2.0.1"
 
 #=======================
@@ -73,6 +76,7 @@ mars-xlog = "1.2.6"
 karn-notify = "1.4.0"
 xx-permissions = "18.2"
 net = "3.5.8"
+coil = "2.4.0"
 
 #================
 #===== Test =====
@@ -129,34 +133,40 @@ leo-lib-common-android = { module = "com.leovp.android:lib-common-android", vers
 leo-lib-common-kotlin = { module = "com.leovp.android:lib-common-kotlin", version.ref = "leo-version" }
 
 #===================
+#= Android Compose =
+#===================
+androidx-compose-bom = { module = "androidx.compose:compose-bom", version.ref = "compose-bom" }
+androidx-material3 = { module = "androidx.compose.material3:material3" }
+androidx-compose-ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview" }
+androidx-compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling" }
+androidx-compose-ui-graphics = { module = "androidx.compose.ui:ui-graphics" }
+
+# Integration with activities
+androidx-compose-activity = { module = "androidx.activity:activity-compose", version.ref = "compose-activity" }
+# Integration with ViewModels
+androidx-compose-viewmodel = { module = "androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "lifecycle-compose" }
+# Integration with LiveData
+androidx-compose-runtime-livedata = { module = "androidx.compose.runtime:runtime-livedata" }
+androidx-compose-ui-test-manifest = { module = "androidx.compose.ui:ui-test-manifest" }
+androidx-compose-materialWindow = { module = "androidx.compose.material3:material3-window-size-class" }
+androidx-compose-material-iconsExtended = { module = "androidx.compose.material:material-icons-extended" }
+androidx-navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "compose-navigation" }
+lottie-compose = { module = "com.airbnb.android:lottie-compose", version.ref = "lottie-compose" }
+androidx-constraintlayout-compose = { module = "androidx.constraintlayout:constraintlayout-compose", version.ref = "androidx-constraintlayout" }
+androidx-lifecycle-runtime-compose = { module = "androidx.lifecycle:lifecycle-runtime-compose", version.ref = "androidx-lifecycle-runtime-compose" }
+
+accompanist-systemuicontroller = { module = "com.google.accompanist:accompanist-systemuicontroller", version.ref = "accompanist" }
+
+#===================
 #===== Android =====
 #===================
-android-material = { module = "com.google.android.material:material", version.ref = "material" }
-androidx-activity = { module = "androidx.activity:activity-ktx", version.ref = "activity-ktx" }
-androidx-fragment = { module = "androidx.fragment:fragment-ktx", version.ref = "fragment-ktx" }
-androidx-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "appcompat" }
-androidx-core-ktx = { module = "androidx.core:core-ktx", version.ref = "core-ktx" }
 androidx-multidex = { module = "androidx.multidex:multidex", version.ref = "multidex" }
 androidx-annotation = { module = "androidx.annotation:annotation", version.ref = "annotation" }
-androidx-navigation-fragment = { module = "androidx.navigation:navigation-fragment-ktx", version.ref = "navigation" }
-androidx-navigation-ui = { module = "androidx.navigation:navigation-ui-ktx", version.ref = "navigation" }
-androidx-constraintlayout = { module = "androidx.constraintlayout:constraintlayout", version.ref = "constraintlayout" }
-androidx-recyclerview = { module = "androidx.recyclerview:recyclerview", version.ref = "recyclerview" }
-androidx-cardview = { module = "androidx.cardview:cardview", version.ref = "cardview" }
 
 #=============================
 #===== Android Lifecycle =====
 #=============================
-# ViewModel
-lifecycle-viewmodel = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "lifecycle" }
-# LiveData
-lifecycle-livedata = { module = "androidx.lifecycle:lifecycle-livedata-ktx", version.ref = "lifecycle" }
-# optional - helpers for implementing LifecycleOwner in a Service
-lifecycle-service = { module = "androidx.lifecycle:lifecycle-service", version.ref = "lifecycle" }
-# Lifecycles only (without ViewModel or LiveData)
-lifecycle-runtime = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "lifecycle" }
-# Saved state module for ViewModel
-lifecycle-viewmodel-savedstate = { module = "androidx.lifecycle:lifecycle-viewmodel-savedstate", version.ref = "lifecycle" }
+
 
 #=======================
 #===== Third party =====
@@ -170,6 +180,8 @@ mars-xlog = { module = "com.tencent.mars:mars-xlog", version.ref = "mars-xlog" }
 xx-permissions = { module = "com.github.getActivity:XXPermissions", version.ref = "xx-permissions" }
 karn-notify = { module = "io.karn:notify", version.ref = "karn-notify" }
 net = { module = "com.github.liangjingkanji:Net", version.ref = "net" }
+#coil = { module = "io.coil-kt:coil", version.ref = "coil" }
+coil-kt-compose = { module = "io.coil-kt:coil-compose", version.ref = "coil" }
 
 #================
 #===== Test =====
@@ -214,27 +226,16 @@ mannodermaus-junit5-runner = { module = "de.mannodermaus.junit5:android-test-run
 #===================#===================#===================#===================
 
 [bundles]
-androidx-main = [
-    "androidx-core-ktx",
-    "androidx-appcompat",
-    "androidx-annotation",
-    "androidx-constraintlayout",
-    "androidx-recyclerview",
-    "androidx-cardview",
-    "androidx-fragment"
+androidx-compose = [
+    "androidx-constraintlayout-compose",
+    "androidx-compose-activity",
+    "androidx-compose-viewmodel",
+    "androidx-compose-runtime-livedata",
+    "androidx-compose-materialWindow"
 ]
+
 kotlin = ["kotlin-reflect", "kotlin-coroutines"]
-navigation = ["androidx-navigation-fragment", "androidx-navigation-ui"]
-lifecycle-full = [
-    "lifecycle-viewmodel",
-    "lifecycle-livedata",
-    "lifecycle-service",
-    "lifecycle-viewmodel-savedstate"
-]
-lifecycle-simple = [
-    "lifecycle-viewmodel",
-    "lifecycle-livedata"
-]
+
 test = [
     "kotlin-junit5",
     "junit-jupiter-api",
@@ -275,7 +276,6 @@ kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin" }
 kotlin-parcelize = { id = "org.jetbrains.kotlin.plugin.parcelize", version.ref = "kotlin" }
 
-navigation = { id = "androidx.navigation.safeargs.kotlin", version.ref = "navigation" }
 detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
 ktlint-gradle = { id = "org.jlleitschuh.gradle.ktlint", version.ref = "ktlint-gradle" }
 benmanes-versions = { id = "com.github.ben-manes.versions", version.ref = "benmanes" }
