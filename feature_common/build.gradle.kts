@@ -14,11 +14,9 @@ plugins {
 android {
     namespace = "com.leovp.module.common"
 
-    @Suppress ("UnstableApiUsage")
     resourcePrefix = "cmn_"
 
     // https://medium.com/androiddevelopers/5-ways-to-prepare-your-app-build-for-android-studio-flamingo-release-da34616bb946
-    @Suppress ("UnstableApiUsage")
     buildFeatures {
         // dataBinding = true
         // viewBinding is enabled by default. Check [build.gradle.kts] in the root folder of project.

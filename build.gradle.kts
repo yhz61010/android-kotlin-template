@@ -227,7 +227,7 @@ fun Project.configureBase(): BaseExtension {
             }
         }
         compileOptions {
-            setDefaultJavaVersion(jdkVersion)
+            // setDefaultJavaVersion(jdkVersion)
             sourceCompatibility = jdkVersion
             targetCompatibility = jdkVersion
         }

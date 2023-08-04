@@ -29,8 +29,10 @@ android {
     /** The app's namespace. Used primarily to access app resources. */
     namespace = "com.leovp.androidtemplate"
 
-    @Suppress ("UnstableApiUsage")
     resourcePrefix = "app_"
+
+    /** Specifies one flavor dimension. */
+    flavorDimensions += listOf("version")
 
     defaultConfig {
         applicationId = namespace
@@ -55,7 +57,6 @@ android {
     }
 
     // https://medium.com/androiddevelopers/5-ways-to-prepare-your-app-build-for-android-studio-flamingo-release-da34616bb946
-    @Suppress ("UnstableApiUsage")
     buildFeatures {
         // dataBinding = true
         // viewBinding is enabled by default. Check [build.gradle.kts] in the root folder of project.
@@ -88,10 +89,6 @@ android {
             enableV4Signing = true
         }
     }
-
-    /** Specifies one flavor dimension. */
-    @Suppress ("UnstableApiUsage")
-    flavorDimensions += "version"
 
     /**
      * The productFlavors block is where you can configure multiple product flavors.
