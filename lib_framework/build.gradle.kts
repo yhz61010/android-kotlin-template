@@ -27,6 +27,18 @@ android {
         // Add this line as needed
         buildConfig = true
     }
+
+    buildTypes {
+        debug /*getByName("debug")*/ {
+            buildConfigField("boolean", "DEBUG_MODE", "true")
+            buildConfigField("boolean", "CONSOLE_LOG_OPEN", "true")
+        }
+
+        release /*getByName("release")*/ {
+            buildConfigField("boolean", "DEBUG_MODE", "false")
+            buildConfigField("boolean", "CONSOLE_LOG_OPEN", "false")
+        }
+    }
 }
 
 composeCompiler {
@@ -38,6 +50,18 @@ composeCompiler {
 
 dependencies {
     // implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar", "*.aar"))))
+
+    // ----------
+    api(libs.mars.xlog)
+    api(libs.karn.notify)
+    api(libs.mmkv)
+    api(libs.serialization.json)
+    // Net - dependencies - Start
+    api(libs.kotlin.coroutines)
+    api(libs.square.okhttp)
+    api(libs.net)
+    // Net - dependencies - End
+    // ----------
 
     api(platform(libs.androidx.compose.bom))
     // Material Design 3
@@ -65,8 +89,6 @@ dependencies {
     api(libs.leo.pref)
     api(libs.leo.log)
     api(libs.leo.lib.json)
-
-    api(libs.mars.xlog)
 
     // ==============================
     testImplementation(libs.bundles.test)

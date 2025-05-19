@@ -20,7 +20,7 @@ plugins {
 }
 
 android {
-    namespace = "com.leovp.module.common"
+    namespace = "com.leovp.feature.base"
 
     resourcePrefix = "cmn_"
 
@@ -52,18 +52,6 @@ android {
         // also ignores checks that have explicitly asked to look at test sources, such
         // as the unused resource check.
         ignoreTestSources = true
-    }
-
-    buildTypes {
-        debug /*getByName("debug")*/ {
-            buildConfigField("boolean", "DEBUG_MODE", "true")
-            buildConfigField("boolean", "CONSOLE_LOG_OPEN", "true")
-        }
-
-        release /*getByName("release")*/ {
-            buildConfigField("boolean", "DEBUG_MODE", "false")
-            buildConfigField("boolean", "CONSOLE_LOG_OPEN", "false")
-        }
     }
 }
 
