@@ -7,6 +7,7 @@ import com.leovp.android.ui.ForegroundComponent
 import com.leovp.androidbase.exts.android.closeAndroidPDialog
 import com.leovp.androidtemplate.R
 import com.leovp.log.LogContext
+import com.leovp.module.common.BuildConfig
 import com.leovp.module.common.CrashHandler
 import com.leovp.module.common.GlobalConst
 import com.leovp.pref.LPref
@@ -21,10 +22,19 @@ object InitManager {
     fun init(app: Application) {
         CrashHandler.initCrashHandler(app)
 
-        LeoToast.getInstance(app).init(LeoToast.ToastConfig(GlobalConst.DEBUG, R.mipmap.app_ic_launcher_round))
+        @Suppress("SENSELESS_COMPARISON")
+        LeoToast.getInstance(app).init(
+            LeoToast.ToastConfig(
+                GlobalConst.DEBUG,
+                R.mipmap.app_ic_launcher_round
+            )
+        )
 
         // Log must be initialized first.
-        LogContext.setLogImpl(MarsXLog("AOS").apply { init(app) })
+        LogContext.setLogImpl(MarsXLog("AOS").apply {
+            @Suppress("SENSELESS_COMPARISON")
+            init(app, BuildConfig.CONSOLE_LOG_OPEN)
+        })
         PrefContext.setPrefImpl(LPref(app))
 
         closeAndroidPDialog()

@@ -1,10 +1,10 @@
-[![Kotlin Version](https://img.shields.io/badge/Kotlin-1.8.21-blue)](https://kotlinlang.org)
-[![AGP](https://img.shields.io/badge/AGP-8.0.2-orange)](https://developer.android.com/studio/releases/gradle-plugin)
-[![Gradle](https://img.shields.io/badge/Gradle-8.1.1-green)](https://gradle.org)
+[![Kotlin Version](https://img.shields.io/badge/Kotlin-2.1.21-blue)](https://kotlinlang.org)
+[![AGP](https://img.shields.io/badge/AGP-8.10.0-orange)](https://developer.android.com/studio/releases/gradle-plugin)
+[![Gradle](https://img.shields.io/badge/Gradle-8.14-green)](https://gradle.org)
 
-[![Android Studio](https://img.shields.io/badge/AndroidStudio-Flamingo|2022.2.1-green)](https://developer.android.com/studio)
-[![Build Java Version](https://img.shields.io/badge/Java-17.0.6-green)](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html)
-[![Compatibility Java Version](https://img.shields.io/badge/Java-11-green)](https://www.oracle.com/java/technologies/javase/jdk11-archive-downloads.html)
+[![Android Studio](https://img.shields.io/badge/Android_Studio-Meerkat_Feature_Drop_|_2024.3.2-green)](https://developer.android.com/studio)
+[![Build Java Version](https://img.shields.io/badge/JDK-17.0.6-green)](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html)
+[![Compatibility Java Version](https://img.shields.io/badge/Compatibility_Java_-17-green)](https://www.oracle.com/java/technologies/javase/jdk11-archive-downloads.html)
 [![NDK](https://img.shields.io/badge/NDK-25.2.9519653-green)](https://developer.android.com/ndk/downloads)
 
 A pure Android kotlin template project that let you create Android Kotlin project.
@@ -33,27 +33,27 @@ with the configuration that is stored in the [detekt.yml](config/detekt/detekt.y
 It also uses the **detekt-formatting** plugin which includes the ktlint rules (see https://detekt.dev/docs/rules/formatting/).
 
 ###  Runs the ktlint formatter on all kotlin sources in this project.
-```kotlin
+```shell
 ./gradlew ktlintFormat
 ```
 
 ### Displays the dependency updates for the project.
-```kotlin
+```shell
 ./gradlew dependencyUpdates
 ```
 
 ### Runs ktlint on all kotlin sources in this project.
-```kotlin
+```shell
 ./gradlew ktlintCheck
 ```
 
 ### Runs detekt
-```kotlin
+```shell
 ./gradlew detekt
 ```
 
 ### Check All
-```kotlin
+```shell
 ./gradlew staticCheck
 ```
 

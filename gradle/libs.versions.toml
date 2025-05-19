@@ -21,11 +21,11 @@
 #===== Project =====
 #===================
 # @keep
-compile-sdk = "33"
+compile-sdk = "36"
 # @keep
-min-sdk = "23"
+min-sdk = "25"
 # @keep
-target-sdk = "33"
+target-sdk = "36"
 # @keep
 ndk-sdk = "25.2.9519653"
 
@@ -34,68 +34,76 @@ versionCode = "1"
 # @keep
 versionName = "1.0.0"
 
-leo-version = "5.12.10"
+leo-version = "5.12.49"
 
 #===================
 #===== Compile =====
 #===================
-agp = "8.1.0"
-kotlin = "1.9.0"
-ksp = "1.9.0-1.0.13"
+agp = "8.10.0"
+kotlin = "2.1.21"
+ksp = "2.1.21-2.0.1"
+
+javaVersion = "17"
+jvmVersion = "17"
+
 # Compose Compiler & Kotlin versions
 # https://androidx.dev/storage/compose-compiler/repository
 # https://developer.android.com/jetpack/androidx/releases/compose-kotlin?hl=zh-cn
-compose-compiler = "1.5.0"
 
 #=================================
 #===== Android dependencies ======
 #=================================
-compose-bom = "2023.06.01"
-compose-activity = "1.7.2"
-compose-navigation = "2.6.0"
+compose-bom = "2025.05.00"
+compose-activity = "1.10.1"
+compose-navigation = "2.9.0"
 accompanist = "0.30.1"
 lottie-compose = "6.1.0"
-lifecycle-compose = "2.6.1"
-androidx-lifecycle-runtime-compose = "2.6.1"
-androidx-constraintlayout = "1.0.1"
+lifecycle-compose = "2.9.0"
+androidx-constraintlayout = "1.1.1"
 
-coroutines = "1.7.3"
-annotation = "1.6.0"
+core-ktx = "1.16.0"
+lifecycle = "2.8.7" # https://stackoverflow.com/a/78490417/6091500
+coroutines = "1.10.1"
+annotation = "1.9.1"
 multidex = "2.0.1"
+
+hilt = "2.56"
+hilt-navigation-compose = "1.2.0"
 
 #=======================
 #===== Third party =====
 #=======================
-detekt = "1.23.0"
+detekt = "1.23.8"
 dokka = "1.7.10"
 ktlint = "0.48.2"
-ktlint-gradle = "11.3.2"
-benmanes = "0.46.0"
+ktlint-gradle = "12.1.2"
+benmanes = "0.51.0"
 jacoco = "0.8.8"
-sonarqube = "4.2.0.3129"
+sonarqube = "6.0.1.5171"
 mars-xlog = "1.2.6"
 karn-notify = "1.4.0"
-xx-permissions = "18.2"
-net = "3.5.8"
-coil = "2.4.0"
+xx-permissions = "21.0"
+net = "3.7.0"
+coil = "2.7.0"
 
 #================
 #===== Test =====
 #================
-jupiter = "5.10.0" # JUnit 5
-androidx-test = "1.5.0"
-androidx-test-ext = "1.1.5"
-androidx-test-runner = "1.5.2"
-androidx-test-monitor = "1.6.1"
-androidx-test-uiautomator = "2.2.0"
-espresso-core = "3.5.1"
+compose-runtime-tracing = "1.8.1"
+jupiter = "5.12.1" # JUnit 5
+androidx-test = "1.6.1"
+androidx-test-ext = "1.2.1"
+androidx-test-runner = "1.6.2"
+androidx-test-monitor = "1.7.2"
+androidx-test-uiautomator = "2.3.0"
+espresso-core = "3.6.1"
 kluent = "1.73"
-mockk = "1.13.5"
+mockk = "1.13.17"
 arch = "2.2.0"
 powermock-version = "2.0.9"
-robolectric-version = "4.10.3"
-mannodermaus-android-junit5 = "1.9.3.0"
-mannodermaus-junit5 = "1.3.0"
+robolectric-version = "4.14.1"
+mannodermaus-android-junit5 = "1.12.0.0"
+mannodermaus-junit5 = "1.7.0"
 
 #===================#===================#===================#===================
 #===================#===================#===================#===================
@@ -107,8 +115,6 @@ mannodermaus-junit5 = "1.3.0"
 #===================
 agp = { module = "com.android.tools.build:gradle", version.ref = "agp" }
 kgp = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
-kotlin-reflect = { module = "org.jetbrains.kotlin:kotlin-reflect", version.ref = "kotlin" }
-kotlin-coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "coroutines" }
 
 #=========================
 #===== Leo Libraries =====
@@ -147,6 +153,7 @@ androidx-compose-activity = { module = "androidx.activity:activity-compose", ver
 # Integration with ViewModels
 androidx-compose-viewmodel = { module = "androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "lifecycle-compose" }
 # Integration with LiveData
+androidx-lifecycle-runtime-compose = { module = "androidx.lifecycle:lifecycle-runtime-compose", version.ref = "lifecycle-compose" }
 androidx-compose-runtime-livedata = { module = "androidx.compose.runtime:runtime-livedata" }
 androidx-compose-ui-test-manifest = { module = "androidx.compose.ui:ui-test-manifest" }
 androidx-compose-materialWindow = { module = "androidx.compose.material3:material3-window-size-class" }
@@ -154,15 +161,20 @@ androidx-compose-material-iconsExtended = { module = "androidx.compose.material:
 androidx-navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "compose-navigation" }
 lottie-compose = { module = "com.airbnb.android:lottie-compose", version.ref = "lottie-compose" }
 androidx-constraintlayout-compose = { module = "androidx.constraintlayout:constraintlayout-compose", version.ref = "androidx-constraintlayout" }
-androidx-lifecycle-runtime-compose = { module = "androidx.lifecycle:lifecycle-runtime-compose", version.ref = "androidx-lifecycle-runtime-compose" }
 
 accompanist-systemuicontroller = { module = "com.google.accompanist:accompanist-systemuicontroller", version.ref = "accompanist" }
 
 #===================
 #===== Android =====
 #===================
+kotlin-reflect = { module = "org.jetbrains.kotlin:kotlin-reflect", version.ref = "kotlin" }
+kotlin-coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "coroutines" }
+androidx-core-ktx = { module = "androidx.core:core-ktx", version.ref = "core-ktx" }
 androidx-multidex = { module = "androidx.multidex:multidex", version.ref = "multidex" }
 androidx-annotation = { module = "androidx.annotation:annotation", version.ref = "annotation" }
+hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hilt" }
+hilt-compiler = { module = "com.google.dagger:hilt-compiler", version.ref = "hilt" }
+androidx-hilt-navigation-compose = { module = "androidx.hilt:hilt-navigation-compose", version.ref = "hilt-navigation-compose" }
 
 #=============================
 #===== Android Lifecycle =====
@@ -187,6 +199,8 @@ coil-kt-compose = { module = "io.coil-kt:coil-compose", version.ref = "coil" }
 #================
 #===== Test =====
 #================
+# implementation at your :app module
+compose-runtime-tracing = { module = "androidx.compose.runtime:runtime-tracing", version.ref = "compose-runtime-tracing" }
 # testImplementation
 junit-jupiter-api = { module = "org.junit.jupiter:junit-jupiter-api", version.ref = "jupiter" }
 # testRuntimeOnly
@@ -228,6 +242,7 @@ mannodermaus-junit5-runner = { module = "de.mannodermaus.junit5:android-test-run
 
 [bundles]
 androidx-compose = [
+    "androidx-core-ktx",
     "androidx-constraintlayout-compose",
     "androidx-compose-activity",
     "androidx-compose-viewmodel",
@@ -235,7 +250,10 @@ androidx-compose = [
     "androidx-compose-materialWindow"
 ]
 
-kotlin = ["kotlin-reflect", "kotlin-coroutines"]
+kotlin = [
+    "kotlin-reflect",
+    "kotlin-coroutines",
+]
 
 test = [
     "kotlin-junit5",
@@ -273,9 +291,14 @@ powermock = [
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 android-library = { id = "com.android.library", version.ref = "agp" }
+# Equivalent kgp - org.jetbrains.kotlin:kotlin-gradle-plugin
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+# https://developer.android.com/develop/ui/compose/compiler?hl=zh-cn
+kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 kotlin-parcelize = { id = "org.jetbrains.kotlin.plugin.parcelize", version.ref = "kotlin" }
+kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
 
 detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
 ktlint-gradle = { id = "org.jlleitschuh.gradle.ktlint", version.ref = "ktlint-gradle" }

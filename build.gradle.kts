@@ -16,10 +16,17 @@ val customGroup = "com.leovp"
 /**
  * You can use it in subproject like this:
  * ```kotlin
- * val jdkVersion: JavaVersion by rootProject.extra
+ * val javaVersion: JavaVersion by rootProject.extra
  * ```
  */
-val jdkVersion: JavaVersion by extra { JavaVersion.VERSION_17 }
+val javaVersion: JavaVersion by extra {
+    // JavaVersion.VERSION_17
+    // We should use integer value for toVersion() in this case.
+    JavaVersion.toVersion(libs.versions.javaVersion.get().toInt())
+}
+val jvmTargetVersion by extra {
+    org.jetbrains.kotlin.gradle.dsl.JvmTarget.fromTarget(libs.versions.jvmVersion.get())
+}
 
 /**
  * By default, the resource prefix is just the module name.
@@ -55,6 +62,10 @@ plugins {
     alias(libs.plugins.android.application) apply false
     alias(libs.plugins.android.library) apply false
     alias(libs.plugins.kotlin.android) apply false
+// https://developer.android.com/develop/ui/compose/compiler?hl=zh-cn
+    alias(libs.plugins.kotlin.compose) apply false
+    alias(libs.plugins.hilt) apply false
+    alias(libs.plugins.kotlin.serialization) apply false
 
     alias(libs.plugins.detekt)
     alias(libs.plugins.ktlint.gradle)
@@ -62,10 +73,12 @@ plugins {
     // alias(libs.plugins.vcu)
     jacoco
 
+    alias(libs.plugins.ksp) apply false
     // If you use kotlin(), you can change dash(-) with dot(.)
     // or you can still use dash like id("kotlin-parcelize")
-    alias(libs.plugins.ksp) apply false
     alias(libs.plugins.kotlin.parcelize) apply false // id("kotlin-parcelize")
+    // https://stackoverflow.com/a/72508037/1685062
+    // alias(libs.plugins.navigation) apply false
 }
 
 // ********************
@@ -82,6 +95,8 @@ val detektFormatting: Provider<MinimalExternalModuleDependency> = libs.detekt.fo
 // all projects = root project + sub projects
 allprojects {
     group = customGroup
+
+    apply(plugin = rootProject.libs.plugins.kotlin.serialization.get().pluginId)
 
     // We want to apply ktlint at all project level because it also checks Gradle config files (*.kts)
     apply(plugin = rootProject.libs.plugins.ktlint.gradle.get().pluginId)
@@ -117,6 +132,7 @@ allprojects {
     ktlint {
         verbose.set(true)
         android.set(true)
+        ignoreFailures.set(false)
 
         // Uncomment below line and run .\gradlew ktlintCheck to see check ktlint experimental rules
         // enableExperimentalRules.set(true)
@@ -135,9 +151,10 @@ allprojects {
         useJUnitPlatform()
     }
 
-    afterEvaluate {
-        configureCompileVersion()
-    }
+    // afterEvaluate {
+    //     configureCompileVersion()
+    // }
+    configureCompileTasks()
 
     // configurations.all {
     //     resolutionStrategy.eachDependency {
@@ -165,7 +182,7 @@ subprojects {
 }
 
 tasks.register<Delete>("clean") {
-    delete(rootProject.buildDir)
+    delete(rootProject.layout.buildDirectory)
 }
 
 /**
@@ -175,15 +192,21 @@ tasks.register<Delete>("clean") {
  * task (current target is 11) jvm target compatibility should be set to the same Java version.
  * ```
  */
-fun Project.configureCompileVersion() {
+fun Project.configureCompileTasks() {
     tasks.withType<JavaCompile>().configureEach {
-        sourceCompatibility = jdkVersion.toString()
-        targetCompatibility = jdkVersion.toString()
+        sourceCompatibility = javaVersion.toString()
+        targetCompatibility = javaVersion.toString()
+        // Enable warning for deprecated APIs
+        options.compilerArgs.add("-Xlint:deprecation")
     }
 
-    tasks.withType<KotlinCompile>().configureEach {
-        kotlinOptions {
-            jvmTarget = jdkVersion.toString()
+    tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach {
+        compilerOptions {
+            jvmTarget.set(jvmTargetVersion)
+
+            // Enable support for experimental features
+            // freeCompilerArgs.add("-opt-in=kotlin.RequiresOptIn")
+            optIn.add("kotlin.RequiresOptIn")
         }
     }
 }
@@ -219,12 +242,15 @@ fun Project.configureBase(): BaseExtension {
         }
         compileOptions {
             // setDefaultJavaVersion(jdkVersion)
-            sourceCompatibility = jdkVersion
-            targetCompatibility = jdkVersion
+            sourceCompatibility = javaVersion
+            targetCompatibility = javaVersion
         }
         buildTypes {
             getByName("release") {
-                proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+                proguardFiles(
+                    getDefaultProguardFile("proguard-android-optimize.txt"),
+                    "proguard-rules.pro"
+                )
             }
         }
 
@@ -314,7 +340,7 @@ fun Project.configureLibrary(): BaseExtension = configureBase().apply {
     }
     buildTypes {
         getByName("release") {
-            isMinifyEnabled = false
+            isMinifyEnabled = true
         }
 
         getByName("debug") {
@@ -325,7 +351,7 @@ fun Project.configureLibrary(): BaseExtension = configureBase().apply {
 
 // Target version of the generated JVM bytecode. It is used for type resolution.
 tasks.withType<Detekt>().configureEach {
-    jvmTarget = jdkVersion.toString()
+    jvmTarget = jvmTargetVersion.target
 
     reports {
         // observe findings in your browser with structure and code snippets

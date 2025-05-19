@@ -7,7 +7,9 @@ apply(from = "../jacoco.gradle.kts")
 // https://docs.gradle.org/current/userguide/plugins.html#sec:subprojects_plugins_dsl
 plugins {
     alias(libs.plugins.android.application)
-
+    alias(libs.plugins.kotlin.android)
+    // Apply the `compose.compiler` plugin to every module that uses Jetpack Compose.
+    alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.kotlin.parcelize) // id("kotlin-parcelize")
 
     // Add ksp only if you use ksp() in dependencies {}
@@ -42,7 +44,7 @@ android {
         ndk {
             // abiFilters "arm64-v8a", "armeabi-v7a", "x86", "x86_64"
             @android.annotation.SuppressLint("ChromeOsAbiSupport")
-            abiFilters += setOf("arm64-v8a")
+            abiFilters += setOf("arm64-v8a", "armeabi-v7a")
         }
 
         // buildConfigFieldFromGradleProperty("apiBaseUrl")
@@ -61,16 +63,8 @@ android {
         // viewBinding is enabled by default. Check [build.gradle.kts] in the root folder of project.
         // viewBinding = true
 
-        // Enable compose feature
-        compose = true
-
         // Generate BuildConfig.java file
         buildConfig = true
-    }
-
-    // Compose options setting
-    composeOptions {
-        kotlinCompilerExtensionVersion = libs.versions.compose.compiler.get()
     }
 
     signingConfigs {
@@ -119,6 +113,9 @@ android {
             dimension = "version"
             applicationIdSuffix = ".demo"
             versionNameSuffix = "-demo"
+
+            // buildConfigField("String", "YOUR_FIELD", "\"This is your field\"")
+            // resValue("string", "app_app_name", "Demo Android Template")
         }
         create("full") {
             dimension = "version"
@@ -126,7 +123,7 @@ android {
     }
 
     buildTypes {
-        getByName("debug") {
+        debug /*getByName("debug")*/ {
             signingConfig = signingConfigs.getByName("debug")
         }
 
@@ -136,7 +133,7 @@ android {
          *
          * See the global configurations in top-level `build.gradle.kts`.
          */
-        getByName("release") {
+        release /*getByName("release")*/ {
             signingConfig = signingConfigs.getByName("release")
         }
 
@@ -177,6 +174,10 @@ android {
                     ".apk"
             }
     }
+}
+
+composeCompiler {
+    includeSourceInformation = true
 }
 
 // 获取当前分支的提交总次数
