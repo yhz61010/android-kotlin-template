@@ -22,7 +22,7 @@ plugins {
 android {
     namespace = "com.leovp.feature.base"
 
-    resourcePrefix = "cmn_"
+    resourcePrefix = "bas_"
 
     // https://medium.com/androiddevelopers/5-ways-to-prepare-your-app-build-for-android-studio-flamingo-release-da34616bb946
     buildFeatures {

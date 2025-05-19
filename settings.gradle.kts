@@ -100,6 +100,6 @@ enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
 include(
     ":lib_framework",
-    "feature_common",
+    "feature_base",
     "app"
 )
