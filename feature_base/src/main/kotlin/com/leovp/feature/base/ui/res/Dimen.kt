@@ -1,4 +1,4 @@
-package com.leovp.module.common.res
+package com.leovp.feature.base.ui.res
 
 import androidx.compose.ui.unit.dp
 

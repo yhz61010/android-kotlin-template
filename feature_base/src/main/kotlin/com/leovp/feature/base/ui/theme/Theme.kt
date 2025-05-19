@@ -1,4 +1,4 @@
-package com.leovp.androidtemplate.ui.theme
+package com.leovp.feature.base.ui.theme
 
 import android.app.Activity
 import android.os.Build

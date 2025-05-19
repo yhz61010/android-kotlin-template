@@ -1,4 +1,4 @@
-package com.leovp.module.common
+package com.leovp.feature.base
 
 import android.app.Application
 import com.leovp.android.exts.toast

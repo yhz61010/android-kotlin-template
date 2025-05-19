@@ -1,11 +1,9 @@
-@file:Suppress("unused", "MemberVisibilityCanBePrivate")
-
-package com.leovp.androidtemplate.framework
+package com.leovp.feature.base.log
 
 import android.content.Context
+import com.leovp.feature.base.GlobalConst
 import com.leovp.log.base.AbsLog
 import com.leovp.log.base.LogOutType
-import com.leovp.module.common.GlobalConst
 import com.tencent.mars.xlog.Log
 import com.tencent.mars.xlog.Xlog
 import java.io.File
