@@ -10,7 +10,8 @@ plugins {
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.kotlin.parcelize) // id("kotlin-parcelize")
 
-    alias(libs.plugins.ksp)
+    // alias(libs.plugins.ksp)
+    // alias(libs.plugins.hilt)
 
     alias(libs.plugins.android.junit5)
 
@@ -74,17 +75,14 @@ composeCompiler {
 }
 
 dependencies {
-    api(platform(libs.androidx.compose.bom))
-    // Material Design 3
-    api(libs.androidx.material3)
-    api(libs.bundles.androidx.compose)
-    // Android Studio Preview support
-    api(libs.androidx.compose.ui.tooling.preview)
-    // api(libs.androidx.compose.ui.graphics)
-    debugImplementation(libs.androidx.compose.ui.tooling)
-    debugImplementation(libs.androidx.compose.ui.test.manifest)
+    // api(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar", "*.aar"))))
 
-    api(libs.androidx.lifecycle.runtime.compose)
+    api(projects.libFramework)
+
+    api(libs.leo.floatview)
+
+    api(libs.karn.notify)
+    api(libs.coil.kt.compose)
     // ----------
 
     // hilt - start
@@ -94,29 +92,5 @@ dependencies {
     // ksp(libs.hilt.compiler)
     // hilt - end
 
-    implementation(libs.bundles.kotlin)
-
-    api(libs.leo.androidbase)
-    api(libs.leo.pref)
-    api(libs.leo.log)
-    api(libs.leo.floatview)
-    api(libs.leo.lib.json)
-
-    api(libs.mars.xlog)
-    api(libs.karn.notify)
-
     // ----------
-    api(libs.androidx.navigation.compose)
-    api(libs.androidx.compose.material.iconsExtended)
-
-    // ==============================
-    testImplementation(libs.bundles.test)
-    testRuntimeOnly(libs.bundles.test.runtime.only)
-    androidTestImplementation(libs.bundles.test)
-    androidTestImplementation(libs.bundles.android.test)
-    // ==============================
-    // The instrumentation test companion libraries
-    androidTestImplementation(libs.mannodermaus.junit5.core)
-    androidTestRuntimeOnly(libs.mannodermaus.junit5.runner)
-    // ==============================
 }

@@ -99,6 +99,7 @@ dependencyResolutionManagement {
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
 include(
-    "app",
-    "feature_common"
+    ":lib_framework",
+    "feature_common",
+    "app"
 )

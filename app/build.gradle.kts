@@ -14,6 +14,7 @@ plugins {
 
     // Add ksp only if you use ksp() in dependencies {}
     // alias(libs.plugins.ksp)
+    // alias(libs.plugins.hilt)
 
     // https://github.com/mannodermaus/android-junit5
     alias(libs.plugins.android.junit5)
@@ -221,20 +222,21 @@ fun gitVersionTag(): String {
             commandLine = cmd.trim().split(' ')
             standardOutput = stdout
         }
-    }.getOrDefault(null) ?: return "NA"
-    var versionTag = stdout.toString().trim()
+    }.getOrDefault("NA")
 
-    val regex = "-(\\d+)-g".toRegex()
-    val matcher: MatchResult? = regex.matchEntire(versionTag)
+    return runCatching {
+        var versionTag = stdout.toString().trim()
 
-    val matcherGroup0: MatchGroup? = matcher?.groups?.get(0)
-    versionTag = if (matcher?.value?.isNotBlank() == true && matcherGroup0?.value?.isNotBlank() == true) {
-        versionTag.substring(0, matcherGroup0.range.first) + "." + matcherGroup0.value
-    } else {
-        versionTag
-    }
+        val regex = "-(\\d+)-g".toRegex()
+        val matcher: MatchResult? = regex.matchEntire(versionTag)
 
-    return versionTag
+        val matcherGroup0: MatchGroup? = matcher?.groups?.get(0)
+        if (matcher?.value?.isNotBlank() == true && matcherGroup0?.value?.isNotBlank() == true) {
+            versionTag.substring(0, matcherGroup0.range.first) + "." + matcherGroup0.value
+        } else {
+            versionTag
+        }
+    }.getOrDefault("NA")
 }
 
 fun Project.getSignProperty(key: String, path: String = "config/sign/keystore.properties"): String {
@@ -242,17 +244,31 @@ fun Project.getSignProperty(key: String, path: String = "config/sign/keystore.pr
 }
 
 dependencies {
+    // implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar", "*.aar"))))
+
+    implementation(libs.xx.permissions)
+
+    implementation(libs.androidx.multidex)
+    implementation(libs.androidx.navigation.compose)
+
     // By using `projects`, you need to enable `enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")`
     // in `settings.gradle.kts` where in your root folder.
     implementation(projects.featureCommon)
 
-    implementation(libs.coil.kt.compose)
+    // hilt - start
+    // implementation(libs.hilt.android)
+    // implementation(libs.androidx.hilt.navigation.compose)
+    // // implementation(libs.ksp.symbol.processing.api)
+    // ksp(libs.hilt.compiler)
+    // hilt - end
 
     // ==============================
+    implementation(libs.compose.runtime.tracing)
     testImplementation(libs.bundles.test)
-    testRuntimeOnly(libs.bundles.test.runtime.only)
-    androidTestImplementation(libs.bundles.test)
+    // testRuntimeOnly(libs.bundles.test.runtime.only)
+    // androidTestImplementation(libs.bundles.test)
     androidTestImplementation(libs.bundles.android.test)
+    androidTestImplementation(platform(libs.androidx.compose.bom))
     // ==============================
     // The instrumentation test companion libraries
     // https://github.com/mannodermaus/android-junit5
