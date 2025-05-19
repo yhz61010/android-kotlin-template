@@ -59,6 +59,7 @@ captures/
 /.idea/studiobot.xml
 /.idea/AndroidProjectSystem.xml
 /.idea/runConfigurations.xml
+/.idea/markdown.xml
 
 # Keystore files
 # Uncomment the following lines if you do not want to check your keystore files in.
