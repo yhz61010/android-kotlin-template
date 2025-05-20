@@ -6,11 +6,20 @@ import coil.ImageLoader
 import coil.ImageLoaderFactory
 import coil.compose.AsyncImage
 import coil.disk.DiskCache
+import com.drake.net.NetConfig.app
+import com.leovp.feature.base.GlobalConst
+import com.leovp.feature.base.log.MarsXLog
+import com.leovp.framework.common.pref.MMKVPref
+import com.leovp.log.LogContext
+import com.leovp.pref.PrefContext
+import dagger.hilt.android.HiltAndroidApp
 
 /**
  * Author: Michael Leo
  * Date: 2023/7/6 15:52
  */
+
+@HiltAndroidApp
 class CustomApplication : MultiDexApplication(), ImageLoaderFactory {
     companion object {
         private const val TAG = "CA"
@@ -18,7 +27,13 @@ class CustomApplication : MultiDexApplication(), ImageLoaderFactory {
 
     override fun onCreate() {
         super.onCreate()
-        InitManager.init(this)
+
+        // Log must be initialized first.
+        LogContext.setLogImpl(MarsXLog("AOS").apply {
+            @Suppress("SENSELESS_COMPARISON")
+            init(this@CustomApplication, GlobalConst.CONSOLE_LOG_OPEN)
+        })
+        PrefContext.setPrefImpl(MMKVPref(this@CustomApplication))
     }
 
     /**

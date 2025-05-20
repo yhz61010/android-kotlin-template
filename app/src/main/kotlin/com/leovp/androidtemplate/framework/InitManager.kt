@@ -1,6 +1,7 @@
 package com.leovp.androidtemplate.framework
 
 import android.app.Application
+import android.os.SystemClock
 import androidx.core.app.NotificationCompat
 import com.drake.net.NetConfig
 import com.leovp.android.exts.LeoToast
@@ -12,6 +13,7 @@ import com.leovp.feature.base.CrashHandler
 import com.leovp.feature.base.GlobalConst
 import com.leovp.feature.base.log.MarsXLog
 import com.leovp.framework.common.pref.MMKVPref
+import com.leovp.framework.common.utils.w
 import com.leovp.pref.LPref
 import com.leovp.pref.PrefContext
 import io.karn.notify.Notify
@@ -20,8 +22,12 @@ import io.karn.notify.Notify
  * Author: Michael Leo
  * Date: 2021/10/11 11:02
  */
+
+private const val TAG = "IM"
+
 object InitManager {
     fun init(app: Application) {
+        val st = SystemClock.elapsedRealtime()
         CrashHandler.initCrashHandler(app)
 
         @Suppress("SENSELESS_COMPARISON")
@@ -31,13 +37,6 @@ object InitManager {
                 R.mipmap.app_ic_launcher_round
             )
         )
-
-        // Log must be initialized first.
-        LogContext.setLogImpl(MarsXLog("AOS").apply {
-            @Suppress("SENSELESS_COMPARISON")
-            init(app, GlobalConst.CONSOLE_LOG_OPEN)
-        })
-        PrefContext.setPrefImpl(MMKVPref(app))
 
         closeAndroidPDialog()
 
@@ -59,5 +58,7 @@ object InitManager {
                 channelImportance = Notify.IMPORTANCE_LOW
             }
         }
+        val ed = SystemClock.elapsedRealtime()
+        w(TAG) { "Initialize manager cost: ${ed - st}ms" }
     }
 }

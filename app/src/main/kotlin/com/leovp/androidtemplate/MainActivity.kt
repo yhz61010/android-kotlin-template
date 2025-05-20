@@ -18,10 +18,20 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.core.view.WindowCompat
+import com.leovp.androidtemplate.framework.InitManager
+import com.leovp.feature.base.http.RequestUtil
 import com.leovp.feature.base.ui.theme.ImmersiveTheme
+import com.leovp.framework.common.utils.d
+import dagger.hilt.android.AndroidEntryPoint
 
+private const val TAG = "MA"
+
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
+        d(TAG) { "=====> Enter MainActivity <=====" }
+        InitManager.init(application)
+        // RequestUtil.initNetEngine(baseUrl = BuildConfig.DOMAIN_LINK)
         super.onCreate(savedInstanceState)
         // This app draws behind the system bars, so we want to handle fitting system windows
         WindowCompat.setDecorFitsSystemWindows(window, false)

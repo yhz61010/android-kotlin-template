@@ -4,7 +4,6 @@ import com.android.build.gradle.internal.dsl.DefaultConfig
 import com.github.benmanes.gradle.versions.updates.DependencyUpdatesTask
 import io.gitlab.arturbosch.detekt.Detekt
 import java.util.Locale
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import org.jlleitschuh.gradle.ktlint.KtlintExtension
 
 // =====================================
@@ -340,7 +339,7 @@ fun Project.configureLibrary(): BaseExtension = configureBase().apply {
     }
     buildTypes {
         getByName("release") {
-            isMinifyEnabled = true
+            isMinifyEnabled = false
         }
 
         getByName("debug") {
@@ -373,7 +372,7 @@ tasks.withType<Detekt>().configureEach {
  * Note that this task is intended to run locally (not on CI), because on CI we prefer to have parallel execution
  * and separate reports for each of the checks (multiple statuses eg. on github PR page).
  */
-task("staticCheck") {
+tasks.register("staticCheck", fun Task.() {
     group = "verification"
 
     afterEvaluate {
@@ -393,7 +392,7 @@ task("staticCheck") {
         // By defining Gradle dependency all dependent tasks will run before this "empty" task
         dependsOn(taskDependencies)
     }
-}
+})
 
 // https://github.com/ben-manes/gradle-versions-plugin
 tasks.withType<DependencyUpdatesTask> {
@@ -412,6 +411,7 @@ fun isNonStable(version: String): Boolean {
 // --------------------------------------
 
 /** Takes value from Gradle project property and sets it as build config property. */
+@Suppress("unused")
 fun BaseFlavor.buildConfigFieldFromGradleProperty(gradlePropertyName: String) {
     val propertyValue = project.properties[gradlePropertyName] as? String
     checkNotNull(propertyValue) { "Gradle property $gradlePropertyName is null" }
@@ -423,6 +423,7 @@ fun BaseFlavor.buildConfigFieldFromGradleProperty(gradlePropertyName: String) {
 fun String.toSnakeCase() = this.split(Regex("(?=[A-Z])")).joinToString("_") { it.lowercase(Locale.getDefault()) }
 
 /* Adds a new field to the generated BuildConfig class. */
+@Suppress("unused")
 fun DefaultConfig.buildConfigField(name: String, value: Array<String>) {
     // Create String that holds Java String Array code
     val strValue = value.joinToString(prefix = "{", separator = ",", postfix = "}", transform = { "\"$it\"" })

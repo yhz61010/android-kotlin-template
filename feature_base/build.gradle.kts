@@ -1,6 +1,3 @@
-import com.android.build.api.dsl.LibraryDefaultConfig
-import java.util.Locale
-
 apply(from = "../jacoco.gradle.kts")
 
 // https://docs.gradle.org/current/userguide/plugins.html#sec:subprojects_plugins_dsl
@@ -10,8 +7,8 @@ plugins {
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.kotlin.parcelize) // id("kotlin-parcelize")
 
-    // alias(libs.plugins.ksp)
-    // alias(libs.plugins.hilt)
+    alias(libs.plugins.ksp)
+    alias(libs.plugins.hilt)
 
     alias(libs.plugins.android.junit5)
 
@@ -74,10 +71,10 @@ dependencies {
     // ----------
 
     // hilt - start
-    // implementation(libs.hilt.android)
-    // implementation(libs.androidx.hilt.navigation.compose)
-    // // implementation(libs.ksp.symbol.processing.api)
-    // ksp(libs.hilt.compiler)
+    implementation(libs.hilt.android)
+    implementation(libs.androidx.hilt.navigation.compose)
+    // implementation(libs.ksp.symbol.processing.api)
+    ksp(libs.hilt.compiler)
     // hilt - end
 
     // ----------

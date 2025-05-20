@@ -1,4 +1,3 @@
-import java.io.ByteArrayOutputStream
 import java.util.*
 
 // https://developer.android.com/studio/build?hl=zh-cn#module-level
@@ -13,8 +12,8 @@ plugins {
     alias(libs.plugins.kotlin.parcelize) // id("kotlin-parcelize")
 
     // Add ksp only if you use ksp() in dependencies {}
-    // alias(libs.plugins.ksp)
-    // alias(libs.plugins.hilt)
+    alias(libs.plugins.ksp)
+    alias(libs.plugins.hilt)
 
     // https://github.com/mannodermaus/android-junit5
     alias(libs.plugins.android.junit5)
@@ -182,19 +181,16 @@ composeCompiler {
 }
 
 // 获取当前分支的提交总次数
-fun gitCommitCount(): Int {
+fun gitCommitCount(): String {
 //    val cmd = 'git rev-list HEAD --first-parent --count'
     val cmd = "git rev-list HEAD --count"
 
-    val stdout = ByteArrayOutputStream()
-    runCatching {
-        exec {
+    return runCatching {
+        // You must trim() the result. Because the result of command has a suffix '\n'.
+        providers.exec {
             commandLine = cmd.trim().split(' ')
-            standardOutput = stdout
-        }
-    }.getOrDefault(0)
-    // You must trim() the result. Because the result of command has a suffix '\n'.
-    return stdout.toString().trim().toInt()
+        }.standardOutput.asText.get().trim()
+    }.getOrDefault("NA")
 }
 
 // 使用commit的哈希值作为版本号也是可以的，获取最新的一次提交的哈希值的前七个字符
@@ -216,17 +212,14 @@ fun gitVersionTag(): String {
 //    val cmd = "git describe --tags"
     val cmd = "git describe --always"
 
-    val stdout = ByteArrayOutputStream()
-    runCatching {
-        exec {
+    val versionTag = runCatching {
+        // You must trim() the result. Because the result of command has a suffix '\n'.
+        providers.exec {
             commandLine = cmd.trim().split(' ')
-            standardOutput = stdout
-        }
+        }.standardOutput.asText.get().trim()
     }.getOrDefault("NA")
 
     return runCatching {
-        var versionTag = stdout.toString().trim()
-
         val regex = "-(\\d+)-g".toRegex()
         val matcher: MatchResult? = regex.matchEntire(versionTag)
 
@@ -256,10 +249,10 @@ dependencies {
     implementation(projects.featureBase)
 
     // hilt - start
-    // implementation(libs.hilt.android)
-    // implementation(libs.androidx.hilt.navigation.compose)
-    // // implementation(libs.ksp.symbol.processing.api)
-    // ksp(libs.hilt.compiler)
+    implementation(libs.hilt.android)
+    implementation(libs.androidx.hilt.navigation.compose)
+    // implementation(libs.ksp.symbol.processing.api)
+    ksp(libs.hilt.compiler)
     // hilt - end
 
     // ==============================
