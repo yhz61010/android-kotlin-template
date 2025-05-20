@@ -9,6 +9,7 @@ import com.leovp.framework.common.utils.i
  * Author: Michael Leo
  * Date: 2025/3/24 08:48
  */
+@Suppress("TooManyFunctions")
 class MMKVPref(ctx: Context) : AbsPref() {
     init {
         val mmkvRootDir: String = MMKV.initialize(ctx)

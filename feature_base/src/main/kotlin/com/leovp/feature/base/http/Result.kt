@@ -81,7 +81,7 @@ inline fun <T> Result<T>.onFailure(action: (exception: ApiException) -> Unit): R
 
 inline fun <T, R> Result<T>.fold(
     onSuccess: (value: T) -> R,
-    onFailure: (exception: ApiException) -> R,
+    onFailure: (exception: ApiException) -> R
 ): R {
     return when (val exception = exceptionOrNull()) {
         null -> onSuccess((this as Result.Success<T>).data)
@@ -103,7 +103,7 @@ inline fun <T, R> Result<T>.fold(
  */
 suspend inline fun <reified R> result(
     dispatcher: CoroutineDispatcher = Dispatchers.Main,
-    crossinline block: suspend CoroutineScope.() -> R,
+    crossinline block: suspend CoroutineScope.() -> R
 ): Result<R> = supervisorScope {
     runCatching {
         Result.Success(withContext(dispatcher) { block() })

@@ -19,7 +19,6 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.core.view.WindowCompat
 import com.leovp.androidtemplate.framework.InitManager
-import com.leovp.feature.base.http.RequestUtil
 import com.leovp.feature.base.ui.theme.ImmersiveTheme
 import com.leovp.framework.common.utils.d
 import dagger.hilt.android.AndroidEntryPoint
@@ -59,7 +58,7 @@ fun MainScreen(modifier: Modifier = Modifier) {
             .fillMaxWidth()
             .clip(shape = MaterialTheme.shapes.medium),
         alignment = Alignment.TopStart,
-        contentScale = ContentScale.FillWidth,
+        contentScale = ContentScale.FillWidth
     )
 }
 

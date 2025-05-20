@@ -61,6 +61,7 @@ private class RecomposeHighlighterElement : ModifierNodeElement<RecomposeHighlig
     }
 
     // It's never equal, so that every recomposition triggers the update function.
+    @Suppress("EqualsAlwaysReturnsTrueOrFalse")
     override fun equals(other: Any?): Boolean = false
 
     override fun hashCode(): Int = Objects.hash(this)

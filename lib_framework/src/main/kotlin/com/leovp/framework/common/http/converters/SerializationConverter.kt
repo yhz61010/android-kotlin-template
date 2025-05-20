@@ -5,8 +5,8 @@ import com.drake.net.exception.ConvertException
 import com.drake.net.exception.RequestParamsException
 import com.drake.net.exception.ServerResponseException
 import com.drake.net.request.kType
-import java.lang.reflect.Type
 import com.leovp.framework.common.utils.e
+import java.lang.reflect.Type
 import kotlin.reflect.KType
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.json.Json
@@ -38,8 +38,6 @@ class SerializationConverter : NetConverter {
             }
             when {
                 code in 200..299 -> {
-                    val bodyString = response.body?.string() ?: return null
-
                     // multiCatch(
                     //     runBlock = {
                     //         // Business error.
@@ -52,10 +50,12 @@ class SerializationConverter : NetConverter {
                     //     )
                     // )
 
-                    val kType = response.request.kType ?: throw ConvertException(
-                        response, "Request does not contain KType"
-                    )
-                    return bodyString.parseBody<R>(kType)
+                    return response.body?.string()?.let { bodyString ->
+                        val kType = response.request.kType ?: throw ConvertException(
+                            response, "Request does not contain KType"
+                        )
+                        bodyString.parseBody<R>(kType)
+                    }
                 }
 
                 code in 400..499 -> throw RequestParamsException(response, code.toString(), e)

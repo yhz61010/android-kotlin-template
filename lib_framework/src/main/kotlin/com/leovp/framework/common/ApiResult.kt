@@ -1,9 +1,9 @@
 package com.leovp.framework.common
 
 /**
-  * Author: Michael Leo
-  * Date: 2023/9/13 16:03
-  */
+ * Author: Michael Leo
+ * Date: 2023/9/13 16:03
+ */
 sealed interface ApiResult<out T> {
 
     /**

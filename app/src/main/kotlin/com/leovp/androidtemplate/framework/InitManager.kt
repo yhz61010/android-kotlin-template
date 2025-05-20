@@ -3,19 +3,13 @@ package com.leovp.androidtemplate.framework
 import android.app.Application
 import android.os.SystemClock
 import androidx.core.app.NotificationCompat
-import com.drake.net.NetConfig
 import com.leovp.android.exts.LeoToast
 import com.leovp.android.ui.ForegroundComponent
 import com.leovp.androidbase.exts.android.closeAndroidPDialog
 import com.leovp.androidtemplate.R
-import com.leovp.log.LogContext
 import com.leovp.feature.base.CrashHandler
 import com.leovp.feature.base.GlobalConst
-import com.leovp.feature.base.log.MarsXLog
-import com.leovp.framework.common.pref.MMKVPref
 import com.leovp.framework.common.utils.w
-import com.leovp.pref.LPref
-import com.leovp.pref.PrefContext
 import io.karn.notify.Notify
 
 /**

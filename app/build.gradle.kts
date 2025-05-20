@@ -219,17 +219,15 @@ fun gitVersionTag(): String {
         }.standardOutput.asText.get().trim()
     }.getOrDefault("NA")
 
-    return runCatching {
-        val regex = "-(\\d+)-g".toRegex()
-        val matcher: MatchResult? = regex.matchEntire(versionTag)
+    val regex = "-(\\d+)-g".toRegex()
+    val matcher: MatchResult? = regex.matchEntire(versionTag)
 
-        val matcherGroup0: MatchGroup? = matcher?.groups?.get(0)
-        if (matcher?.value?.isNotBlank() == true && matcherGroup0?.value?.isNotBlank() == true) {
-            versionTag.substring(0, matcherGroup0.range.first) + "." + matcherGroup0.value
-        } else {
-            versionTag
-        }
-    }.getOrDefault("NA")
+    val matcherGroup0: MatchGroup? = matcher?.groups?.get(0)
+    return if (matcher?.value?.isNotBlank() == true && matcherGroup0?.value?.isNotBlank() == true) {
+        versionTag.substring(0, matcherGroup0.range.first) + "." + matcherGroup0.value
+    } else {
+        versionTag
+    }
 }
 
 fun Project.getSignProperty(key: String, path: String = "config/sign/keystore.properties"): String {

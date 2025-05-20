@@ -12,6 +12,7 @@ import java.io.File
  * Author: Michael Leo
  * Date: 2023/7/6 15:54
  */
+@Suppress("TooManyFunctions")
 class MarsXLog(prefix: String) : AbsLog(prefix) {
 
     companion object {

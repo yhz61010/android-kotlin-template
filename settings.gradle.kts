@@ -17,7 +17,7 @@ pluginManagement {
         // Tencent Gradle mirrors
         maven { url = uri("https://mirrors.cloud.tencent.com/nexus/repository/gradle-plugins/") }
         maven { url = uri("https://mirrors.tuna.tsinghua.edu.cn/maven") }
-        // Aliyun Gradle mirrors
+        // AliYun Gradle mirrors
         maven { url = uri("https://maven.aliyun.com/repository/gradle-plugin") }
 
         gradlePluginPortal()
@@ -67,10 +67,10 @@ dependencyResolutionManagement {
      * template that requires some).
      */
 
-    @Suppress ("UnstableApiUsage")
+    @Suppress("UnstableApiUsage")
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
 
-    @Suppress ("UnstableApiUsage")
+    @Suppress("UnstableApiUsage")
     repositories {
         maven("https://jitpack.io")
 
@@ -90,7 +90,6 @@ dependencyResolutionManagement {
         mavenCentral {
             isAllowInsecureProtocol = true
         }
-        maven("https://maven.aliyun.com/repository/public")
     }
 }
 

@@ -6,7 +6,6 @@ import coil.ImageLoader
 import coil.ImageLoaderFactory
 import coil.compose.AsyncImage
 import coil.disk.DiskCache
-import com.drake.net.NetConfig.app
 import com.leovp.feature.base.GlobalConst
 import com.leovp.feature.base.log.MarsXLog
 import com.leovp.framework.common.pref.MMKVPref
@@ -29,10 +28,12 @@ class CustomApplication : MultiDexApplication(), ImageLoaderFactory {
         super.onCreate()
 
         // Log must be initialized first.
-        LogContext.setLogImpl(MarsXLog("AOS").apply {
-            @Suppress("SENSELESS_COMPARISON")
-            init(this@CustomApplication, GlobalConst.CONSOLE_LOG_OPEN)
-        })
+        LogContext.setLogImpl(
+            MarsXLog("AOS").apply {
+                @Suppress("SENSELESS_COMPARISON")
+                init(this@CustomApplication, GlobalConst.CONSOLE_LOG_OPEN)
+            }
+        )
         PrefContext.setPrefImpl(MMKVPref(this@CustomApplication))
     }
 

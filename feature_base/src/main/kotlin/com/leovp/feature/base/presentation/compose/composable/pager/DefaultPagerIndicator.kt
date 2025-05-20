@@ -25,13 +25,13 @@ import androidx.compose.ui.unit.dp
 fun DefaultPagerIndicator(
     modifier: Modifier = Modifier,
     currentPageIndex: Int,
-    pageCount: Int,
+    pageCount: Int
 ) {
     Row(
         modifier = modifier
             .fillMaxWidth()
             .padding(horizontal = 26.dp, vertical = 10.dp),
-        verticalAlignment = Alignment.CenterVertically,
+        verticalAlignment = Alignment.CenterVertically
     ) {
         repeat(pageCount) { index ->
             Box(
@@ -43,7 +43,7 @@ fun DefaultPagerIndicator(
                         if (index == currentPageIndex) RoundedCornerShape(2.dp) else CircleShape
                     )
                     .background(
-                        color = if (index == currentPageIndex) Color.White else Color.LightGray,
+                        color = if (index == currentPageIndex) Color.White else Color.LightGray
                         // shape = if (index == pageCountIndex) {
                         //     RoundedCornerShape(2.dp)
                         // } else {

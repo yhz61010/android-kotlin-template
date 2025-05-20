@@ -18,7 +18,7 @@ object RequestUtil {
     fun initNetEngine(
         baseUrl: String,
         context: Context? = null,
-        headerMap: Map<String, String>? = null,
+        headerMap: Map<String, String>? = null
     ) {
         NetConfig.initialize(baseUrl, context) {
             connectTimeout(20, TimeUnit.SECONDS)
@@ -33,7 +33,8 @@ object RequestUtil {
             )
             addInterceptor(
                 HttpLoggingInterceptor()
-                    .apply { level = HttpLoggingInterceptor.Level.BODY })
+                    .apply { level = HttpLoggingInterceptor.Level.BODY }
+            )
             addInterceptor(RetryInterceptor(3))
             // setConverter(GsonConverter())
             setConverter(SerializationConverter())

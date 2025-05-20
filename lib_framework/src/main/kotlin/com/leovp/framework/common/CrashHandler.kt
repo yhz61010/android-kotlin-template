@@ -5,9 +5,9 @@ import com.leovp.android.exts.toast
 import com.leovp.log.LogContext
 
 /**
-  * Author: Michael Leo
-  * Date: 2025/3/21 13:42
-  */
+ * Author: Michael Leo
+ * Date: 2025/3/21 13:42
+ */
 object CrashHandler : Thread.UncaughtExceptionHandler {
     private const val TAG = "crash"
 

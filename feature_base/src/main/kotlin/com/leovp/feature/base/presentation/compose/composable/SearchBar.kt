@@ -37,6 +37,7 @@ import com.leovp.framework.common.utils.previewInitLog
 
 private val iconSize = 19.dp
 
+@Suppress("LongParameterList")
 @Composable
 fun SearchBar(
     modifier: Modifier = Modifier,
@@ -67,7 +68,8 @@ fun SearchBar(
             rowModifier = rowModifier.background(brush = it, shape = CircleShape)
         }
         Row(
-            verticalAlignment = Alignment.CenterVertically, modifier = rowModifier
+            verticalAlignment = Alignment.CenterVertically,
+            modifier = rowModifier
         ) {
             Spacer(Modifier.width(containerHorizontalPadding))
             if (searchIndicatorIcon != null) {
@@ -85,13 +87,13 @@ fun SearchBar(
                 color = if (isSystemInDarkTheme()) MaterialTheme.colorScheme.onSurfaceVariant else Color.Gray,
                 style = MaterialTheme.typography.bodyMedium,
                 maxLines = 1,
-                overflow = TextOverflow.Ellipsis,
+                overflow = TextOverflow.Ellipsis
             )
             if (actionIcon != null) {
                 Spacer(Modifier.width(8.dp))
                 IconButton(
                     onClick = onActionClick,
-                    modifier = Modifier.requiredSize(iconSize),
+                    modifier = Modifier.requiredSize(iconSize)
                 ) {
                     Icon(
                         painter = actionIcon,
@@ -112,13 +114,14 @@ val defaultLinearGradient: Brush
     get() = Brush.linearGradient(
         listOf(
             discoverySearchBarStartColor,
-            discoverySearchBarEndColor,
+            discoverySearchBarEndColor
         ),
         start = Offset(Float.POSITIVE_INFINITY, 0f),
         end = Offset(0f, Float.POSITIVE_INFINITY),
         tileMode = TileMode.Clamp
     )
 
+@Suppress("unused")
 @Preview("Searchbar")
 @Preview("Searchbar (dark)", uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
@@ -129,10 +132,10 @@ private fun PreviewSearchBar() {
         searchText = "Wellerman Nathan Evans",
         border = BorderStroke(
             width = 0.5.dp,
-            brush = defaultLinearGradient,
+            brush = defaultLinearGradient
         ),
         backgroundBrush = defaultLinearGradient,
         onClick = {},
-        onActionClick = {},
+        onActionClick = {}
     )
 }

@@ -29,7 +29,7 @@ import androidx.lifecycle.compose.LocalLifecycleOwner
 @Composable
 fun OnLifecycleEvent(
     lifecycleEvent: Lifecycle.Event,
-    onEvent: () -> Unit,
+    onEvent: () -> Unit
 ) {
     val currentOnEvent by rememberUpdatedState(onEvent)
 

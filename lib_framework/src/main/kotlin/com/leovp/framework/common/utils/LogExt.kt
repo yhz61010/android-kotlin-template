@@ -2,7 +2,6 @@
 
 package com.leovp.framework.common.utils
 
-import android.util.Log
 import com.leovp.framework.BuildConfig
 import com.leovp.log.LogContext
 import com.leovp.log.base.LogOutType

@@ -104,6 +104,7 @@ class HttpLoggingInterceptor(private val logger: Logger = Logger.DEFAULT) :
     @Volatile
     var level = Level.NONE
 
+    @Suppress("LongMethod", "CyclomaticComplexMethod", "NestedBlockDepth", "TooGenericExceptionCaught")
     @Throws(IOException::class)
     override fun intercept(chain: Interceptor.Chain): Response {
         val level = level
@@ -120,8 +121,10 @@ class HttpLoggingInterceptor(private val logger: Logger = Logger.DEFAULT) :
         var hasBoundary = false
         logger.log("──────────────────────────────────────────────────────────")
         var requestStartMessage = "--> ${request.method} ${request.url} $protocol"
-        if (!logHeaders && hasRequestBody) requestStartMessage =
-            "$requestStartMessage (${requestBody.contentLength()}-byte body)"
+        if (!logHeaders && hasRequestBody) {
+            requestStartMessage =
+                "$requestStartMessage (${requestBody.contentLength()}-byte body)"
+        }
         logger.log(requestStartMessage)
         if (logHeaders) {
             if (hasRequestBody) {
@@ -270,7 +273,7 @@ class HttpLoggingInterceptor(private val logger: Logger = Logger.DEFAULT) :
                     }
                 }
                 true
-            }.getOrDefault(false /* Truncated UTF-8 sequence. */)
+            }.getOrDefault(false) // Truncated UTF-8 sequence.
         }
     }
 }

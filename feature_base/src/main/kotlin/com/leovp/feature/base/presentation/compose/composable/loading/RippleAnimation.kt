@@ -32,10 +32,9 @@ fun RippleAnimation(
     size: Dp = 60.dp,
     animationDelay: Int = 30
 ) {
-
     val circles = listOf(
         remember { Animatable(initialValue = 0f) },
-        remember { Animatable(initialValue = 0f) },
+        remember { Animatable(initialValue = 0f) }
         // remember { Animatable(initialValue = 0f) }
     )
 
@@ -58,9 +57,11 @@ fun RippleAnimation(
     }
 
     // outer circle
-    Box(modifier = Modifier
-        .size(size = size)
-        .background(color = Color.Transparent)) {
+    Box(
+        modifier = Modifier
+            .size(size = size)
+            .background(color = Color.Transparent)
+    ) {
         // animating circles
         circles.forEachIndexed { _, animatable ->
             Box(
