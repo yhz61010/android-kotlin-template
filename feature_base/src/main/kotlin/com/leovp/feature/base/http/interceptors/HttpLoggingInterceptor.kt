@@ -92,7 +92,10 @@ class HttpLoggingInterceptor(private val logger: Logger = Logger.DEFAULT) :
              */
             val DEFAULT: Logger = object : Logger {
                 override fun log(message: String?, outputType: LogOutType) {
-                    w(TAG, outputType = outputType) { message }
+                    w(TAG) {
+                        this.outputType = outputType
+                        message
+                    }
                 }
             }
         }

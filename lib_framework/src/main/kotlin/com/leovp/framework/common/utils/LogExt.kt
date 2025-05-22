@@ -11,72 +11,72 @@ import com.leovp.log.base.LogOutType
  * Date: 2023/9/19 16:08
  */
 
-inline fun d(
-    tag: String = "",
-    throwable: Throwable? = null,
-    fullOutput: Boolean = false,
-    outputType: LogOutType = LogOutType.COMMON,
-    generateMsg: () -> Any?
-) {
+interface ILogConfig {
+    var throwable: Throwable?
+    var fullOutput: Boolean
+    var outputType: LogOutType
+}
+
+class LogConfig : ILogConfig {
+    override var throwable: Throwable? = null
+    override var fullOutput: Boolean = false
+    override var outputType: LogOutType = LogOutType.COMMON
+    lateinit var message: () -> String?
+}
+
+class LogConfig4Debug : ILogConfig {
+    override var throwable: Throwable? = null
+    override var fullOutput: Boolean = false
+    override var outputType: LogOutType = LogOutType.COMMON
+    lateinit var generateMsg: () -> Any?
+}
+
+inline fun d(tag: String = "", config: LogConfig4Debug.() -> Unit) {
+    val logConfig = LogConfig4Debug().apply(config)
     @Suppress("SENSELESS_COMPARISON")
     if (BuildConfig.DEBUG_MODE) {
-        val ret = generateMsg()
+        val ret = logConfig.generateMsg()
         if (ret is String?) {
             LogContext.log.d(
                 tag = tag,
                 message = ret,
-                fullOutput = fullOutput,
-                throwable = throwable,
-                outputType = outputType
+                fullOutput = logConfig.fullOutput,
+                throwable = logConfig.throwable,
+                outputType = logConfig.outputType
             )
         }
     }
 }
 
-inline fun i(
-    tag: String = "",
-    throwable: Throwable? = null,
-    fullOutput: Boolean = false,
-    outputType: LogOutType = LogOutType.COMMON,
-    generateMsg: () -> String?
-) {
+inline fun i(tag: String = "", config: LogConfig.() -> Unit) {
+    val logConfig = LogConfig().apply(config)
     LogContext.log.i(
         tag = tag,
-        message = generateMsg(),
-        fullOutput = fullOutput,
-        throwable = throwable,
-        outputType = outputType
+        message = logConfig.message(),
+        fullOutput = logConfig.fullOutput,
+        throwable = logConfig.throwable,
+        outputType = logConfig.outputType
     )
 }
 
-inline fun w(
-    tag: String = "",
-    throwable: Throwable? = null,
-    fullOutput: Boolean = false,
-    outputType: LogOutType = LogOutType.COMMON,
-    generateMsg: () -> String?
-) {
+inline fun w(tag: String = "", config: LogConfig.() -> Unit) {
+    val logConfig = LogConfig().apply(config)
     LogContext.log.w(
         tag = tag,
-        message = generateMsg(),
-        fullOutput = fullOutput,
-        throwable = throwable,
-        outputType = outputType
+        message = logConfig.message(),
+        fullOutput = logConfig.fullOutput,
+        throwable = logConfig.throwable,
+        outputType = logConfig.outputType
     )
 }
 
-inline fun e(
-    tag: String = "",
-    throwable: Throwable? = null,
-    fullOutput: Boolean = false,
-    outputType: LogOutType = LogOutType.COMMON,
-    generateMsg: () -> String?
-) {
+inline fun e(tag: String = "", config: LogConfig.() -> Unit) {
+    val logConfig = LogConfig().apply(config)
     LogContext.log.e(
         tag = tag,
-        message = generateMsg(),
-        fullOutput = fullOutput,
-        throwable = throwable,
-        outputType = outputType
+        message = logConfig.message(),
+        fullOutput = logConfig.fullOutput,
+        throwable = logConfig.throwable,
+        outputType = logConfig.outputType
     )
 }

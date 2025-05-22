@@ -15,7 +15,8 @@ class HeaderInterceptor(private val headerMap: Map<String, String>? = null) : In
         val request = headerMap?.let { headers ->
             val builder = it.newBuilder()
             for ((k, v) in headers) {
-                d(tag = "Interceptor", outputType = LogOutType.Companion.HTTP_HEADER) {
+                d(tag = "Interceptor") {
+                    outputType = LogOutType.Companion.HTTP_HEADER
                     "Assign cookie: $k=$v"
                 }
                 builder.addHeader(k, v)

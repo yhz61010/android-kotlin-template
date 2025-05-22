@@ -34,7 +34,10 @@ class SerializationConverter : NetConverter {
         } catch (e: ConvertException) {
             val code = response.code
             if (e.cause != null) {
-                e("onConvert", throwable = e.cause) { "onConvert exception. Code: $code" }
+                e("onConvert") {
+                    throwable = e.cause
+                    "onConvert exception. Code: $code"
+                }
             }
             when {
                 code in 200..299 -> {
