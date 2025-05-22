@@ -7,6 +7,9 @@
 [![Compatibility Java Version](https://img.shields.io/badge/Compatibility_Java_-17-green)](https://www.oracle.com/java/technologies/javase/jdk11-archive-downloads.html)
 [![NDK](https://img.shields.io/badge/NDK-25.2.9519653-green)](https://developer.android.com/ndk/downloads)
 
+[![codebeat badge](https://codebeat.co/badges/f7763187-802e-4ac3-a685-8c1417577315)](https://codebeat.co/projects/github-com-yhz61010-android-kotlin-template-main)
+[![CodeFactor](https://www.codefactor.io/repository/github/yhz61010/android-kotlin-template/badge)](https://www.codefactor.io/repository/github/yhz61010/android-kotlin-template)
+
 A pure Android kotlin template project that let you create Android Kotlin project.
 
 Using `Android + Kotlin + ktlint + Detekt + Gradle Kotlin DSL + Version Catalog(TOML)`
