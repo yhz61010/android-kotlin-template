@@ -34,12 +34,12 @@ versionCode = "1"
 # @keep
 versionName = "1.0.0"
 
-leo-version = "5.12.49"
+leo-version = "5.12.66"
 
 #===================
 #===== Compile =====
 #===================
-agp = "8.10.0"
+agp = "8.10.1"
 kotlin = "2.1.21"
 ksp = "2.1.21-2.0.1"
 
@@ -61,7 +61,7 @@ androidx-constraintlayout = "1.1.1"
 
 core-ktx = "1.16.0"
 #lifecycle = "2.8.7" # https://stackoverflow.com/a/78490417/6091500
-coroutines = "1.10.2"
+coroutines = "2.0.21-coroutines-KBA-001"
 annotation = "1.9.1"
 multidex = "2.0.1"
 
@@ -89,8 +89,8 @@ lottie-compose = "6.1.0"
 #=======================
 detekt = "1.23.8"
 dokka = "1.7.10"
-ktlint = "0.48.2" # 0.51.0-FINAL
-ktlint-gradle = "12.2.0" # 12.2.0
+ktlint = "0.51.0-FINAL" # 0.51.0-FINAL # 0.48.2
+ktlint-gradle = "12.3.0" # 12.2.0
 benmanes = "0.52.0"
 jacoco = "0.8.13"
 # Ensure the SonarQube is compatible with the server version.
@@ -100,7 +100,7 @@ sonarqube = "6.2.0.5505"
 #===== Test =====
 #================
 compose-runtime-tracing = "1.8.2"
-jupiter = "5.12.2" # JUnit 5
+jupiter = "5.13.0" # JUnit 5
 androidx-test = "1.6.1"
 androidx-test-ext = "1.2.1"
 androidx-test-runner = "1.6.2"
