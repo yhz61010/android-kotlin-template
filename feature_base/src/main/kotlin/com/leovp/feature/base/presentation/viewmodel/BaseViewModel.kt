@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.leovp.feature.base.GlobalConst
 import com.leovp.feature.base.presentation.viewmodel.lifecycle.LifecycleAware
-import com.leovp.framework.common.utils.w
+import com.leovp.log.base.w
 import kotlin.properties.Delegates
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow

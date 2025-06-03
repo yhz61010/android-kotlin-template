@@ -9,7 +9,7 @@ import com.leovp.androidbase.exts.android.closeAndroidPDialog
 import com.leovp.androidtemplate.R
 import com.leovp.feature.base.CrashHandler
 import com.leovp.feature.base.GlobalConst
-import com.leovp.framework.common.utils.w
+import com.leovp.log.base.w
 import io.karn.notify.Notify
 
 /**

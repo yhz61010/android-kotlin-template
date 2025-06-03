@@ -1,7 +1,8 @@
 package com.leovp.feature.base.http.interceptors
 
-import com.leovp.framework.common.utils.w
+import android.R.attr.tag
 import com.leovp.log.base.LogOutType
+import com.leovp.log.base.w
 import java.io.IOException
 import java.util.concurrent.TimeUnit
 import okhttp3.Headers

@@ -1,9 +1,9 @@
 package com.leovp.framework.common.pref
 
 import android.content.Context
+import com.leovp.log.base.i
 import com.leovp.pref.base.AbsPref
 import com.tencent.mmkv.MMKV
-import com.leovp.framework.common.utils.i
 
 /**
  * Author: Michael Leo
