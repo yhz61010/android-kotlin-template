@@ -22,9 +22,15 @@ class SerializationConverter : NetConverter {
     companion object {
         @OptIn(ExperimentalSerializationApi::class)
         val jsonDecoder = Json {
+            // Do not encode `null` fields.
+            // During decoding, the absence of a field value as treated as `null`
+            // for nullable properties without a default value.
             explicitNulls = false
-            ignoreUnknownKeys = true
+            // Check the document for details.
             coerceInputValues = false
+            encodeDefaults = true
+            prettyPrint = false
+            ignoreUnknownKeys = true
         }
     }
 
