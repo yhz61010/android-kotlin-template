@@ -1,3 +1,5 @@
+@file:Suppress("unused")
+
 package com.leovp.feature.base.ui.theme
 
 import android.app.Activity
@@ -87,9 +89,15 @@ fun SplashTheme(content: @Composable () -> Unit) {
     if (!view.isInEditMode) {
         SideEffect {
             val window = (view.context as Activity).window
-            window.statusBarColor = md_theme_light_surfaceVariant.toArgb()
-            window.navigationBarColor = md_theme_light_surfaceVariant.toArgb()
-            WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars = true
+            @Suppress("DEPRECATION")
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.VANILLA_ICE_CREAM) {
+                window.statusBarColor = md_theme_light_surfaceVariant.toArgb()
+                window.navigationBarColor = md_theme_light_surfaceVariant.toArgb()
+            }
+            with(WindowCompat.getInsetsController(window, view)) {
+                isAppearanceLightStatusBars = true
+                isAppearanceLightNavigationBars = true
+            }
         }
     }
 
@@ -100,10 +108,13 @@ fun SplashTheme(content: @Composable () -> Unit) {
     )
 }
 
+/**
+ * @param dynamicColor Only available on Android 12+
+ */
 @Composable
 fun AppTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
-    // Dynamic color is available on Android 12+
+    /** Dynamic color is available on Android 12+ */
     dynamicColor: Boolean = false,
     content: @Composable () -> Unit
 ) {
@@ -115,12 +126,15 @@ fun AppTheme(
     )
 }
 
+/**
+ * @param dynamicColor Only available on Android 12+
+ */
 @Composable
 fun ImmersiveTheme(
     color: Color,
     darkTheme: Boolean = isSystemInDarkTheme(),
-    lightStatusBar: Boolean? = null,
-    // Dynamic color is available on Android 12+
+    lightStatusBar: Boolean = false,
+    /** Dynamic color is available on Android 12+ */
     dynamicColor: Boolean = false,
     content: @Composable () -> Unit
 ) {
@@ -137,10 +151,17 @@ fun ImmersiveTheme(
     if (!view.isInEditMode) {
         SideEffect {
             val window = (view.context as Activity).window
-            window.statusBarColor = color.toArgb()
-            window.navigationBarColor = color.toArgb()
-            val isLightStatusBar = lightStatusBar.takeIf { it != null } ?: darkTheme
-            WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars = isLightStatusBar
+            @Suppress("DEPRECATION")
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.VANILLA_ICE_CREAM) {
+                window.statusBarColor = color.toArgb()
+                window.navigationBarColor = color.toArgb()
+            }
+            // if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            with(WindowCompat.getInsetsController(window, view)) {
+                isAppearanceLightStatusBars = lightStatusBar
+                isAppearanceLightNavigationBars = lightStatusBar
+            }
+            // }
         }
     }
 

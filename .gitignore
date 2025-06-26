@@ -102,3 +102,4 @@ lint/tmp/
 **/.DS_Store
 /.idea/deploymentTargetSelector.xml
 /.kotlin/sessions/
+/.idea/inspectionProfiles/Project_Default.xml
