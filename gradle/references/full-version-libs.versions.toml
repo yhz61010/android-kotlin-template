@@ -145,8 +145,8 @@ robolectric-version = "4.9.2"
 #===================
 #===== Compile =====
 #===================
-agp = { module = "com.android.tools.build:gradle", version.ref = "agp" }
-kgp = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
+#agp = { module = "com.android.tools.build:gradle", version.ref = "agp" }
+#kgp = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
 kotlin-reflect = { module = "org.jetbrains.kotlin:kotlin-reflect", version.ref = "kotlin" }
 kotlin-coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "coroutines" }
 

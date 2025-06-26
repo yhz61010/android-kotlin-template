@@ -123,8 +123,8 @@ mannodermaus-junit5 = "1.7.0"
 #===================
 #===== Compile =====
 #===================
-agp = { module = "com.android.tools.build:gradle", version.ref = "agp" }
-kgp = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
+#agp = { module = "com.android.tools.build:gradle", version.ref = "agp" }
+#kgp = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
 
 #=========================
 #===== Leo Libraries =====
