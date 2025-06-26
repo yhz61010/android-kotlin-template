@@ -300,6 +300,7 @@ powermock = [
 #===================#===================#===================#===================
 
 [plugins]
+# Search Gradle Plugins https://plugins.gradle.org/
 android-application = { id = "com.android.application", version.ref = "agp" }
 android-library = { id = "com.android.library", version.ref = "agp" }
 # Equivalent kgp - org.jetbrains.kotlin:kotlin-gradle-plugin
