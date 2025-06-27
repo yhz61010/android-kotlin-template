@@ -8,6 +8,10 @@ import kotlin.reflect.full.memberProperties
  */
 class StateTimeTravelDebugger(private val viewClassName: String) {
 
+    companion object {
+        private const val TAG = "STTD"
+    }
+
     private val stateTimeline = mutableListOf<StateTransition>()
     private var lastViewAction: BaseAction<*>? = null
 
@@ -44,12 +48,12 @@ class StateTimeTravelDebugger(private val viewClassName: String) {
     }
 
     fun logAll() {
-        d { getMessage() }
+        d(TAG) { getMessage() }
     }
 
     fun logLast() {
         val states = listOf(stateTimeline.last())
-        d { getMessage(states) }
+        d(TAG) { getMessage(states) }
     }
 
     private fun getLogLine(oldState: BaseState, newState: BaseState, propertyName: String): String {
