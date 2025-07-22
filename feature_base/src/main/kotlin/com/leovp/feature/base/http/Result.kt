@@ -4,8 +4,8 @@ package com.leovp.feature.base.http
 
 import com.drake.net.exception.HttpResponseException
 import com.drake.net.exception.RequestParamsException
-import com.leovp.framework.common.exception.ApiException
 import com.leovp.feature.base.http.model.ApiResponseResult
+import com.leovp.framework.common.exception.ApiException
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -33,6 +33,8 @@ sealed interface Result<out R> {
         }
     }
 }
+
+fun <R, T : R> Result<T>.get(): R = (this as Result.Success<T>).data
 
 fun <R, T : R> Result<T>.getOrDefault(defaultValue: T): R = when {
     isFailure -> defaultValue
