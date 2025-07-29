@@ -71,6 +71,8 @@ fun <T> Result<T>.exceptionOrNull(): ApiException? =
         else -> null
     }
 
+fun <T> Result<T>.exception(): ApiException = (this as Result.Failure).exception
+
 inline fun <T> Result<T>.onSuccess(action: (value: T) -> Unit): Result<T> {
     if (isSuccess) action((this as Result.Success<T>).data)
     return this
@@ -112,7 +114,7 @@ suspend inline fun <reified R> result(
     }.getOrElse { err ->
         var code = -65535
         var message: String? = err.message
-        var exception: Throwable = err
+        val exception: Throwable = err
 
         // err can be one of the following exception:
         // - RequestParamsException
