@@ -74,7 +74,7 @@ dependencies {
     debugImplementation(libs.androidx.compose.ui.tooling)
     debugImplementation(libs.androidx.compose.ui.test.manifest)
 
-    api(libs.androidx.lifecycle.runtime.compose)
+    api(libs.lifecycle.runtime.compose)
     // ----------
 
     // hilt - start
@@ -90,6 +90,7 @@ dependencies {
     api(libs.leo.pref)
     api(libs.leo.log)
     api(libs.leo.lib.json)
+    api(libs.leo.lib.common.android)
 
     // ==============================
     testImplementation(libs.bundles.test)
