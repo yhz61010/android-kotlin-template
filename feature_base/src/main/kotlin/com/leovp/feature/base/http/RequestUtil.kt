@@ -4,11 +4,11 @@ import android.content.Context
 import com.drake.net.NetConfig
 import com.drake.net.interceptor.RetryInterceptor
 import com.drake.net.okhttp.setConverter
-import java.util.concurrent.TimeUnit
 import com.leovp.feature.base.http.interceptors.HeaderInterceptor
-import com.leovp.framework.common.http.converters.SerializationConverter
 import com.leovp.feature.base.http.interceptors.HttpLoggingInterceptor
 import com.leovp.feature.base.http.interceptors.UserAgentInterceptor
+import com.leovp.network.http.converters.SerializationConverter
+import java.util.concurrent.TimeUnit
 
 /**
  * Author: Michael Leo

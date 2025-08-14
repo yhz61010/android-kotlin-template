@@ -10,8 +10,8 @@ package com.leovp.feature.base
 object GlobalConst {
     private const val TAG = "GlobalConst"
 
-    const val DEBUG = com.leovp.framework.BuildConfig.DEBUG_MODE
-    const val CONSOLE_LOG_OPEN = com.leovp.framework.BuildConfig.CONSOLE_LOG_OPEN
+    const val DEBUG = BuildConfig.DEBUG_MODE
+    const val CONSOLE_LOG_OPEN = BuildConfig.CONSOLE_LOG_OPEN
 
     const val VERSION_NAME = BuildConfig.VERSION_NAME
 }

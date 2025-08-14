@@ -4,10 +4,11 @@ import android.app.Application
 import android.os.SystemClock
 import androidx.core.app.NotificationCompat
 import com.leovp.android.exts.LeoToast
+import com.leovp.android.exts.toast
 import com.leovp.android.ui.ForegroundComponent
 import com.leovp.androidbase.exts.android.closeAndroidPDialog
+import com.leovp.androidbase.utils.CrashHandler
 import com.leovp.androidtemplate.R
-import com.leovp.feature.base.CrashHandler
 import com.leovp.feature.base.GlobalConst
 import com.leovp.log.base.w
 import io.karn.notify.Notify
@@ -22,7 +23,9 @@ private const val TAG = "IM"
 object InitManager {
     fun init(app: Application) {
         val st = SystemClock.elapsedRealtime()
-        CrashHandler.initCrashHandler(app)
+        CrashHandler.initCrashHandler { th, err ->
+            app.toast("Crash...", error = true)
+        }
 
         @Suppress("SENSELESS_COMPARISON")
         LeoToast.getInstance(app).init(

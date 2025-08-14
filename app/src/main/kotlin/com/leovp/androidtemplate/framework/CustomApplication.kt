@@ -8,7 +8,7 @@ import coil.compose.AsyncImage
 import coil.disk.DiskCache
 import com.leovp.feature.base.GlobalConst
 import com.leovp.feature.base.log.MarsXLog
-import com.leovp.framework.common.pref.MMKVPref
+import com.leovp.feature.base.pref.MMKVPref
 import com.leovp.log.LogContext
 import com.leovp.pref.PrefContext
 import dagger.hilt.android.HiltAndroidApp

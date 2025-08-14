@@ -41,6 +41,18 @@ android {
         buildConfigField("String", "VERSION_NAME", "\"${libs.versions.versionName.get()}\"")
     }
 
+    buildTypes {
+        debug /*getByName("debug")*/ {
+            buildConfigField("boolean", "DEBUG_MODE", "true")
+            buildConfigField("boolean", "CONSOLE_LOG_OPEN", "true")
+        }
+
+        release /*getByName("release")*/ {
+            buildConfigField("boolean", "DEBUG_MODE", "false")
+            buildConfigField("boolean", "CONSOLE_LOG_OPEN", "false")
+        }
+    }
+
     // https://developer.android.com/reference/tools/gradle-api/7.1/com/android/build/api/dsl/Lint
     lint {
         // if true, stop the gradle build if errors are found
@@ -62,12 +74,41 @@ composeCompiler {
 dependencies {
     // api(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar", "*.aar"))))
 
-    api(projects.libFramework)
-
+    // ----------
+    api(libs.leo.lib.compose)
+    api(libs.leo.mvvm)
+    api(libs.leo.lib.network)
     api(libs.leo.floatview)
+    api(libs.leo.androidbase)
+    api(libs.leo.pref)
+    api(libs.leo.log)
+    api(libs.leo.lib.json)
+    api(libs.leo.lib.common.android)
 
+    api(libs.bundles.kotlin)
+    api(libs.kotlin.coroutines)
     api(libs.karn.notify)
     api(libs.coil.kt.compose)
+    api(libs.mars.xlog)
+    api(libs.mmkv)
+    api(libs.serialization.json)
+    // Net - dependencies - Start
+    api(libs.square.okhttp)
+    api(libs.net)
+    // Net - dependencies - End
+    // ----------
+
+    api(platform(libs.androidx.compose.bom))
+    // Material Design 3
+    api(libs.androidx.material3)
+    api(libs.bundles.androidx.compose)
+    // Android Studio Preview support
+    api(libs.androidx.compose.ui.tooling.preview)
+    // api(libs.androidx.compose.ui.graphics)
+    debugImplementation(libs.androidx.compose.ui.tooling)
+    debugImplementation(libs.androidx.compose.ui.test.manifest)
+
+    api(libs.lifecycle.runtime.compose)
     // ----------
 
     // hilt - start
@@ -77,5 +118,17 @@ dependencies {
     ksp(libs.hilt.compiler)
     // hilt - end
 
-    // ----------
+    // ==============================
+    testImplementation(libs.bundles.test)
+    // testRuntimeOnly(libs.bundles.test.runtime.only)
+    // androidTestImplementation(libs.bundles.test)
+    androidTestImplementation(libs.bundles.android.test)
+    androidTestImplementation(platform(libs.androidx.compose.bom))
+    // ==============================
+    // The instrumentation test companion libraries
+    // https://github.com/mannodermaus/android-junit5
+    // ==============================
+    androidTestImplementation(libs.mannodermaus.junit5.core)
+    androidTestRuntimeOnly(libs.mannodermaus.junit5.runner)
+    // ==============================
 }

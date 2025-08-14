@@ -1,7 +1,7 @@
 package com.leovp.feature.base.http.interceptors
 
-import com.leovp.framework.common.utils.d
 import com.leovp.log.base.LogOutType
+import com.leovp.log.base.d
 import okhttp3.Interceptor
 import okhttp3.Response
 

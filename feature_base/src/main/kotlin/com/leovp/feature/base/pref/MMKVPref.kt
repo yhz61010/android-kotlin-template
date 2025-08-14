@@ -1,22 +1,22 @@
-package com.leovp.framework.common.pref
+package com.leovp.feature.base.pref
 
 import android.content.Context
-import com.leovp.log.base.i
+import com.leovp.log.LogContext
+import com.leovp.log.base.ITAG
 import com.leovp.pref.base.AbsPref
 import com.tencent.mmkv.MMKV
 
 /**
  * Author: Michael Leo
- * Date: 2025/3/24 08:48
+ * Date: 20-12-10 下午1:47
  */
-@Suppress("TooManyFunctions")
 class MMKVPref(ctx: Context) : AbsPref() {
     init {
         val mmkvRootDir: String = MMKV.initialize(ctx)
-        i("MMKV") { "mmkvRootDir=$mmkvRootDir" }
+        LogContext.log.i(ITAG, "mmkvRootDir=$mmkvRootDir")
     }
 
-    private val mmkv = MMKV.defaultMMKV()
+    private val mmkv = MMKV.defaultMMKV(MMKV.SINGLE_PROCESS_MODE, "sk-leo-crypt-key")
 
     @Synchronized
     override fun put(key: String, v: Int) {
@@ -58,6 +58,5 @@ class MMKVPref(ctx: Context) : AbsPref() {
 
     override fun getString(key: String, default: String?): String? = mmkv.decodeString(key, default)
 
-    override fun getStringSet(key: String, default: Set<String>?): Set<String>? =
-        mmkv.decodeStringSet(key, default)
+    override fun getStringSet(key: String, default: Set<String>?): Set<String>? = mmkv.decodeStringSet(key, default)
 }

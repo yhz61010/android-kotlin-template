@@ -20,7 +20,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.core.view.WindowCompat
 import com.leovp.androidtemplate.framework.InitManager
 import com.leovp.feature.base.ui.theme.ImmersiveTheme
-import com.leovp.framework.common.utils.d
+import com.leovp.log.base.d
 import dagger.hilt.android.AndroidEntryPoint
 
 private const val TAG = "MA"

@@ -16,7 +16,7 @@ Using `Android + Kotlin + ktlint + Detekt + Gradle Kotlin DSL + Version Catalog(
 
 ## Attention
 Starting with Android 14, apps with a targetSdkVersion lower than 23 can't be installed.
-So the min sdk of this project is 23 too.
+So the min sdk of this project is 24 too.
 
 ## Features
 - 100% Kotlin-only template.
