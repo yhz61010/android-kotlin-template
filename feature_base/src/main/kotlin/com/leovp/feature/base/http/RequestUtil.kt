@@ -7,7 +7,7 @@ import com.drake.net.okhttp.setConverter
 import com.leovp.feature.base.http.interceptors.HeaderInterceptor
 import com.leovp.feature.base.http.interceptors.HttpLoggingInterceptor
 import com.leovp.feature.base.http.interceptors.UserAgentInterceptor
-import com.leovp.network.http.converters.SerializationConverter
+import com.leovp.network.http.net.converters.SerializationConverter
 import java.util.concurrent.TimeUnit
 
 /**
