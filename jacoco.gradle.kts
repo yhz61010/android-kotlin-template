@@ -38,7 +38,8 @@ private val classDirectoriesTree =
             "**/*Component*.*",
             "**/*BR*.*",
             "**/*\$Lambda\$*.*", // Jacoco can not handle several "$" in class name.
-            "**/*\$inlined\$*.*", // Kotlin specific, Jacoco can not handle several "$" in class name.
+            // Kotlin specific, Jacoco can not handle several "$" in class name.
+            "**/*\$inlined\$*.*",
             "**/*Companion*.*",
             "**/*Module.*", // filtering Dagger modules classes
             "**/*Dagger*.*", // filtering Dagger-generated classes

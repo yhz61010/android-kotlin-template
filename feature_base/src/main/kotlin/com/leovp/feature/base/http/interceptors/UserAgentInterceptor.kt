@@ -12,7 +12,8 @@ import okhttp3.Response
  * See testing user agent: https://faisalman.github.io/ua-parser-js/
  */
 class UserAgentInterceptor : Interceptor {
-    private val userAgent = "hippodrome/${GlobalConst.VERSION_NAME} ${System.getProperty("http.agent")}"
+    private val userAgent =
+        "hippodrome/${GlobalConst.VERSION_NAME} ${System.getProperty("http.agent")}"
 
     override fun intercept(chain: Interceptor.Chain): Response =
         chain

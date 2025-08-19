@@ -58,7 +58,10 @@ class MarsXLog(
     private fun getBaseDirString(
         ctx: Context,
         baseFolderName: String,
-    ): String = ctx.getExternalFilesDir(null)?.let { it.absolutePath + File.separator + baseFolderName } ?: ""
+    ): String =
+        ctx.getExternalFilesDir(null)?.let {
+            it.absolutePath + File.separator + baseFolderName
+        } ?: ""
 
     // ==================================================
     override fun printVerbLog(

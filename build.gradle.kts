@@ -472,7 +472,10 @@ fun BaseFlavor.buildConfigFieldFromGradleProperty(gradlePropertyName: String) {
     buildConfigField("String", androidResourceName, propertyValue)
 }
 
-fun String.toSnakeCase() = this.split(Regex("(?=[A-Z])")).joinToString("_") { it.lowercase(Locale.getDefault()) }
+fun String.toSnakeCase() =
+    this.split(Regex("(?=[A-Z])")).joinToString("_") {
+        it.lowercase(Locale.getDefault())
+    }
 
 // Adds a new field to the generated BuildConfig class.
 @Suppress("unused")
