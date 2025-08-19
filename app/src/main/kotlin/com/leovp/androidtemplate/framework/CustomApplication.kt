@@ -19,7 +19,9 @@ import dagger.hilt.android.HiltAndroidApp
  */
 
 @HiltAndroidApp
-class CustomApplication : MultiDexApplication(), ImageLoaderFactory {
+class CustomApplication :
+    MultiDexApplication(),
+    ImageLoaderFactory {
     companion object {
         private const val TAG = "CA"
     }
@@ -32,7 +34,7 @@ class CustomApplication : MultiDexApplication(), ImageLoaderFactory {
             MarsXLog("AOS").apply {
                 @Suppress("SENSELESS_COMPARISON")
                 init(this@CustomApplication, GlobalConst.CONSOLE_LOG_OPEN)
-            }
+            },
         )
         PrefContext.setPrefImpl(MMKVPref(this@CustomApplication))
     }
@@ -41,8 +43,9 @@ class CustomApplication : MultiDexApplication(), ImageLoaderFactory {
      * Create the singleton [ImageLoader].
      * This is used by [AsyncImage] to load images in the app.
      */
-    override fun newImageLoader(): ImageLoader {
-        return ImageLoader.Builder(this)
+    override fun newImageLoader(): ImageLoader =
+        ImageLoader
+            .Builder(this)
             .crossfade(true)
             // Disable `Cache-Control` header support in order to disable disk caching.
             // .respectCacheHeaders(false)
@@ -52,13 +55,12 @@ class CustomApplication : MultiDexApplication(), ImageLoaderFactory {
             //         .build()
             // }
             .diskCache {
-                DiskCache.Builder()
+                DiskCache
+                    .Builder()
                     .directory(this.cacheDir.resolve("image_cache"))
                     // .maxSizePercent(0.02)
                     .build()
-            }
-            .build()
-    }
+            }.build()
 
     // override fun attachBaseContext(base: Context) {
     //     // super.attachBaseContext(LangUtil.getInstance(base).setAppLanguage(base))

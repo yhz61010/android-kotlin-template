@@ -39,7 +39,7 @@ class MainActivity : ComponentActivity() {
             ImmersiveTheme(
                 color = Color.Transparent,
                 dynamicColor = false,
-                lightStatusBar = false
+                lightStatusBar = false,
             ) {
                 Surface(modifier = Modifier.fillMaxSize()) {
                     MainScreen()
@@ -54,11 +54,12 @@ fun MainScreen(modifier: Modifier = Modifier) {
     Image(
         painterResource(R.drawable.app_beauty),
         contentDescription = null,
-        modifier = modifier
-            .fillMaxWidth()
-            .clip(shape = MaterialTheme.shapes.medium),
+        modifier =
+            modifier
+                .fillMaxWidth()
+                .clip(shape = MaterialTheme.shapes.medium),
         alignment = Alignment.TopStart,
-        contentScale = ContentScale.FillWidth
+        contentScale = ContentScale.FillWidth,
     )
 }
 
@@ -69,7 +70,7 @@ fun PreviewMainScreen() {
     ImmersiveTheme(
         color = Color.Transparent,
         dynamicColor = false,
-        lightStatusBar = false
+        lightStatusBar = false,
     ) {
         MainScreen()
     }

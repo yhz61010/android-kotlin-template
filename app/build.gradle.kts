@@ -1,4 +1,4 @@
-import java.util.*
+import java.util.Properties
 
 // https://developer.android.com/studio/build?hl=zh-cn#module-level
 
@@ -36,7 +36,10 @@ android {
     defaultConfig {
         applicationId = namespace
 
-        versionCode = libs.versions.versionCode.get().toInt()
+        versionCode =
+            libs.versions.versionCode
+                .get()
+                .toInt()
         versionName = libs.versions.versionName.get()
 
         multiDexEnabled = true
@@ -52,7 +55,8 @@ android {
 
         // https://github.com/mannodermaus/android-junit5
         // Connect JUnit 5 to the runner
-        testInstrumentationRunnerArguments["runnerBuilder"] = "de.mannodermaus.junit5.AndroidJUnit5Builder"
+        testInstrumentationRunnerArguments["runnerBuilder"] =
+            "de.mannodermaus.junit5.AndroidJUnit5Builder"
     }
 
     // https://medium.com/androiddevelopers/5-ways-to-prepare-your-app-build-for-android-studio-flamingo-release-da34616bb946
@@ -123,7 +127,8 @@ android {
     }
 
     buildTypes {
-        debug /*getByName("debug")*/ {
+        debug {
+            // getByName("debug")
             signingConfig = signingConfigs.getByName("debug")
         }
 
@@ -133,15 +138,15 @@ android {
          *
          * See the global configurations in top-level `build.gradle.kts`.
          */
-        release /*getByName("release")*/ {
+        release {
+            // getByName("release")
             signingConfig = signingConfigs.getByName("release")
         }
 
-        /**
-         * The `initWith` property allows you to copy configurations from other build types,
-         * then configure only the settings you want to change. This one copies the debug build
-         * type, and then changes the manifest placeholder and application ID.
-         */
+        // The `initWith` property allows you to copy configurations from other build types,
+        // then configure only the settings you want to change. This one copies the debug build
+        // type, and then changes the manifest placeholder and application ID.
+        //
         // Uncommented the following block will cause build exception
         // if using ./gradlew build command
         // create("staging") {
@@ -167,7 +172,8 @@ android {
         variant.outputs
             .mapNotNull { it as? com.android.build.gradle.internal.api.ApkVariantOutputImpl }
             .forEach { output ->
-                output.outputFileName = "${appName}${("-$flavorName").takeIf { it != "-" } ?: ""}-${buildType.name}" +
+                output.outputFileName =
+                    "${appName}${("-$flavorName").takeIf { it != "-" } ?: ""}-${buildType.name}" +
                     "-v$versionName($versionCode)" +
                     "-${gitVersionTag()}-${gitCommitCount()}" +
 //                        ("-unaligned".takeIf { !output.zipAlign.enabled } ?: "") +
@@ -187,9 +193,12 @@ fun gitCommitCount(): String {
 
     return runCatching {
         // You must trim() the result. Because the result of command has a suffix '\n'.
-        providers.exec {
-            commandLine = cmd.trim().split(' ')
-        }.standardOutput.asText.get().trim()
+        providers
+            .exec {
+                commandLine = cmd.trim().split(' ')
+            }.standardOutput.asText
+            .get()
+            .trim()
     }.getOrDefault("NA")
 }
 
@@ -212,27 +221,39 @@ fun gitVersionTag(): String {
 //    val cmd = "git describe --tags"
     val cmd = "git describe --always"
 
-    val versionTag = runCatching {
-        // You must trim() the result. Because the result of command has a suffix '\n'.
-        providers.exec {
-            commandLine = cmd.trim().split(' ')
-        }.standardOutput.asText.get().trim()
-    }.getOrDefault("NA")
+    val versionTag =
+        runCatching {
+            // You must trim() the result. Because the result of command has a suffix '\n'.
+            providers
+                .exec {
+                    commandLine = cmd.trim().split(' ')
+                }.standardOutput.asText
+                .get()
+                .trim()
+        }.getOrDefault("NA")
 
     val regex = "-(\\d+)-g".toRegex()
     val matcher: MatchResult? = regex.matchEntire(versionTag)
 
     val matcherGroup0: MatchGroup? = matcher?.groups?.get(0)
     return if (matcher?.value?.isNotBlank() == true && matcherGroup0?.value?.isNotBlank() == true) {
-        versionTag.substring(0, matcherGroup0.range.first) + "." + matcherGroup0.value
+        versionTag.substring(
+            0,
+            matcherGroup0.range.first,
+        ) + "." + matcherGroup0.value
     } else {
         versionTag
     }
 }
 
-fun Project.getSignProperty(key: String, path: String = "config/sign/keystore.properties"): String {
-    return Properties().apply { rootProject.file(path).inputStream().use(::load) }.getProperty(key)
-}
+fun Project.getSignProperty(
+    key: String,
+    path: String = "config/sign/keystore.properties",
+): String =
+    Properties()
+        .apply {
+            rootProject.file(path).inputStream().use(::load)
+        }.getProperty(key)
 
 dependencies {
     // implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar", "*.aar"))))

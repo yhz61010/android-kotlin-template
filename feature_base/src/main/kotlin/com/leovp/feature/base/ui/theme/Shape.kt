@@ -9,9 +9,10 @@ import androidx.compose.ui.unit.dp
  * Date: 2023/7/19 14:02
  */
 
-val AppShapes = Shapes(
-    extraSmall = RoundedCornerShape(2.dp),
-    small = RoundedCornerShape(4.dp),
-    medium = RoundedCornerShape(6.dp),
-    large = RoundedCornerShape(8.dp)
-)
+val AppShapes =
+    Shapes(
+        extraSmall = RoundedCornerShape(2.dp),
+        small = RoundedCornerShape(4.dp),
+        medium = RoundedCornerShape(6.dp),
+        large = RoundedCornerShape(8.dp),
+    )

@@ -31,8 +31,8 @@ object InitManager {
         LeoToast.getInstance(app).init(
             LeoToast.ToastConfig(
                 GlobalConst.DEBUG,
-                R.mipmap.app_ic_launcher_round
-            )
+                R.mipmap.app_ic_launcher_round,
+            ),
         )
 
         closeAndroidPDialog()

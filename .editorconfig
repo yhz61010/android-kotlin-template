@@ -1,42 +1,10 @@
 root = true
 
 # https://pinterest.github.io/ktlint/rules/configuration-ktlint/
-
-[*]
-charset = utf-8
-indent_size = 4
-indent_style = space
-insert_final_newline = true
-trim_trailing_whitespace = true
-# Use "off" (or -1) to ignore max line length or a positive number to set max line length
-max_line_length = 120
-ktlint_standard = enabled
-ktlint_standard_trailing-comma-on-call-site = enabled
-ktlint_standard_trailing-comma-on-declaration-site = enabled
-ktlint_standard_argument-list-wrapping = disabled
-ktlint_standard_import-ordering = disabled
-ktlint_standard_no-wildcard-imports = disabled
-
 [*.{kt,kts}]
-ktlint_code_style = android
-ktlint_standard_indent = disabled
-ktlint_standard_spacing-between-declarations-with-annotations = disabled
-ij_kotlin_imports_layout = *
-ij_kotlin_name_count_to_use_star_import = 999
-ij_kotlin_name_count_to_use_star_import_for_members = 999
-
-[*.md]
-trim_trailing_whitespace = false
-
-[*.{yml,yaml}]
-indent_size = 2
-
-[*.java]
-ij_java_imports_layout = ascii
-ij_java_use_single_class_imports = true
-
-[*.proto]
-indent_size = 2
-
-[*.json]
-indent_size = 2
+# Compose 函数命名规则 - 允许 @Composable 注解的函数以大写开头
+ktlint_function_naming_ignore_when_annotated_with = Composable
+# 基础缩进 4 个空格
+indent_size = 4
+# 续行缩进 16 个空格
+continuation_indent_size = 20

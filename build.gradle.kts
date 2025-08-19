@@ -4,7 +4,6 @@ import com.android.build.gradle.internal.dsl.DefaultConfig
 import com.github.benmanes.gradle.versions.updates.DependencyUpdatesTask
 import io.gitlab.arturbosch.detekt.Detekt
 import java.util.Locale
-import org.jlleitschuh.gradle.ktlint.KtlintExtension
 
 // =====================================
 // ========== Global settings ==========
@@ -21,13 +20,18 @@ val customGroup = "com.leovp"
 val javaVersion: JavaVersion by extra {
     // JavaVersion.VERSION_17
     // We should use integer value for toVersion() in this case.
-    JavaVersion.toVersion(libs.versions.javaVersion.get().toInt())
+    JavaVersion.toVersion(
+        libs.versions.javaVersion
+            .get()
+            .toInt(),
+    )
 }
 val jvmTargetVersion by extra {
-    org.jetbrains.kotlin.gradle.dsl.JvmTarget.fromTarget(libs.versions.jvmVersion.get())
+    org.jetbrains.kotlin.gradle.dsl.JvmTarget
+        .fromTarget(libs.versions.jvmVersion.get())
 }
 
-/**
+/*
  * By default, the resource prefix is just the module name.
  *
  * resourcePrefix 的校验规则：
@@ -41,6 +45,7 @@ val jvmTargetVersion by extra {
  *
  * @see <a href="https://blog.csdn.net/weixin_43910395/article/details/120166450">resourcePrefix</a>
  */
+
 // private val useResourcePrefix = true
 
 // =====================================
@@ -49,7 +54,7 @@ val jvmTargetVersion by extra {
 
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 plugins {
-    /**
+    /*
      * You should use `apply false` in the top-level build.gradle file
      * to add a Gradle plugin as a build dependency, but not apply it to the
      * current (root) project. You should not use `apply false` in sub-projects.
@@ -86,7 +91,9 @@ plugins {
 // Fix the problem: "Unexpected SMAP line: *S KotlinDebug"
 // ********************
 jacoco {
-    toolVersion = rootProject.libs.versions.jacoco.get()
+    toolVersion =
+        rootProject.libs.versions.jacoco
+            .get()
 }
 
 val detektFormatting: Provider<MinimalExternalModuleDependency> = libs.detekt.formatting
@@ -95,15 +102,30 @@ val detektFormatting: Provider<MinimalExternalModuleDependency> = libs.detekt.fo
 allprojects {
     group = customGroup
 
-    apply(plugin = rootProject.libs.plugins.kotlin.serialization.get().pluginId)
+    apply(
+        plugin =
+            rootProject.libs.plugins.kotlin.serialization
+                .get()
+                .pluginId,
+    )
 
     // We want to apply ktlint at all project level because it also checks Gradle config files (*.kts)
-    apply(plugin = rootProject.libs.plugins.ktlint.gradle.get().pluginId)
-    configure<KtlintExtension> {
-        version.set(rootProject.libs.versions.ktlint.asProvider().get())
-    }
+    apply(
+        plugin =
+            rootProject.libs.plugins.ktlint.gradle
+                .get()
+                .pluginId,
+    )
+    // configure<KtlintExtension> {
+    //     version.set(rootProject.libs.versions.ktlint.asProvider().get())
+    // }
 
-    apply(plugin = rootProject.libs.plugins.detekt.get().pluginId)
+    apply(
+        plugin =
+            rootProject.libs.plugins.detekt
+                .get()
+                .pluginId,
+    )
     // or
     // apply {
     //     plugin(rootProject.libs.plugins.detekt.get().pluginId)
@@ -122,8 +144,8 @@ allprojects {
                 "$rootDir/build.gradle.kts",
                 "$rootDir/settings.gradle.kts",
                 "src/main/kotlin",
-                "src/test/kotlin"
-            )
+                "src/test/kotlin",
+            ),
         )
     }
 
@@ -170,14 +192,27 @@ allprojects {
 }
 
 subprojects {
-    apply(plugin = rootProject.libs.plugins.kotlin.android.get().pluginId)
+    apply(
+        plugin =
+            rootProject.libs.plugins.kotlin.android
+                .get()
+                .pluginId,
+    )
 
-    plugins.withId(rootProject.libs.plugins.android.application.get().pluginId) {
+    plugins.withId(
+        rootProject.libs.plugins.android.application
+            .get()
+            .pluginId,
+    ) {
         // println("displayName=$displayName, name=$name, group=$group")
         configureApplication()
     }
 
-    plugins.withId(rootProject.libs.plugins.android.library.get().pluginId) { configureLibrary() }
+    plugins.withId(
+        rootProject.libs.plugins.android.library
+            .get()
+            .pluginId,
+    ) { configureLibrary() }
 }
 
 tasks.register<Delete>("clean") {
@@ -210,8 +245,8 @@ fun Project.configureCompileTasks() {
     }
 }
 
-fun Project.configureBase(): BaseExtension {
-    return extensions.getByName<BaseExtension>("android").apply {
+fun Project.configureBase(): BaseExtension =
+    extensions.getByName<BaseExtension>("android").apply {
         // You need to _resourcePrefix_ on your each module.
         // if (useResourcePrefix) {
         //     if (resourcePrefix == null) {
@@ -219,10 +254,20 @@ fun Project.configureBase(): BaseExtension {
         //         resourcePrefix = "${moduleName}_"
         //     }
         // }
-        compileSdkVersion(rootProject.libs.versions.compile.sdk.get().toInt())
+        compileSdkVersion(
+            rootProject.libs.versions.compile.sdk
+                .get()
+                .toInt(),
+        )
         defaultConfig {
-            minSdk = rootProject.libs.versions.min.sdk.get().toInt()
-            targetSdk = rootProject.libs.versions.target.sdk.get().toInt()
+            minSdk =
+                rootProject.libs.versions.min.sdk
+                    .get()
+                    .toInt()
+            targetSdk =
+                rootProject.libs.versions.target.sdk
+                    .get()
+                    .toInt()
 
             testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         }
@@ -248,7 +293,7 @@ fun Project.configureBase(): BaseExtension {
             getByName("release") {
                 proguardFiles(
                     getDefaultProguardFile("proguard-android-optimize.txt"),
-                    "proguard-rules.pro"
+                    "proguard-rules.pro",
                 )
             }
         }
@@ -259,50 +304,50 @@ fun Project.configureBase(): BaseExtension {
         // buildFeatures.buildConfig = true
 
         // Turn off checking the given issue id's
-        lintOptions.disable += setOf(
-            // "MissingTranslation",
-            // "GoogleAppIndexingWarning",
-            "RtlHardcoded",
-            "RtlCompat",
-            "RtlEnabled"
-        )
-        packagingOptions.resources.pickFirsts += setOf(
-            // kotlinx-coroutines-android
-            "META-INF/atomicfu.kotlin_module"
-        )
-        packagingOptions.resources.excludes += setOf(
-            "META-INF/licenses/**",
-            "META-INF/NOTICE*",
-            "META-INF/LICENSE*",
-            "META-INF/DEPENDENCIES*",
-            "META-INF/INDEX.LIST",
-            "META-INF/io.netty.versions.properties",
-            "META-INF/services/reactor.blockhound.integration.BlockHoundIntegration",
-
-            // Multiple dependency bring these files in. Exclude them to enable
-            // our test APK to build (has no effect on our AARs)
-            "META-INF/{AL2.0,LGPL2.1}",
-
-            "**/*.proto",
-            "**/*.bin",
-            "**/*.java"
-            // "**/*.properties",
-            // "**/*.version",
-            // ==============================
-            // ==============================
-            // Don't exclude [kotlin_module] file.
-            // Or else, you can't import kotlin extension methods in kotlin file.
-            // "**/*.*_module", // **/*.kotlin_module
-            // ==============================
-            // ==============================
-            // "*.txt",
-            // "kotlin/**",
-            // "kotlinx/**",
-            // "okhttp3/**",
-            // "META-INF/services/**",
-        )
+        lintOptions.disable +=
+            setOf(
+                // "MissingTranslation",
+                // "GoogleAppIndexingWarning",
+                "RtlHardcoded",
+                "RtlCompat",
+                "RtlEnabled",
+            )
+        packagingOptions.resources.pickFirsts +=
+            setOf(
+                // kotlinx-coroutines-android
+                "META-INF/atomicfu.kotlin_module",
+            )
+        packagingOptions.resources.excludes +=
+            setOf(
+                "META-INF/licenses/**",
+                "META-INF/NOTICE*",
+                "META-INF/LICENSE*",
+                "META-INF/DEPENDENCIES*",
+                "META-INF/INDEX.LIST",
+                "META-INF/io.netty.versions.properties",
+                "META-INF/services/reactor.blockhound.integration.BlockHoundIntegration",
+                // Multiple dependency bring these files in. Exclude them to enable
+                // our test APK to build (has no effect on our AARs)
+                "META-INF/{AL2.0,LGPL2.1}",
+                "**/*.proto",
+                "**/*.bin",
+                "**/*.java",
+                // "**/*.properties",
+                // "**/*.version",
+                // ==============================
+                // ==============================
+                // Don't exclude [kotlin_module] file.
+                // Or else, you can't import kotlin extension methods in kotlin file.
+                // "**/*.*_module", // **/*.kotlin_module
+                // ==============================
+                // ==============================
+                // "*.txt",
+                // "kotlin/**",
+                // "kotlinx/**",
+                // "okhttp3/**",
+                // "META-INF/services/**",
+            )
     }
-}
 
 /**
  * The application level default configurations.
@@ -311,42 +356,44 @@ fun Project.configureBase(): BaseExtension {
  * **Attention**:
  * The default value of `applicationId` is `namespace`.
  */
-fun Project.configureApplication(): BaseExtension = configureBase().apply {
-    defaultConfig {
-        applicationId = namespace
-        vectorDrawables.useSupportLibrary = true
-    }
-    buildTypes {
-        getByName("release") {
-            isShrinkResources = true
-            isMinifyEnabled = true
+fun Project.configureApplication(): BaseExtension =
+    configureBase().apply {
+        defaultConfig {
+            applicationId = namespace
+            vectorDrawables.useSupportLibrary = true
         }
+        buildTypes {
+            getByName("release") {
+                isShrinkResources = true
+                isMinifyEnabled = true
+            }
 
-        getByName("debug") {
-            isShrinkResources = false
-            isMinifyEnabled = false
+            getByName("debug") {
+                isShrinkResources = false
+                isMinifyEnabled = false
+            }
         }
     }
-}
 
 /**
  * All the submodules will have the hierarchy configurations.
  * You just need to add your custom properties as you wish.
  */
-fun Project.configureLibrary(): BaseExtension = configureBase().apply {
-    defaultConfig {
-        consumerProguardFiles("consumer-rules.pro")
-    }
-    buildTypes {
-        getByName("release") {
-            isMinifyEnabled = false
+fun Project.configureLibrary(): BaseExtension =
+    configureBase().apply {
+        defaultConfig {
+            consumerProguardFiles("consumer-rules.pro")
         }
+        buildTypes {
+            getByName("release") {
+                isMinifyEnabled = false
+            }
 
-        getByName("debug") {
-            isMinifyEnabled = false
+            getByName("debug") {
+                isMinifyEnabled = false
+            }
         }
     }
-}
 
 // Target version of the generated JVM bytecode. It is used for type resolution.
 tasks.withType<Detekt>().configureEach {
@@ -381,13 +428,16 @@ tasks.register("staticCheck", fun Task.() {
 
         // Get modules with "testDebugUnitTest" task (app module does not have it)
         val testTasks =
-            subprojects.mapNotNull { "${it.name}:testDebugUnitTest" }.filter { it != "app:testDebugUnitTest" }
+            subprojects
+                .mapNotNull { "${it.name}:testDebugUnitTest" }
+                .filter { it != "app:testDebugUnitTest" }
 
         // All task dependencies
-        val taskDependencies = mutableListOf("app:assembleAndroidTest", "ktlintCheck", "detekt").also {
-            it.addAll(lintTasks)
-            it.addAll(testTasks)
-        }
+        val taskDependencies =
+            mutableListOf("app:assembleAndroidTest", "ktlintCheck", "detekt").also {
+                it.addAll(lintTasks)
+                it.addAll(testTasks)
+            }
 
         // By defining Gradle dependency all dependent tasks will run before this "empty" task
         dependsOn(taskDependencies)
@@ -402,7 +452,8 @@ tasks.withType<DependencyUpdatesTask> {
 }
 
 fun isNonStable(version: String): Boolean {
-    val stableKeyword = listOf("RELEASE", "FINAL", "GA").any { version.uppercase(Locale.getDefault()).contains(it) }
+    val stableKeyword =
+        listOf("RELEASE", "FINAL", "GA").any { version.uppercase(Locale.getDefault()).contains(it) }
     val regex = "^[0-9,.v-]+(-r)?$".toRegex()
     val isStable = stableKeyword || regex.matches(version)
     return isStable.not()
@@ -416,16 +467,21 @@ fun BaseFlavor.buildConfigFieldFromGradleProperty(gradlePropertyName: String) {
     val propertyValue = project.properties[gradlePropertyName] as? String
     checkNotNull(propertyValue) { "Gradle property $gradlePropertyName is null" }
 
-    val androidResourceName = "GRADLE_${gradlePropertyName.toSnakeCase()}".uppercase(Locale.getDefault())
+    val androidResourceName =
+        "GRADLE_${gradlePropertyName.toSnakeCase()}".uppercase(Locale.getDefault())
     buildConfigField("String", androidResourceName, propertyValue)
 }
 
 fun String.toSnakeCase() = this.split(Regex("(?=[A-Z])")).joinToString("_") { it.lowercase(Locale.getDefault()) }
 
-/* Adds a new field to the generated BuildConfig class. */
+// Adds a new field to the generated BuildConfig class.
 @Suppress("unused")
-fun DefaultConfig.buildConfigField(name: String, value: Array<String>) {
+fun DefaultConfig.buildConfigField(
+    name: String,
+    value: Array<String>,
+) {
     // Create String that holds Java String Array code
-    val strValue = value.joinToString(prefix = "{", separator = ",", postfix = "}", transform = { "\"$it\"" })
+    val strValue =
+        value.joinToString(prefix = "{", separator = ",", postfix = "}", transform = { "\"$it\"" })
     buildConfigField("String[]", name, strValue)
 }

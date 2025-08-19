@@ -33,7 +33,8 @@ android {
 
     defaultConfig {
         // Connect JUnit 5 to the runner
-        testInstrumentationRunnerArguments["runnerBuilder"] = "de.mannodermaus.junit5.AndroidJUnit5Builder"
+        testInstrumentationRunnerArguments["runnerBuilder"] =
+            "de.mannodermaus.junit5.AndroidJUnit5Builder"
 
         // buildConfigFieldFromGradleProperty("apiBaseUrl")
         // buildConfigFieldFromGradleProperty("apiToken")
@@ -42,12 +43,14 @@ android {
     }
 
     buildTypes {
-        debug /*getByName("debug")*/ {
+        debug {
+            // getByName("debug")
             buildConfigField("boolean", "DEBUG_MODE", "true")
             buildConfigField("boolean", "CONSOLE_LOG_OPEN", "true")
         }
 
-        release /*getByName("release")*/ {
+        release {
+            // getByName("release")
             buildConfigField("boolean", "DEBUG_MODE", "false")
             buildConfigField("boolean", "CONSOLE_LOG_OPEN", "false")
         }

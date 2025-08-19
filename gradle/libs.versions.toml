@@ -34,7 +34,7 @@ versionCode = "1"
 # @keep
 versionName = "1.0.0"
 
-leo-version = "5.12.77"
+leo-version = "5.12.81"
 
 #===================
 #===== Compile =====
@@ -89,7 +89,7 @@ serialization-json = "1.9.0"
 #=======================
 detekt = "1.23.8"
 #dokka = "2.0.0"
-ktlint = "0.51.0-FINAL" # 0.51.0-FINAL # 0.48.2
+#ktlint = "0.51.0-FINAL" # 0.51.0-FINAL # 0.48.2
 ktlint-gradle = "13.0.0" # 12.2.0
 benmanes = "0.52.0"
 jacoco = "0.8.13"
@@ -298,6 +298,7 @@ test = [
     "robolectric"
 ]
 android-test = [
+    "junit-jupiter-api",
     "androidx-test-core",
     "androidx-test-core-ktx",
     "androidx-test-runner",

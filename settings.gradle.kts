@@ -99,5 +99,5 @@ enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
 include(
     ":feature_base",
-    ":app"
+    ":app",
 )
