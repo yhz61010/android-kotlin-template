@@ -1,3 +1,10 @@
+@file:Suppress(
+    "ktlint:standard:max-line-length", // for ktlint
+    "MaximumLineLength", // for detekt
+    "MaxLineLength", // for detekt
+    "LongLine", // for detekt
+)
+
 apply(from = "../jacoco.gradle.kts")
 
 // https://docs.gradle.org/current/userguide/plugins.html#sec:subprojects_plugins_dsl
@@ -67,6 +74,14 @@ android {
     }
 }
 
+ksp {
+    // The following two lines will suppress the warning:
+    // Hilt_CustomApplication.java:25: 警告: [deprecation] Builder中的applicationContextModule(ApplicationContextModule)已过时
+    //           .applicationContextModule(new ApplicationContextModule(Hilt_CustomApplication.this))
+    arg("dagger.fastInit", "enabled")
+    arg("dagger.formatGeneratedSource", "disabled")
+}
+
 composeCompiler {
     // deprecated
     // enableStrongSkippingMode = true
@@ -120,6 +135,30 @@ dependencies {
     // implementation(libs.ksp.symbol.processing.api)
     ksp(libs.hilt.compiler)
     // hilt - end
+
+    api(libs.bundles.kotlin)
+    api(libs.lifecycle.runtime.compose)
+
+    api(libs.leo.androidbase)
+    api(libs.leo.lib.compose)
+    api(libs.leo.lib.network)
+    // api(libs.leo.log)
+    // api(libs.leo.lib.json)
+    // api(libs.leo.lib.common.kotlin)
+    api(libs.leo.pref)
+    // implementation(libs.leo.floatview)
+
+    // Net - dependencies - Start
+    api(libs.kotlin.coroutines)
+    api(libs.square.okhttp)
+    api(libs.net)
+    // Net - dependencies - End
+
+    api(libs.serialization.json)
+    api(libs.mars.xlog)
+    api(libs.coil.kt.compose)
+    api(libs.karn.notify)
+    // api(libs.lottie.compose)
 
     // ==============================
     testImplementation(libs.bundles.test)
