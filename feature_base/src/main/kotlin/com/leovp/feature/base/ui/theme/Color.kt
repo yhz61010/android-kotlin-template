@@ -4,6 +4,9 @@ package com.leovp.feature.base.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
+// https://material-foundation.github.io/material-theme-builder/
+// https://www.logicui.com/colorgenerator
+
 // --------------------
 val immersive_sys_ui = Color(0x338B5000)
 // --------------------
