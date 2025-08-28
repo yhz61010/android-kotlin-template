@@ -92,6 +92,18 @@ composeCompiler {
 dependencies {
     // api(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar", "*.aar"))))
 
+    api(platform(libs.androidx.compose.bom))
+    // Material Design 3
+    api(libs.androidx.material3)
+    api(libs.bundles.androidx.compose)
+    // Android Studio Preview support
+    api(libs.androidx.compose.ui.tooling.preview)
+    // api(libs.androidx.compose.ui.graphics)
+    debugImplementation(libs.androidx.compose.ui.tooling)
+    debugImplementation(libs.androidx.compose.ui.test.manifest)
+
+    api(libs.lifecycle.runtime.compose)
+
     // ----------
     api(libs.leo.lib.compose)
     api(libs.leo.mvvm)
@@ -110,55 +122,20 @@ dependencies {
     api(libs.mars.xlog)
     api(libs.mmkv)
     api(libs.serialization.json)
-    // Net - dependencies - Start
-    api(libs.square.okhttp)
-    api(libs.net)
-    // Net - dependencies - End
-    // ----------
-
-    api(platform(libs.androidx.compose.bom))
-    // Material Design 3
-    api(libs.androidx.material3)
-    api(libs.bundles.androidx.compose)
-    // Android Studio Preview support
-    api(libs.androidx.compose.ui.tooling.preview)
-    // api(libs.androidx.compose.ui.graphics)
-    debugImplementation(libs.androidx.compose.ui.tooling)
-    debugImplementation(libs.androidx.compose.ui.test.manifest)
-
-    api(libs.lifecycle.runtime.compose)
-    // ----------
-
-    // hilt - start
-    implementation(libs.hilt.android)
-    implementation(libs.androidx.hilt.navigation.compose)
-    // implementation(libs.ksp.symbol.processing.api)
-    ksp(libs.hilt.compiler)
-    // hilt - end
-
-    api(libs.bundles.kotlin)
-    api(libs.lifecycle.runtime.compose)
-
-    api(libs.leo.androidbase)
-    api(libs.leo.lib.compose)
-    api(libs.leo.lib.network)
-    // api(libs.leo.log)
-    // api(libs.leo.lib.json)
-    // api(libs.leo.lib.common.kotlin)
-    api(libs.leo.pref)
-    // implementation(libs.leo.floatview)
-
+    // api(libs.lottie.compose)
     // Net - dependencies - Start
     api(libs.kotlin.coroutines)
     api(libs.square.okhttp)
     api(libs.net)
     // Net - dependencies - End
 
-    api(libs.serialization.json)
-    api(libs.mars.xlog)
-    api(libs.coil.kt.compose)
-    api(libs.karn.notify)
-    // api(libs.lottie.compose)
+    // Hilt - start
+    implementation(libs.hilt.android)
+    implementation(libs.androidx.hilt.navigation.compose)
+    // implementation(libs.ksp.symbol.processing.api)
+    ksp(libs.hilt.compiler)
+    // Hilt - end
+    // ----------
 
     // ==============================
     testImplementation(libs.bundles.test)
