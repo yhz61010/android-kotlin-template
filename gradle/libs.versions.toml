@@ -30,11 +30,11 @@ target-sdk = "36"
 ndk-sdk = "25.2.9519653"
 
 # @keep
-versionCode = "1"
-# @keep
 versionName = "1.0.0"
+# @keep
+versionCode = "1"
 
-leo-version = "5.12.86"
+leo-version = "5.12.89"
 
 #===================
 #===== Compile =====
@@ -126,30 +126,17 @@ mannodermaus-junit5 = "1.8.0"
 #agp = { module = "com.android.tools.build:gradle", version.ref = "agp" }
 #kgp = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
 
-#=========================
-#===== Leo Libraries =====
-#=========================
-leo-androidbase = { module = "com.leovp.android:androidbase", version.ref = "leo-version" }
-leo-pref = { module = "com.leovp.android:pref", version.ref = "leo-version" }
-leo-mvvm = { module = "com.leovp.android:lib-mvvm", version.ref = "leo-version" }
-#leo-basenetty = { module = "com.leovp.android:basenetty", version.ref = "leo-version" }
-leo-floatview = { module = "com.leovp.android:floatview", version.ref = "leo-version" }
-#leo-audio = { module = "com.leovp.android:audio", version.ref = "leo-version" }
-#leo-adpcm-ima-qt-codec-h264-hevc-decoder = { module = "com.leovp.android:adpcm-ima-qt-codec-h264-hevc-decoder", version.ref = "leo-version" }
-#leo-opengl = { module = "com.leovp.android:opengl", version.ref = "leo-version" }
-#leo-draw-on-screen = { module = "com.leovp.android:drawonscreen", version.ref = "leo-version" }
-#leo-circle-progressbar = { module = "com.leovp.android:circleprogressbar", version.ref = "leo-version" }
-leo-log = { module = "com.leovp.android:log", version.ref = "leo-version" }
-
-leo-lib-network = { module = "com.leovp.android:lib-network", version.ref = "leo-version" }
-leo-lib-compose = { module = "com.leovp.android:lib-compose", version.ref = "leo-version" }
-#leo-lib-compress = { module = "com.leovp.android:lib-compress", version.ref = "leo-version" }
-#leo-lib-reflection = { module = "com.leovp.android:lib-reflection", version.ref = "leo-version" }
-leo-lib-json = { module = "com.leovp.android:lib-json", version.ref = "leo-version" }
-#leo-lib-bytes = { module = "com.leovp.android:lib-bytes", version.ref = "leo-version" }
-#leo-lib-image = { module = "com.leovp.android:lib-image", version.ref = "leo-version" }
-leo-lib-common-android = { module = "com.leovp.android:lib-common-android", version.ref = "leo-version" }
-#leo-lib-common-kotlin = { module = "com.leovp.android:lib-common-kotlin", version.ref = "leo-version" }
+#===================
+#===== Android =====
+#===================
+kotlin-reflect = { module = "org.jetbrains.kotlin:kotlin-reflect", version.ref = "kotlin" }
+kotlin-coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "coroutines" }
+androidx-core-ktx = { module = "androidx.core:core-ktx", version.ref = "core-ktx" }
+androidx-multidex = { module = "androidx.multidex:multidex", version.ref = "multidex" }
+#androidx-annotation = { module = "androidx.annotation:annotation", version.ref = "annotation" }
+hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hilt" }
+hilt-compiler = { module = "com.google.dagger:hilt-compiler", version.ref = "hilt" }
+androidx-hilt-navigation-compose = { module = "androidx.hilt:hilt-navigation-compose", version.ref = "hilt-navigation-compose" }
 
 #===================
 #= Android Compose =
@@ -181,18 +168,6 @@ androidx-navigation-compose = { module = "androidx.navigation:navigation-compose
 #lottie-compose = { module = "com.airbnb.android:lottie-compose", version.ref = "lottie-compose" }
 androidx-constraintlayout-compose = { module = "androidx.constraintlayout:constraintlayout-compose", version.ref = "androidx-constraintlayout" }
 
-#===================
-#===== Android =====
-#===================
-kotlin-reflect = { module = "org.jetbrains.kotlin:kotlin-reflect", version.ref = "kotlin" }
-kotlin-coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "coroutines" }
-androidx-core-ktx = { module = "androidx.core:core-ktx", version.ref = "core-ktx" }
-androidx-multidex = { module = "androidx.multidex:multidex", version.ref = "multidex" }
-#androidx-annotation = { module = "androidx.annotation:annotation", version.ref = "annotation" }
-hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hilt" }
-hilt-compiler = { module = "com.google.dagger:hilt-compiler", version.ref = "hilt" }
-androidx-hilt-navigation-compose = { module = "androidx.hilt:hilt-navigation-compose", version.ref = "hilt-navigation-compose" }
-
 #=============================
 #===== Android Lifecycle =====
 #=============================
@@ -205,6 +180,31 @@ lifecycle-viewmodel = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", v
 
 # optional - helpers for implementing LifecycleOwner in a Service
 #lifecycle-service = { module = "androidx.lifecycle:lifecycle-service", version.ref = "lifecycle" }
+
+#=========================
+#===== Leo Libraries =====
+#=========================
+leo-androidbase = { module = "com.leovp.android:androidbase", version.ref = "leo-version" }
+leo-pref = { module = "com.leovp.android:pref", version.ref = "leo-version" }
+leo-mvvm = { module = "com.leovp.android:lib-mvvm", version.ref = "leo-version" }
+#leo-basenetty = { module = "com.leovp.android:basenetty", version.ref = "leo-version" }
+leo-floatview = { module = "com.leovp.android:floatview", version.ref = "leo-version" }
+#leo-audio = { module = "com.leovp.android:audio", version.ref = "leo-version" }
+#leo-adpcm-ima-qt-codec-h264-hevc-decoder = { module = "com.leovp.android:adpcm-ima-qt-codec-h264-hevc-decoder", version.ref = "leo-version" }
+#leo-opengl = { module = "com.leovp.android:opengl", version.ref = "leo-version" }
+#leo-draw-on-screen = { module = "com.leovp.android:drawonscreen", version.ref = "leo-version" }
+#leo-circle-progressbar = { module = "com.leovp.android:circleprogressbar", version.ref = "leo-version" }
+leo-log = { module = "com.leovp.android:log", version.ref = "leo-version" }
+
+leo-lib-network = { module = "com.leovp.android:lib-network", version.ref = "leo-version" }
+leo-lib-compose = { module = "com.leovp.android:lib-compose", version.ref = "leo-version" }
+#leo-lib-compress = { module = "com.leovp.android:lib-compress", version.ref = "leo-version" }
+#leo-lib-reflection = { module = "com.leovp.android:lib-reflection", version.ref = "leo-version" }
+leo-lib-json = { module = "com.leovp.android:lib-json", version.ref = "leo-version" }
+#leo-lib-bytes = { module = "com.leovp.android:lib-bytes", version.ref = "leo-version" }
+#leo-lib-image = { module = "com.leovp.android:lib-image", version.ref = "leo-version" }
+leo-lib-common-android = { module = "com.leovp.android:lib-common-android", version.ref = "leo-version" }
+#leo-lib-common-kotlin = { module = "com.leovp.android:lib-common-kotlin", version.ref = "leo-version" }
 
 #=======================
 #===== Third party =====
