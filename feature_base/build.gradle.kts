@@ -11,7 +11,7 @@ apply(from = "../jacoco.gradle.kts")
 plugins {
     alias(libs.plugins.android.library)
     // Apply the `compose.compiler` plugin to every module that uses Jetpack Compose.
-    alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.kotlin.compose.compiler)
     alias(libs.plugins.kotlin.parcelize) // id("kotlin-parcelize")
 
     alias(libs.plugins.ksp)

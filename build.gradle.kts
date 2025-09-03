@@ -67,7 +67,7 @@ plugins {
     alias(libs.plugins.android.library) apply false
     alias(libs.plugins.kotlin.android) apply false
 // https://developer.android.com/develop/ui/compose/compiler?hl=zh-cn
-    alias(libs.plugins.kotlin.compose) apply false
+    alias(libs.plugins.kotlin.compose.compiler) apply false
     alias(libs.plugins.hilt) apply false
     alias(libs.plugins.kotlin.serialization) apply false
 

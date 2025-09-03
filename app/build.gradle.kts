@@ -8,7 +8,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     // Apply the `compose.compiler` plugin to every module that uses Jetpack Compose.
-    alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.kotlin.compose.compiler)
     alias(libs.plugins.kotlin.parcelize) // id("kotlin-parcelize")
 
     // Add ksp only if you use ksp() in dependencies {}

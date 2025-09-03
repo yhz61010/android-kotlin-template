@@ -53,20 +53,20 @@ jvmVersion = "17"
 #=================================
 #===== Android dependencies ======
 #=================================
-compose-bom = "2025.08.00"
-compose-activity = "1.10.1"
-compose-navigation = "2.9.3"
-lifecycle = "2.9.2" # "2.8.7" # https://stackoverflow.com/a/78490417/6091500
-lifecycle-viewmodel-navigation3 = "1.0.0-alpha04"
-androidx-constraintlayout = "1.1.1"
-
+multidex = "2.0.1"
 core-ktx = "1.17.0"
 coroutines = "1.10.2"
 #annotation = "1.9.1"
-multidex = "2.0.1"
+compose-bom = "2025.08.00"
+compose-activity = "1.10.1"
+compose-navigation = "2.9.3"
 
+lifecycle = "2.9.2" # "2.8.7" # https://stackoverflow.com/a/78490417/6091500
+lifecycle-viewmodel-navigation3 = "1.0.0-alpha04"
+androidx-constraintlayout = "1.1.1"
 hilt = "2.57.1"
 hilt-navigation-compose = "1.2.0"
+serialization-json = "1.9.0"
 
 #=======================
 #===== Third party =====
@@ -81,7 +81,6 @@ xx-permissions = "26.0"
 net = "3.7.0"
 coil = "2.7.0"
 square-okhttp = "5.1.0"
-serialization-json = "1.9.0"
 #lottie-compose = "6.6.7"
 
 #=======================
@@ -322,13 +321,14 @@ android-test = [
 #===================#===================#===================#===================
 
 [plugins]
+# Equivalent agp - com.android.tools.build:gradle
 # Search Gradle Plugins https://plugins.gradle.org/
 android-application = { id = "com.android.application", version.ref = "agp" }
 android-library = { id = "com.android.library", version.ref = "agp" }
 # Equivalent kgp - org.jetbrains.kotlin:kotlin-gradle-plugin
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 # https://developer.android.com/develop/ui/compose/compiler?hl=zh-cn
-kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
+kotlin-compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 kotlin-parcelize = { id = "org.jetbrains.kotlin.plugin.parcelize", version.ref = "kotlin" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
