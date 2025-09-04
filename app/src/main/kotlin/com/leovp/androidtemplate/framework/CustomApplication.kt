@@ -41,8 +41,8 @@ class CustomApplication :
         PrefContext.setPrefImpl(MMKVPref(this@CustomApplication))
     }
 
-    override fun newImageLoader(context: PlatformContext): ImageLoader {
-        return ImageLoader
+    override fun newImageLoader(context: PlatformContext): ImageLoader =
+        ImageLoader
             .Builder(context)
             .crossfade(true)
             // Disable `Cache-Control` header support in order to disable disk caching.
@@ -59,8 +59,6 @@ class CustomApplication :
                     // .maxSizePercent(0.02)
                     .build()
             }.build()
-    }
-
 
     // override fun attachBaseContext(base: Context) {
     //     // super.attachBaseContext(LangUtil.getInstance(base).setAppLanguage(base))
