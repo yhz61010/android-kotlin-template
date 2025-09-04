@@ -116,13 +116,13 @@ dependencies {
     api(libs.leo.lib.common.android)
 
     api(libs.bundles.kotlin)
-    api(libs.kotlin.coroutines)
     api(libs.karn.notify)
-    api(libs.coil.kt.compose)
+    api(libs.bundles.coil)
     api(libs.mars.xlog)
     api(libs.mmkv)
     api(libs.serialization.json)
     // api(libs.lottie.compose)
+
     // Net - dependencies - Start
     api(libs.kotlin.coroutines)
     api(libs.square.okhttp)
